@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuizFragment">
+    tools:context=".ArticleReforestFragment">
 
     <TextView
-        android:id="@+id/TVQuiz"
+        android:id="@+id/TVArticleReforestation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="146dp"
-        android:text="Maps location"
+        android:text="Articles Reforestation"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

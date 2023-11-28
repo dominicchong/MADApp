@@ -11,13 +11,18 @@
         tools:layout="@layout/fragment_reforestation" >
     </fragment>
     <fragment
-        android:id="@+id/destMap"
-        android:name="com.example.madapp.MapsFragment"
+        android:id="@+id/DestMap"
+        android:name="com.example.madapp.MapFragment"
         android:label="Map"
         tools:layout="@layout/fragment_map" />
     <fragment
-        android:id="@+id/destQuiz"
+        android:id="@+id/DestQuiz"
         android:name="com.example.madapp.QuizFragment"
-        android:label="fragment_dest_quiz"
+        android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
+    <fragment
+        android:id="@+id/DestArticleReforest"
+        android:name="com.example.madapp.ArticleReforestFragment"
+        android:label="Articles"
+        tools:layout="@layout/fragment_article_reforest" />
 </navigation>
