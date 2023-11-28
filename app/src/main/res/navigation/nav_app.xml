@@ -6,8 +6,18 @@
     app:startDestination="@id/DestReforestation">
     <fragment
         android:id="@+id/DestReforestation"
-        android:name="com.example.madapp.DestReforestation"
-        android:label="fragment_reforestation"
+        android:name="com.example.madapp.ReforestationFragment"
+        android:label="Reforestation"
         tools:layout="@layout/fragment_reforestation" >
     </fragment>
+    <fragment
+        android:id="@+id/destMap"
+        android:name="com.example.madapp.MapsFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/destQuiz"
+        android:name="com.example.madapp.QuizFragment"
+        android:label="fragment_dest_quiz"
+        tools:layout="@layout/fragment_quiz" />
 </navigation>
