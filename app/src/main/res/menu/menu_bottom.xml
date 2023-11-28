@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id ="@+id/DestHome"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Home" />
+
+    <item
+        android:id ="@+id/DestCarbonFootprint"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Carbon Footprint" />
+
+    <item
+        android:id ="@+id/DestReforestation"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Reforestation" />
+
+    <item
+        android:id ="@+id/DestProfile"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Profile"/>
+
+</menu>
