@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_app"
     app:startDestination="@id/DestReforestation">
+
     <fragment
         android:id="@+id/DestReforestation"
         android:name="com.example.madapp.ReforestationFragment"
         android:label="Reforestation"
-        tools:layout="@layout/fragment_reforestation" >
-    </fragment>
+        tools:layout="@layout/fragment_reforestation" />
+
     <fragment
         android:id="@+id/DestMap"
         android:name="com.example.madapp.MapFragment"
@@ -25,4 +26,5 @@
         android:name="com.example.madapp.ArticleReforestFragment"
         android:label="Articles"
         tools:layout="@layout/fragment_article_reforest" />
+
 </navigation>
