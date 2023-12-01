@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <item
-        android:id ="@+id/DestHome"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="Home" />
+    <group android:id="@+id/SideNavMain">
+        <item
+            android:id="@+id/SendFeedback"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="Send Feedback" />
 
-    <item
-        android:id ="@+id/DestCarbonFootprint"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="Carbon Footprint" />
+        <item
+            android:id="@+id/Help"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Help" />
 
-    <item
-        android:id ="@+id/DestReforestation"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="Reforestation" />
+        <item
+            android:id ="@+id/DestProfile"
+            android:icon="@android:drawable/ic_menu_more"
+            android:title="Log Out" />
+    </group>
 
-    <item
-        android:id ="@+id/DestProfile"
-        android:icon="@android:drawable/ic_menu_more"
-        android:title="Profile" />
+    <group android:id="@+id/SideNavFeatures">
+        <item
+            android:id="@+id/DestReforestation"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Reforestation" />
+
+        <item
+            android:id="@+id/DestArticleReforest"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Articles Reforestation" />
+
+        <item
+            android:id="@+id/DestQuiz"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Quiz" />
+
+        <item
+            android:id="@+id/DestMap"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Maps" />
+
+    </group>
+
 
 
 </menu>

@@ -18,6 +18,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment {
 
+    public MapFragment() {
+
+    }
+
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**

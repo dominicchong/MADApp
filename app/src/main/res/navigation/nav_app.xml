@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_reforestation" />
 
     <fragment
+        android:id="@+id/DestArticleReforest"
+        android:name="com.example.madapp.ArticleReforestFragment"
+        android:label="Articles"
+        tools:layout="@layout/fragment_article_reforest" />
+
+    <fragment
         android:id="@+id/DestMap"
         android:name="com.example.madapp.MapFragment"
         android:label="Map"
@@ -21,10 +27,12 @@
         android:name="com.example.madapp.QuizFragment"
         android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
-    <fragment
-        android:id="@+id/DestArticleReforest"
-        android:name="com.example.madapp.ArticleReforestFragment"
-        android:label="Articles"
-        tools:layout="@layout/fragment_article_reforest" />
+
+    <activity
+        android:id="@+id/DestMapsActivity"
+        android:name="com.example.madapp.MapsActivity"
+        android:label="Google Maps Location"
+        tools:layout="@layout/fragment_maps" />
+
 
 </navigation>

@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/DLMain"
-    android:layout_width="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:id="@+id/TBMainAct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/colorSecondary"
             android:minHeight="?attr/actionBarSize"
             app:title="Reforestation" />
 
@@ -26,7 +26,7 @@
             android:id="@+id/NHFMain"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="228dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_app" />

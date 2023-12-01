@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
@@ -15,7 +17,12 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +32,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.TBMainAct);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawerLayout = findViewById(R.id.DLMain);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawerLayout = findViewById(R.id.DLMain);
+        toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.NHFMain);
+        NavController navController = host.getNavController();
+
+        // For setting up the hamburger icon and Up button(or back button)
+        Set<Integer> topLevelDestinations = new HashSet<>();
+        topLevelDestinations.add(R.id.DestReforestation);
+        // Add other top-level destinations
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(topLevelDestinations).setOpenableLayout(drawerLayout).build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        setupBottomNavMenu(navController);
+        setupNavMenu(navController);
+
     }
 
     private void setupNavMenu(NavController navController){
@@ -43,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    // the method below is used to configure the action of the overflow menu which
+    // navigates back to 'home' or 'about app' page
     public boolean onOptionsItemSelected(MenuItem item){
         try{
             Navigation.findNavController(this, R.id.NHFMain).navigate(item.getItemId());
