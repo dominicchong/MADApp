@@ -1,9 +1,10 @@
 package com.example.madapp;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -13,18 +14,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.madapp.databinding.FragmentMapBinding;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private FragmentMapBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = FragmentMapBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
+        setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapFragment);
@@ -44,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -59,10 +57,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Malaysia and move the camera
         LatLng malaysia = new LatLng(3.5, 102.5);
-        mMap.addMarker(new MarkerOptions().position(malaysia).title("Malaysia"));
+        mMap.addMarker(new MarkerOptions()
+                .position(malaysia)
+                .title("Malaysia")
+                .snippet("Default reforestation location country"));
 
         LatLng site1 = new LatLng(5.55, 118.31);
-        mMap.addMarker(new MarkerOptions().position(site1).title("APE Malaysia Volunteer Site 5\nKinabatangan,Sabah"));
+        mMap.addMarker(new MarkerOptions()
+                .position(site1)
+                .title("APE Malaysia Volunteer Site 5")
+                .snippet("Location: Kinabatangan,Sabah"));
 
         // Move camera to default location
         mMap.moveCamera(CameraUpdateFactory.newLatLng(malaysia));

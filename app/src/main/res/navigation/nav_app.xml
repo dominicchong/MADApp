@@ -32,7 +32,7 @@
         android:id="@+id/DestMapsActivity"
         android:name="com.example.madapp.MapsActivity"
         android:label="Google Maps Location"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/activity_maps" />
 
 
 </navigation>
