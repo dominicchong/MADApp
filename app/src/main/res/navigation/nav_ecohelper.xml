@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_ecohelper"
+    app:startDestination="@id/DestHome">
+
+    <fragment
+        android:id="@+id/DestNews"
+        android:name="com.example.ecohelper.News"
+        android:label="News"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/DestProgrammes"
+        android:name="com.example.ecohelper.Programme"
+        android:label="Programmes"
+        tools:layout="@layout/fragment_programme" />
+    <fragment
+        android:id="@+id/DestOrganizations"
+        android:name="com.example.ecohelper.Organizations"
+        android:label="Organizations"
+        tools:layout="@layout/fragment_organizations" />
+    <fragment
+        android:id="@+id/DestHome"
+        android:name="com.example.ecohelper.HomePage"
+        android:label="HomePage" >
+        <action
+            android:id="@+id/action_DestHome_to_DestNews"
+            app:destination="@id/DestNews" />
+    </fragment>
+</navigation>

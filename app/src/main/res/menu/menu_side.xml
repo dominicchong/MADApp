@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/SideNavMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <item
+            android:id="@+id/DestHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="HomePage" />
+        <item
+            android:id="@+id/DestAboutApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Profile" />
+    </group>
+    <group
+        android:id="@+id/SideNavAnimal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <item
+            android:id="@+id/DestNews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="News" />
+        <item
+            android:id="@+id/DestProgrammes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="Programmes" />
+
+        <item
+            android:id="@+id/DestOrganizations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="Organizations" />
+    </group>
+</menu>
