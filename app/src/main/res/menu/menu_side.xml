@@ -4,23 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <group android:id="@+id/SideNavMain">
-        <item
-            android:id="@+id/SendFeedback"
-            android:icon="@android:drawable/ic_dialog_info"
-            android:title="Send Feedback" />
-
-        <item
-            android:id="@+id/Help"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="Help" />
-
-        <item
-            android:id ="@+id/DestProfile"
-            android:icon="@android:drawable/ic_menu_more"
-            android:title="Log Out" />
-    </group>
-
     <group android:id="@+id/SideNavFeatures">
         <item
             android:id="@+id/DestReforestation"
