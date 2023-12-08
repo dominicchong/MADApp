@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/SideNavMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <item
+            android:id="@+id/DestHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/DestProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/baseline_person_outline_24"
+            android:title="Profile" />
+    </group>
+    <group
+        android:id="@+id/SideNavCF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <item
+            android:id="@+id/DestTrackCarbonFootprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/track"
+            android:title="Carbon Footprint" />
+        <item
+            android:id="@+id/DestTipsReduceCF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/idea"
+            android:title="Tips Reduce CF" />
+    </group>
+</menu>

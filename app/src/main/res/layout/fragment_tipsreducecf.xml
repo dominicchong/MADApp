@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#65AEDD"
+    tools:context=".TipsReduceCFFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/TVTitleTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="Tips to reduce carbon footprint"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/IBtnTips1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/tips_card_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TVTitleTips"
+        app:layout_constraintTop_toBottomOf="@+id/TVTitleTips"
+        android:contentDescription="Use to go to tips 1"/>
+
+    <ImageButton
+        android:id="@+id/IBtnTips2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/tips_card_2"
+        app:layout_constraintEnd_toEndOf="@+id/IBtnTips1"
+        app:layout_constraintStart_toStartOf="@+id/IBtnTips1"
+        app:layout_constraintTop_toBottomOf="@+id/IBtnTips1"
+        android:contentDescription="Use to go to tips 2"/>
+
+    <ImageButton
+        android:id="@+id/IBtnTips3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/tips_card_3"
+        app:layout_constraintEnd_toEndOf="@+id/IBtnTips2"
+        app:layout_constraintStart_toStartOf="@+id/IBtnTips2"
+        app:layout_constraintTop_toBottomOf="@+id/IBtnTips2"
+        android:contentDescription="Use to go to tips 3"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
