@@ -8,7 +8,7 @@
     tools:context=".ReforestationFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/IVReforestation"
         android:layout_width="413dp"
         android:layout_height="275dp"
         android:src="@drawable/plant"
@@ -30,7 +30,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/IVQuiz"
         android:layout_width="117dp"
         android:layout_height="130dp"
         android:layout_marginStart="244dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/IVArticles"
         android:layout_width="117dp"
         android:layout_height="130dp"
         android:layout_marginStart="56dp"
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/IVMap"
         android:layout_width="207dp"
         android:layout_height="118dp"
         android:layout_marginStart="100dp"

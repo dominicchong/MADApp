@@ -41,12 +41,16 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.NHFMain);
         NavController navController = host.getNavController();
 
-        // For setting up the hamburger icon and Up button(or back button)
-        Set<Integer> topLevelDestinations = new HashSet<>();
-        topLevelDestinations.add(R.id.DestReforestation);
-        // Add other top-level destinations
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(topLevelDestinations).setOpenableLayout(drawerLayout).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build(); //Appbar configuration will help to define which destination should have an Up button (back arrow) in app bar
+//      to automatically handle Up button behavior based on the navigation graph.
+
+        //set up action bar to work with NavController, means up button will navigate to appropriate destination define in navigation graph
+        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration); //this: Typically, in an activity, this refers to the current activity context.
+
+        //setDrawerLayout(drawerLayout): This is configuring the builder to work with a DrawerLayout. It means that if you have a drawer layout in your app, the configured destinations will show the hamburger icon in the Toolbar, indicating that there's a navigation drawer.
+        NavigationUI.setupWithNavController(toolbar, navController, new AppBarConfiguration.Builder(R.id.DestReforestation).setDrawerLayout(drawerLayout).build());
+        //only write the home and about app so that top level destination will show hamburger icon, and other fragment show up hbutton
+
 
         setupBottomNavMenu(navController);
         setupNavMenu(navController);

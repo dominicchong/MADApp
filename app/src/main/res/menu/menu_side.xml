@@ -21,7 +21,7 @@
             android:title="Quiz" />
 
         <item
-            android:id="@+id/DestMap"
+            android:id="@+id/DestMapsActivity"
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="Maps" />
 
