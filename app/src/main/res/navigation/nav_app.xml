@@ -52,11 +52,11 @@
         android:label="Google Maps Location"
         tools:layout="@layout/activity_maps" />
 
-    <fragment android:id="@+id/DestHelp"
+    <fragment
+        android:id="@+id/DestHelp"
+        android:name="com.example.madapp.HelpFragment"
         android:label="Help"
-        tools:layout="@layout/frament_help"/>
-
-    <fragment android:id="@+id/placeholder2" />
+        tools:layout="@layout/fragment_help" />
 
 
 </navigation>

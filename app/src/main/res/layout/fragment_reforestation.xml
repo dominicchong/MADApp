@@ -9,17 +9,18 @@
 
     <ImageView
         android:id="@+id/IVReforestation"
-        android:layout_width="413dp"
-        android:layout_height="275dp"
+        android:layout_width="412dp"
+        android:layout_height="227dp"
         android:src="@drawable/plant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/TVReforestation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:text="Reforestation"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -28,14 +29,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
-        android:id="@+id/IVQuiz"
-        android:layout_width="117dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="288dp"
-        android:src="@drawable/quiz"
+        android:id="@+id/IVArticles"
+        android:layout_width="100dp"
+        android:layout_height="111dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="256dp"
+        android:src="@drawable/articles"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,39 +44,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="@color/blue_900"
         android:text="Articles"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/IVArticles"
-        android:layout_width="117dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="288dp"
-        android:src="@drawable/articles"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/BtnQuiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="428dp"
-        android:backgroundTint="@color/blue_900"
-        android:text="Quiz"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/IVArticles" />
 
     <ImageView
         android:id="@+id/IVMap"
-        android:layout_width="207dp"
-        android:layout_height="118dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="496dp"
+        android:layout_width="186dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="456dp"
         android:src="@drawable/map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,11 +65,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="132dp"
-        android:layout_marginTop="624dp"
+        android:layout_marginTop="572dp"
         android:backgroundTint="@color/blue_900"
         android:text="Maps Location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/IVQuiz"
+        android:layout_width="97dp"
+        android:layout_height="111dp"
+        android:layout_marginStart="244dp"
+        android:layout_marginTop="256dp"
+        android:src="@drawable/quiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/BtnQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/blue_900"
+        android:text="Quiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IVQuiz" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

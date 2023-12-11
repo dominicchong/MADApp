@@ -2,11 +2,14 @@ package com.example.madapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +63,35 @@ public class QuizFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quiz, container, false);
+    }
+
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Button BtnQuiz1 = view.findViewById(R.id.BtnQuiz1);
+        View.OnClickListener OCLArticle = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestReforestation);
+            }
+        };
+        BtnQuiz1.setOnClickListener(OCLArticle);
+
+        Button BtnQuiz2 = view.findViewById(R.id.BtnQuiz2);
+        View.OnClickListener OCLQuiz = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestReforestation);
+            }
+        };
+        BtnQuiz2.setOnClickListener(OCLQuiz);
+
+        Button BtnQuiz3 = view.findViewById(R.id.BtnQuiz3);
+        View.OnClickListener OCLMap = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestReforestation);
+            }
+        };
+        BtnQuiz3.setOnClickListener(OCLMap);
+
     }
 }
