@@ -38,7 +38,7 @@
         <item
             android:id="@+id/DestMapsActivity"
             android:icon="@drawable/map_icon"
-            android:title="Maps" />
+            android:title="Map" />
     </group>
 
 </menu>
