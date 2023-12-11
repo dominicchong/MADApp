@@ -7,23 +7,25 @@
 
     <fragment
         android:id="@+id/DestHome"
-        android:name="com.example.madapp.HomeFragment"
+        android:name="com.example.madapp.CarbonFtFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_dest_home" >
+        tools:layout="@layout/fragment_carbonft_home" >
         <action
             android:id="@+id/NextToTipsReduceCF"
             app:destination="@id/DestTipsReduceCF" />
     </fragment>
+
     <fragment
         android:id="@+id/DestTrackCarbonFootprint"
-        android:name="com.example.wia2007_project.TrackCarbonFootprintFragment"
+        android:name="com.example.madapp.TrackCarbonFootprintFragment"
         android:label="Track Carbon Footprint"
         tools:layout="@layout/fragment_carbonfootprint" />
     <fragment
         android:id="@+id/DestTipsReduceCF"
-        android:name="com.example.wia2007_project.TipsReduceCFFragment"
+        android:name="com.example.madapp.TipsReduceCFFragment"
         android:label="TipsReduceCF"
         tools:layout="@layout/fragment_tipsreducecf" />
+
 
 
     <fragment

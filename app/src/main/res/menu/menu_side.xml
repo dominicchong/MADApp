@@ -4,29 +4,41 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <group android:id="@+id/SideNavFeatures">
+    <group
+        android:id="@+id/SideNavCF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <item
-            android:id="@+id/DestReforestation"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="Reforestation" />
-
+            android:id="@+id/DestTrackCarbonFootprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/track"
+            android:title="Carbon Footprint" />
         <item
-            android:id="@+id/DestArticleReforest"
-            android:icon="@android:drawable/ic_menu_help"
-            android:title="Articles Reforestation" />
-
-        <item
-            android:id="@+id/DestQuiz"
-            android:icon="@android:drawable/ic_menu_agenda"
-            android:title="Quiz" />
-
-        <item
-            android:id="@+id/DestMapsActivity"
-            android:icon="@android:drawable/ic_menu_agenda"
-            android:title="Maps" />
-
+            android:id="@+id/DestTipsReduceCF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/idea"
+            android:title="Tips Reduce CF" />
     </group>
 
-
+    <group android:id="@+id/SideNavReforest">
+        <item
+            android:id="@+id/DestReforestation"
+            android:icon="@drawable/forest_icon"
+            android:title="Reforestation" />
+        <item
+            android:id="@+id/DestArticleReforest"
+            android:icon="@drawable/article_icon"
+            android:title="Articles Reforestation" />
+        <item
+            android:id="@+id/DestQuiz"
+            android:icon="@drawable/question_icon"
+            android:title="Quiz" />
+        <item
+            android:id="@+id/DestMapsActivity"
+            android:icon="@drawable/map_icon"
+            android:title="Maps" />
+    </group>
 
 </menu>

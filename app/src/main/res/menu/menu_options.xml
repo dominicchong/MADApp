@@ -4,18 +4,18 @@
 
     <item
         android:id="@+id/SendFeedback"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/feedback"
         android:title="Send Feedback" />
 
     <item
         android:id="@+id/Help"
-        android:icon="@android:drawable/ic_menu_help"
+        android:icon="@drawable/baseline_question_mark_24"
         android:title="Help"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/LogOut"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/exit"
         android:title="Log Out" />
 
 </menu>

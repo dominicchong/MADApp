@@ -10,8 +10,8 @@
 
     <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="47dp"
-        android:layout_height="33dp"
+        android:layout_width="41dp"
+        android:layout_height="29dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="27dp"
         android:background="@color/blue"
@@ -24,8 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="63dp"
-        android:text="Maps location \n\n Reforestation Locations\n"
+        android:text="Reforestation Locations"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
