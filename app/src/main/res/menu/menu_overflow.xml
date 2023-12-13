@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/SendFeedback"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Send Feedback" />
+
+    <item
+        android:id="@+id/Help"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Help" />
+
+    <item
+        android:id="@+id/LogOut"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Log Out" />
+
+</menu>
