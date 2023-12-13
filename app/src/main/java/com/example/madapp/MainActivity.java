@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration); //this: Typically, in an activity, this refers to the current activity context.
 
         //setDrawerLayout(drawerLayout): This is configuring the builder to work with a DrawerLayout. It means that if you have a drawer layout in your app, the configured destinations will show the hamburger icon in the Toolbar, indicating that there's a navigation drawer.
-        NavigationUI.setupWithNavController(toolbar, navController, new AppBarConfiguration.Builder(R.id.DestReforestation).setDrawerLayout(drawerLayout).build());
+        NavigationUI.setupWithNavController(toolbar, navController, new AppBarConfiguration.Builder(R.id.DestReforestation,R.id.DestHome).setDrawerLayout(drawerLayout).build());
         //only write the home and about app so that top level destination will show hamburger icon, and other fragment show up hbutton
 
 
