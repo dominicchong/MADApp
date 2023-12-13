@@ -46,17 +46,22 @@
         android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
 
-    <activity
-        android:id="@+id/DestMapsActivity"
-        android:name="com.example.madapp.MapsActivity"
-        android:label="Google Maps Location"
-        tools:layout="@layout/activity_maps" />
+<!--    <activity-->
+<!--        android:id="@+id/DestMapsActivity"-->
+<!--        android:name="com.example.madapp.MapsActivity"-->
+<!--        android:label="Google Maps Location"-->
+<!--        tools:layout="@layout/activity_maps" />-->
 
     <fragment
         android:id="@+id/DestHelp"
         android:name="com.example.madapp.HelpFragment"
         android:label="Help"
         tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/DestMapsActivity"
+        android:name="com.example.madapp.MapsFragment"
+        android:label="Google Maps Location"
+        tools:layout="@layout/fragment_maps" />
 
 
 </navigation>
