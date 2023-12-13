@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MADApp"
+rootProject.name = "EcoHelper"
 include(":app")
  
