@@ -3,7 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_app"
-    app:startDestination="@id/DestReforestation">
+    app:startDestination="@id/DestHome">
+
+<!--    News and Programmes module-->
+    <fragment
+        android:id="@+id/DestHome"
+        android:name="com.example.madapp.fragment_home"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/NextToNews"
+            app:destination="@id/DestNews" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/DestOrganizations"
+        android:name="com.example.madapp.OrganizationsFragment"
+        android:label="Organizations"
+        tools:layout="@layout/fragment_organizations" />
+    <fragment
+        android:id="@+id/DestProgrammes"
+        android:name="com.example.madapp.ProgrammesFragment"
+        android:label="Programmes"
+        tools:layout="@layout/fragment_programmes" />
+    <fragment
+        android:id="@+id/DestNews"
+        android:name="com.example.madapp.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news"/>
+
 
     <!--Carbon Footprint module-->
     <fragment
