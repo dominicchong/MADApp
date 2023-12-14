@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +65,21 @@ public class LogoutFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_logout, container, false);
+        View view= inflater.inflate(R.layout.fragment_logout, container, false);
+        // Hide the toolbar
+        if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
+
+        // Hide the bottom navigation bar
+        if (getActivity() != null) {
+            BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_nav_view);
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setVisibility(View.GONE);
+            }
+        }
+        return view;
+
     }
 
     @Override
