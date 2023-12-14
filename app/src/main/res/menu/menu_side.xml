@@ -5,6 +5,28 @@
     android:layout_height="wrap_content">
 
     <group
+        android:id="@+id/SideNavNews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <item
+            android:id="@+id/DestNews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="News" />
+        <item
+            android:id="@+id/DestProgrammes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="Programmes" />
+
+        <item
+            android:id="@+id/DestOrganizations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="Organizations" />
+    </group>
+
+    <group
         android:id="@+id/SideNavCF"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -39,6 +61,13 @@
             android:id="@+id/DestMapsActivity"
             android:icon="@drawable/map_icon"
             android:title="Map" />
+    </group>
+
+    <group android:id="@+id/SideNavProfile">
+        <item
+            android:id="@+id/DestProfileEnhancedSurvey"
+            android:icon="@drawable/article_icon"
+            android:title="Profile Enhanced Survey" />
     </group>
 
 </menu>

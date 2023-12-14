@@ -33,13 +33,12 @@
             android:value="AIzaSyBEm_j_bcGVYTQ_xda6cqpWNmjXxDq3KT0" />
 
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps">
+            android:name=".MainActivity"
+            android:exported="true">
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

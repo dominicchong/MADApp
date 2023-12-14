@@ -3,13 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_app"
-    app:startDestination="@id/DestReforestation">
+    app:startDestination="@id/DestHome">
 
+<!--    News and Programmes module-->
     <fragment
         android:id="@+id/DestHome"
+        android:name="com.example.madapp.fragment_home"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/NextToNews"
+            app:destination="@id/DestNews" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/DestOrganizations"
+        android:name="com.example.madapp.OrganizationsFragment"
+        android:label="Organizations"
+        tools:layout="@layout/fragment_organizations" />
+    <fragment
+        android:id="@+id/DestProgrammes"
+        android:name="com.example.madapp.ProgrammesFragment"
+        android:label="Programmes"
+        tools:layout="@layout/fragment_programmes" />
+    <fragment
+        android:id="@+id/DestNews"
+        android:name="com.example.madapp.NewsFragment"
+        android:label="News"
+        tools:layout="@layout/fragment_news"/>
+
+
+    <!--Carbon Footprint module-->
+    <fragment
+        android:id="@+id/DestCarbonFootprint"
         android:name="com.example.madapp.CarbonFtFragment"
         android:label="Carbon Footprint"
-        tools:layout="@layout/fragment_carbonft_home">
+        tools:layout="@layout/fragment_carbonft_home" >
         <action
             android:id="@+id/NextToTipsReduceCF"
             app:destination="@id/DestTipsReduceCF" />
@@ -27,7 +57,7 @@
         tools:layout="@layout/fragment_tipsreducecf" />
 
 
-
+    <!--Reforestation module-->
     <fragment
         android:id="@+id/DestReforestation"
         android:name="com.example.madapp.ReforestationFragment"
@@ -46,22 +76,47 @@
         android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
 
-<!--    <activity-->
-<!--        android:id="@+id/DestMapsActivity"-->
-<!--        android:name="com.example.madapp.MapsActivity"-->
-<!--        android:label="Google Maps Location"-->
-<!--        tools:layout="@layout/activity_maps" />-->
+    <fragment
+        android:id="@+id/DestMapsActivity"
+        android:name="com.example.madapp.MapsFragment"
+        android:label="Google Maps Location"
+        tools:layout="@layout/fragment_maps" />
 
+
+    <!--Profile module-->
+    <fragment
+        android:id="@+id/DestProfile"
+        android:name="com.example.madapp.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/DestEditProfile"
+        android:name="com.example.madapp.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/DestFeedback"
+        android:name="com.example.madapp.FeedbackFragment"
+        android:label="Feedback"
+        tools:layout="@layout/fragment_feedback" />
+    <fragment
+        android:id="@+id/DestProfileEnhancedSurvey"
+        android:name="com.example.madapp.ProfileEnhancedSurveyFragment"
+        android:label="Profile Enhanced Survey"
+        tools:layout="@layout/fragment_profile_enhanced_survey" />
+
+
+    <!--Other pages-->
     <fragment
         android:id="@+id/DestHelp"
         android:name="com.example.madapp.HelpFragment"
         android:label="Help"
         tools:layout="@layout/fragment_help" />
     <fragment
-        android:id="@+id/DestMapsActivity"
-        android:name="com.example.madapp.MapsFragment"
-        android:label="Google Maps Location"
-        tools:layout="@layout/fragment_maps" />
+        android:id="@+id/DestLogout"
+        android:name="com.example.madapp.LogoutFragment"
+        android:label="Logout"
+        tools:layout="@layout/fragment_logout"/>
 
 
 </navigation>

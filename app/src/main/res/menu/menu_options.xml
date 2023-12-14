@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/SendFeedback"
+        android:id="@+id/DestFeedback"
         android:icon="@drawable/feedback"
         android:title="Send Feedback" />
 
@@ -14,7 +14,7 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/LogOut"
+        android:id="@+id/DestLogout"
         android:icon="@drawable/exit"
         android:title="Log Out" />
 
