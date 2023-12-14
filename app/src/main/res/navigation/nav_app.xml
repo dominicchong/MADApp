@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/DestNews"
         android:name="com.example.madapp.NewsFragment"
-        android:label="fragment_news"
+        android:label="News"
         tools:layout="@layout/fragment_news"/>
 
 

@@ -10,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,14 +71,32 @@ public class FeedbackFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // Connect with UI Widget RateBarFeedback, TVRating, ETFeedback, BtnFeedback
+        RatingBar RateBarFeedback = view.findViewById(R.id.RatingBarFeedback);
+        TextView TVRating = view.findViewById(R.id.TVRating);
+        EditText ETFeedback = view.findViewById(R.id.ETFeedback);    // needed if you want to collect the feedback later
         Button BtnSubmitFeedback = view.findViewById(R.id.BtnSubmitFeedback);
+
         View.OnClickListener OCLSubmitFeedback = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestProfile);
+                String message = "Thank you for your feedback! ";
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                // Clear the rating and text input after click submit button
+                RateBarFeedback.setRating(0);
+                ETFeedback.setText("");
             }
         };
         BtnSubmitFeedback.setOnClickListener(OCLSubmitFeedback);
+
+        // The rating bar OnRatingBarChangeListener to change the rating whenever it is used by user
+        RateBarFeedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                TVRating.setText("Rating: " + rating);
+            }
+        });
 
     }
 }
