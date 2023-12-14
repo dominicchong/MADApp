@@ -5,50 +5,24 @@
     android:layout_height="wrap_content">
 
     <group
-        android:id="@+id/SideNavNews"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <item
-            android:id="@+id/DestNews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:title="News" />
-        <item
-            android:id="@+id/DestProgrammes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:title="Programmes" />
-
-        <item
-            android:id="@+id/DestOrganizations"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:title="Organizations" />
-    </group>
-
-    <group
         android:id="@+id/SideNavCF"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <item
-            android:id="@+id/DestCarbonFootprint"
+            android:id="@+id/DestTrackCarbonFootprint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/carbon_footprint"
-            android:title="Carbon Footprint" />
+            android:icon="@drawable/track"
+            android:title="Track Carbon Footprint" />
         <item
             android:id="@+id/DestTipsReduceCF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/idea"
-            android:title="Tips Reduce CF" />
+            android:title="Tips Reduce Carbon Footprint" />
     </group>
 
     <group android:id="@+id/SideNavReforest">
-        <item
-            android:id="@+id/DestReforestation"
-            android:icon="@drawable/forest_icon"
-            android:title="Reforestation" />
         <item
             android:id="@+id/DestArticleReforest"
             android:icon="@drawable/article_icon"
@@ -60,14 +34,26 @@
         <item
             android:id="@+id/DestMapsActivity"
             android:icon="@drawable/map_icon"
-            android:title="Map" />
+            android:title="Location Reforestation" />
     </group>
 
+
     <group android:id="@+id/SideNavProfile">
+        <item
+            android:id="@+id/DestProfile"
+            android:icon="@drawable/profileicon1"
+            android:title="Profile" />
         <item
             android:id="@+id/DestProfileEnhancedSurvey"
             android:icon="@drawable/article_icon"
             android:title="Profile Enhanced Survey" />
+    </group>
+
+    <group android:id="@+id/Feedback">
+        <item
+            android:id="@+id/DestFeedback"
+            android:icon="@drawable/feedback"
+            android:title="Feedback" />
     </group>
 
 </menu>
