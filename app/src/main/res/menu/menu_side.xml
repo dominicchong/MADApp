@@ -41,4 +41,11 @@
             android:title="Map" />
     </group>
 
+    <group android:id="@+id/SideNavProfile">
+        <item
+            android:id="@+id/DestProfileEnhancedSurvey"
+            android:icon="@drawable/article_icon"
+            android:title="Profile Enhanced Survey" />
+    </group>
+
 </menu>

@@ -33,12 +33,6 @@
             android:value="AIzaSyBEm_j_bcGVYTQ_xda6cqpWNmjXxDq3KT0" />
 
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps">
-        </activity>
-
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
