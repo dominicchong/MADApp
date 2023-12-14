@@ -82,6 +82,7 @@
         android:label="Google Maps Location"
         tools:layout="@layout/fragment_maps" />
 
+
     <!--Profile module-->
     <fragment
         android:id="@+id/DestProfile"
@@ -111,6 +112,11 @@
         android:name="com.example.madapp.HelpFragment"
         android:label="Help"
         tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/DestLogout"
+        android:name="com.example.madapp.LogoutFragment"
+        android:label="Logout"
+        tools:layout="@layout/fragment_logout"/>
 
 
 </navigation>

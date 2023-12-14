@@ -14,7 +14,7 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/LogOut"
+        android:id="@+id/DestLogout"
         android:icon="@drawable/exit"
         android:title="Log Out" />
 
