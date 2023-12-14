@@ -31,10 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <item
-            android:id="@+id/DestTrackCarbonFootprint"
+            android:id="@+id/DestCarbonFootprint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/track"
+            android:icon="@drawable/carbon_footprint"
             android:title="Carbon Footprint" />
         <item
             android:id="@+id/DestTipsReduceCF"

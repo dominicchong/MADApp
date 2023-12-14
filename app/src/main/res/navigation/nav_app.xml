@@ -112,6 +112,7 @@
         android:name="com.example.madapp.HelpFragment"
         android:label="Help"
         tools:layout="@layout/fragment_help" />
+
     <fragment
         android:id="@+id/DestLogout"
         android:name="com.example.madapp.LogoutFragment"
