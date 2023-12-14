@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/DestHome"
         android:name="com.example.madapp.CarbonFtFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_carbonft_home" >
+        android:label="Carbon Footprint"
+        tools:layout="@layout/fragment_carbonft_home">
         <action
             android:id="@+id/NextToTipsReduceCF"
             app:destination="@id/DestTipsReduceCF" />
