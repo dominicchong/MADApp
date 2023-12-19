@@ -5,10 +5,10 @@
     android:id="@+id/maps"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/white"
     tools:context=".MapsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Map Fragment -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapFragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"

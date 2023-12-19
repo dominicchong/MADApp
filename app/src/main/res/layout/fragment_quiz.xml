@@ -4,26 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSecondary"
+    android:background="@drawable/quiz_background"
     tools:context=".QuizFragment">
-
-    <ImageView
-        android:id="@+id/IVQuiz"
-        android:layout_width="414dp"
-        android:layout_height="215dp"
-        android:src="@drawable/quiz_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/BtnQuiz1"
-        android:layout_width="260dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="244dp"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="68dp"
         android:backgroundTint="@color/blue_900"
         android:onClick="sendMessage"
-        android:text="Quiz 1"
+        android:text="Start Quiz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,13 +33,13 @@
 
     <Button
         android:id="@+id/BtnQuiz3"
-        android:layout_width="260dp"
-        android:layout_height="86dp"
+        android:layout_width="143dp"
+        android:layout_height="52dp"
         android:layout_marginStart="75dp"
         android:layout_marginTop="35dp"
         android:backgroundTint="@color/blue_900"
         android:onClick="sendMessage"
-        android:text="Quiz 3"
+        android:text="Scores"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BtnQuiz2" />
 
