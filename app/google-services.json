@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "361748161733",
+    "project_id": "ecohelper-eea91",
+    "storage_bucket": "ecohelper-eea91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361748161733:android:c42a13a7134c6e6cadfcac",
+        "android_client_info": {
+          "package_name": "com.example.madapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTVuhj19JuO9tQHamtjDAL4Mx_YiOYX8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
