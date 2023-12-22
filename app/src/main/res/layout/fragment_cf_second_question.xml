@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    tools:context=".fragment_secondQuestionCalculateCF">
+
+    <TextView
+        android:id="@+id/TVTitleTrackCF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Track Your Carbon Footprint"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragmentlayout"
+        android:layout_width="408dp"
+        android:layout_height="412dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="148dp"
+        android:background="@drawable/rounded_frame_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/TVUnit2"
+            android:layout_width="102dp"
+            android:layout_height="33dp"
+            android:layout_gravity="top"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="110dp"
+            android:text="km"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/editTextText2"
+            app:layout_constraintTop_toBottomOf="@+id/TVQuestion1" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="100dp"
+            android:ems="10"
+            android:hint="Number"
+            android:inputType="text"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toStartOf="@id/TVQuestion"
+            app:layout_constraintTop_toBottomOf="@id/TVQuestion" />
+
+        <TextView
+            android:id="@+id/TVQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:text="Distance travel in km"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/BtnPreviousQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/blue_900"
+            android:text="Previous Question"
+            app:icon="@drawable/back_button"
+            app:iconGravity="start" />
+
+        <Button
+            android:id="@+id/btnNextQuestionQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/blue_900"
+            android:text="Next Question"
+            app:icon="@drawable/next"
+            app:iconGravity="end" />
+
+        <TextView
+            android:id="@+id/TVQuestionSentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="200dp"
+            android:text="at a factor of 2.30000 kgCO2e/L"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/IVProgressBar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/progress_bar_cf2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVTitleTrackCF" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
