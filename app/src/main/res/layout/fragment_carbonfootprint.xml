@@ -78,7 +78,7 @@
             app:layout_constraintTop_toBottomOf="parent" />
 
         <Button
-            android:id="@+id/BtnNextQuestion"
+            android:id="@+id/BtnNextQuestionQ1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
@@ -98,5 +98,16 @@
             android:textColor="#000000"
             android:textSize="24sp" />
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/IVProgressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/progress_bar_cf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVTitleTrackCF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

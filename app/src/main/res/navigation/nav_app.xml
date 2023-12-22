@@ -118,6 +118,11 @@
         android:name="com.example.madapp.LogoutFragment"
         android:label="Logout"
         tools:layout="@layout/fragment_logout"/>
+    <fragment
+        android:id="@+id/secondQuestionCalculateCF"
+        android:name="com.example.madapp.fragment_secondQuestionCalculateCF"
+        android:label="Track Carbon Footprint"
+        tools:layout="@layout/fragment_cf_second_question" />
 
 
 </navigation>
