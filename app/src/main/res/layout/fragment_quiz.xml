@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/quiz_background_blue"
-    tools:context=".QuizFragment">
+    tools:context=".quiz.QuizFragment">
 
     <ImageView
         android:id="@+id/imageView12"

@@ -2,11 +2,15 @@ package com.example.madapp.quiz;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.madapp.R;
 
@@ -62,5 +66,20 @@ public class QuizInFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quiz_in, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        TextView TVTotalQuestion = view.findViewById(R.id.TVTotalQuestion);
+        TextView TVQuestion = view.findViewById(R.id.TVQuestion);
+        Button option1 = view.findViewById(R.id.option1);
+        Button option2 = view.findViewById(R.id.option2);
+        Button option3 = view.findViewById(R.id.option3);
+        Button option4 = view.findViewById(R.id.option4);
+        Button BtnSubmitAns = view.findViewById(R.id.BTNSubmitAns);
+
+//        option1.setOnClickListener();
     }
 }

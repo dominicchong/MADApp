@@ -11,25 +11,27 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:text="Quiz inside"
+        android:id="@+id/TVTotalQuestion"
+        android:layout_width="121dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/dark_blue"
+        android:gravity="center"
+        android:text="Total Question"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/question"
+        android:id="@+id/TVQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="96dp"
         android:text="Question"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +97,7 @@
         tools:layout_editor_absoluteY="596dp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/BTNSubmitAns"
         android:layout_width="136dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="47dp"
