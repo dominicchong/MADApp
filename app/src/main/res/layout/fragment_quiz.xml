@@ -4,44 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/quiz_background"
+    android:background="@drawable/quiz_background_blue"
     tools:context=".QuizFragment">
 
-    <Button
-        android:id="@+id/BtnQuiz1"
-        android:layout_width="155dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="68dp"
-        android:backgroundTint="@color/blue_900"
-        android:onClick="sendMessage"
-        android:text="Start Quiz"
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="291dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="91dp"
+        android:src="@drawable/quiz_front"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/BtnQuiz2"
-        android:layout_width="260dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="35dp"
+        android:id="@+id/BtnStartQuiz"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="320dp"
         android:backgroundTint="@color/blue_900"
         android:onClick="sendMessage"
-        android:text="Quiz 2"
+        android:text="Start Quiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BtnQuiz1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/BtnQuiz3"
+        android:id="@+id/BtnScoreQuiz"
         android:layout_width="143dp"
         android:layout_height="52dp"
-        android:layout_marginStart="75dp"
         android:layout_marginTop="35dp"
         android:backgroundTint="@color/blue_900"
         android:onClick="sendMessage"
         android:text="Scores"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BtnQuiz2" />
+        app:layout_constraintTop_toBottomOf="@+id/BtnStartQuiz" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
