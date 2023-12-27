@@ -46,8 +46,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/DestTrackCarbonFootprint"
-        android:name="com.example.madapp.TrackCarbonFootprintFragment"
+        android:id="@+id/firstQuestionCalculateCF"
+        android:name="com.example.madapp.fragment_firstQuestionCalculateCF"
         android:label="Track Carbon Footprint"
         tools:layout="@layout/fragment_carbonfootprint" />
     <fragment
@@ -135,6 +135,16 @@
         android:name="com.example.madapp.quiz.QuizScoreFragment"
         android:label="Quiz Score"
         tools:layout="@layout/fragment_quiz_score"/>
+    <fragment
+        android:id="@+id/thridQuestionCalculateCF"
+        android:name="com.example.madapp.fragment_thridQuestionCalculateCF"
+        android:label="Track Carbon Footprint"
+        tools:layout="@layout/fragment_thrid_question_calculate_cf" />
+    <fragment
+        android:id="@+id/DestCertificate"
+        android:name="com.example.madapp.DestCertificate"
+        android:label="fragment_dest_certificate"
+        tools:layout="@layout/fragment_dest_certificate" />
 
 
 </navigation>
