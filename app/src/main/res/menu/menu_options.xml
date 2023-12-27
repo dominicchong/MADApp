@@ -8,9 +8,9 @@
         android:title="Send Feedback" />
 
     <item
-        android:id="@+id/DestHelp"
-        android:icon="@drawable/baseline_question_mark_24"
-        android:title="Help"
+        android:id="@+id/DestInfo"
+        android:icon="@drawable/ic_baseline_info_outline_24"
+        android:title="Info App"
         app:showAsAction="ifRoom"/>
 
     <item

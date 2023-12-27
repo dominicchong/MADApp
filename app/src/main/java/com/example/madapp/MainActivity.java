@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,10 +14,13 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.madapp.quiz.ScoreViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
+    private ScoreViewModel scoreViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.NHFMain);
         NavController navController = host.getNavController();
 
+        // Set of destination IDs which do not show the Up button and bottom navigation bar
+        Set<Integer> destinationsWithoutUpAndBottomNav = new HashSet<>(Arrays.asList(
+                R.id.DestQuizIn
+
+        ));
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build(); //Appbar configuration will help to define which destination should have an Up button (back arrow) in app bar
 //      to automatically handle Up button behavior based on the navigation graph.
 
@@ -50,13 +61,29 @@ public class MainActivity extends AppCompatActivity {
 
         //setDrawerLayout(drawerLayout): This is configuring the builder to work with a DrawerLayout. It means that if you have a drawer layout in your app, the configured destinations will show the hamburger icon in the Toolbar, indicating that there's a navigation drawer.
         NavigationUI.setupWithNavController(toolbar, navController, new AppBarConfiguration
-                .Builder(R.id.DestHome, R.id.DestCarbonFootprint, R.id.DestReforestation, R.id.DestProfile)
+                .Builder(R.id.DestHome, R.id.DestCarbonFootprint, R.id.DestReforestation, R.id.DestProfile, R.id.DestQuiz)
                 .setDrawerLayout(drawerLayout).build());
         //only write the home and about app so that top level destination will show hamburger icon, and other fragment show up hbutton
 
 
-        setupBottomNavMenu(navController);
+        // Side Navigation menu
         setupNavMenu(navController);
+
+        /// Add a destination changed listener to hide the Up button and show/hide bottom navigation bar dynamically
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destinationsWithoutUpAndBottomNav.contains(destination.getId())) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false); // Hide Up button
+                hideBottomNavigationView(); // Hide bottom navigation bar
+            } else {
+                showBottomNavigationView(); // Show bottom navigation bar
+            }
+        });
+
+        // Bottom Navigation menu
+        setupBottomNavMenu(navController);
+
+
+        scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
 
     }
 
@@ -90,5 +117,15 @@ public class MainActivity extends AppCompatActivity {
     private void setupBottomNavMenu(NavController navController){
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_view);
         NavigationUI.setupWithNavController(bottomNav, navController);
+    }
+
+    private void hideBottomNavigationView() {
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_view);
+        bottomNav.setVisibility(View.GONE);
+    }
+
+    private void showBottomNavigationView() {
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_view);
+        bottomNav.setVisibility(View.VISIBLE);
     }
 }

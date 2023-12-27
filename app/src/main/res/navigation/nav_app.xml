@@ -72,7 +72,7 @@
 
     <fragment
         android:id="@+id/DestQuiz"
-        android:name="com.example.madapp.QuizFragment"
+        android:name="com.example.madapp.quiz.QuizFragment"
         android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
 
@@ -108,10 +108,10 @@
 
     <!--Other pages-->
     <fragment
-        android:id="@+id/DestHelp"
-        android:name="com.example.madapp.HelpFragment"
-        android:label="Help"
-        tools:layout="@layout/fragment_help" />
+        android:id="@+id/DestInfo"
+        android:name="com.example.madapp.InfoFragment"
+        android:label="Info App"
+        tools:layout="@layout/fragment_info" />
 
     <fragment
         android:id="@+id/DestLogout"
@@ -123,6 +123,18 @@
         android:name="com.example.madapp.fragment_secondQuestionCalculateCF"
         android:label="Track Carbon Footprint"
         tools:layout="@layout/fragment_cf_second_question" />
+
+    <fragment
+        android:id="@+id/DestQuizIn"
+        android:name="com.example.madapp.quiz.QuizInFragment"
+        android:label="Play Quiz"
+        tools:layout="@layout/fragment_quiz_in"/>
+
+    <fragment
+        android:id="@+id/DestScoreQuiz"
+        android:name="com.example.madapp.quiz.QuizScoreFragment"
+        android:label="Quiz Score"
+        tools:layout="@layout/fragment_quiz_score"/>
 
 
 </navigation>
