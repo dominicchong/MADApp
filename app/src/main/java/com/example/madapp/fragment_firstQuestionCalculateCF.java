@@ -13,10 +13,10 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_secondQuestionCalculateCF#newInstance} factory method to
+ * Use the {@link fragment_firstQuestionCalculateCF#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_secondQuestionCalculateCF extends Fragment {
+public class fragment_firstQuestionCalculateCF extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class fragment_secondQuestionCalculateCF extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_secondQuestionCalculateCF() {
+    public fragment_firstQuestionCalculateCF() {
         // Required empty public constructor
     }
 
@@ -37,11 +37,11 @@ public class fragment_secondQuestionCalculateCF extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_secondQuestionCalculateCF.
+     * @return A new instance of fragment CarbonFootprintFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_secondQuestionCalculateCF newInstance(String param1, String param2) {
-        fragment_secondQuestionCalculateCF fragment = new fragment_secondQuestionCalculateCF();
+    public static fragment_firstQuestionCalculateCF newInstance(String param1, String param2) {
+        fragment_firstQuestionCalculateCF fragment = new fragment_firstQuestionCalculateCF();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,28 +62,18 @@ public class fragment_secondQuestionCalculateCF extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cf_second_question, container, false);
+        return inflater.inflate(R.layout.fragment_carbonfootprint, container, false);
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-        Button BtnPreviousQuestion2 = view.findViewById(R.id.BtnPreviousQuestion2);
+        Button BtnNextQuestionQ1 = view.findViewById(R.id.BtnNextQuestionQ1);
 
-        View.OnClickListener OCLPreviousQuestion2 = new View.OnClickListener() {
+        View.OnClickListener OCLNextQuestion = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.firstQuestionCalculateCF);
+                Navigation.findNavController(view).navigate(R.id.secondQuestionCalculateCF);
             }
         };
-        BtnPreviousQuestion2.setOnClickListener(OCLPreviousQuestion2);
-
-        Button BtnNextQuestionQ2 = view.findViewById(R.id.BtnNextQuestionQ2);
-
-        View.OnClickListener OCLNextQuestion2 = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.thridQuestionCalculateCF);
-            }
-        };
-        BtnNextQuestionQ2.setOnClickListener(OCLNextQuestion2);
+        BtnNextQuestionQ1.setOnClickListener(OCLNextQuestion);
     }
 }

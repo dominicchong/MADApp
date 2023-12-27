@@ -70,7 +70,7 @@ public class CarbonFtFragment extends Fragment {
         View.OnClickListener OCLTrackCF = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestTrackCarbonFootprint); //using Fragment ID
+                Navigation.findNavController(view).navigate(R.id.firstQuestionCalculateCF); //using Fragment ID
             }
         };
         BtnTrackCF.setOnClickListener(OCLTrackCF);
