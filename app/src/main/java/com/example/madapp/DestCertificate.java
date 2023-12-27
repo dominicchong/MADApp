@@ -2,11 +2,17 @@ package com.example.madapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,8 @@ public class DestCertificate extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    CFViewModel viewModel;
 
     public DestCertificate() {
         // Required empty public constructor
@@ -53,6 +61,7 @@ public class DestCertificate extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        viewModel = new ViewModelProvider(requireActivity()).get(CFViewModel.class);
     }
 
     @Override
@@ -60,5 +69,11 @@ public class DestCertificate extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dest_certificate, container, false);
+    }
+
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+        TextView TVName = view.findViewById(R.id.TVName);
+        Double total = viewModel.getTotal();
+        TVName.setText(Double.toString(total));
     }
 }

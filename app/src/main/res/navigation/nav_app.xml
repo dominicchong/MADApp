@@ -136,7 +136,7 @@
         android:label="Quiz Score"
         tools:layout="@layout/fragment_quiz_score"/>
     <fragment
-        android:id="@+id/thridQuestionCalculateCF"
+        android:id="@+id/thirdQuestionCalculateCF"
         android:name="com.example.madapp.fragment_thridQuestionCalculateCF"
         android:label="Track Carbon Footprint"
         tools:layout="@layout/fragment_thrid_question_calculate_cf" />

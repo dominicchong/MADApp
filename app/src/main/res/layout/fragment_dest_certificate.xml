@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/congratulations_your_carbon_footprint_is_lower_than_average_carbon_footprint" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/TVName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
