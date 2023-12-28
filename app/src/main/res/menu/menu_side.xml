@@ -5,6 +5,14 @@
     android:layout_height="wrap_content">
 
     <group
+        android:id="@+id/SideNavHome">
+        <item
+            android:id="@+id/DestHome"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Home"/>
+    </group>
+
+    <group
         android:id="@+id/SideNavCF"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

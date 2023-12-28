@@ -89,8 +89,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.getUiSettings().setMapToolbarEnabled(true);
+
+        // Setting basic features of Google Map
+//        mMap.getUiSettings().setZoomControlsEnabled(true);      // show zoom in and out button at bottom right corner
+//        mMap.getUiSettings().setMapToolbarEnabled(true);        // show toolbar(description) of marker when clicked
+        mMap.getUiSettings().setAllGesturesEnabled(true);
 
 
         // Add a marker in Malaysia and move the camera
@@ -109,6 +112,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         // Move camera to default location
         mMap.moveCamera(CameraUpdateFactory.newLatLng(malaysia));
 
+
+        // show custom info window when marker is clicked
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
