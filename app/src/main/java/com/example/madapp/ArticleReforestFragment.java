@@ -69,8 +69,14 @@ public class ArticleReforestFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        CardView CVArticle1;
-        CVArticle1 = view.findViewById(R.id.CVArticle1);
+        CardView CVArticle1 = view.findViewById(R.id.CVArticle1);
+        CardView CVArticle2 = view.findViewById(R.id.CVArticle2);
+        CardView CVArticle3 = view.findViewById(R.id.CVArticle3);
+        CardView CVArticle4 = view.findViewById(R.id.CVArticle4);
+        CardView CVArticle5 = view.findViewById(R.id.CVArticle5);
+
+
+
 
 
     }

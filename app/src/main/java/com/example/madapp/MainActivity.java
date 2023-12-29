@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set of destination IDs which do not show the Up button and bottom navigation bar
         Set<Integer> destinationsWithoutUpAndBottomNav = new HashSet<>(Arrays.asList(
-                R.id.DestQuizIn
+                R.id.DestQuizQuestion
 
         ));
 
