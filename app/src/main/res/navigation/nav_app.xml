@@ -77,7 +77,7 @@
         tools:layout="@layout/fragment_quiz" />
 
     <fragment
-        android:id="@+id/DestMapsActivity"
+        android:id="@+id/DestMap"
         android:name="com.example.madapp.MapsFragment"
         android:label="Google Maps Location"
         tools:layout="@layout/fragment_maps" />

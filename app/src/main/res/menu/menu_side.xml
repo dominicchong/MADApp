@@ -40,7 +40,7 @@
             android:icon="@drawable/question_icon"
             android:title="Quiz" />
         <item
-            android:id="@+id/DestMapsActivity"
+            android:id="@+id/DestMap"
             android:icon="@drawable/map_icon"
             android:title="Location Reforestation" />
     </group>

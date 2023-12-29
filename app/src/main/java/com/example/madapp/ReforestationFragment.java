@@ -88,7 +88,7 @@ public class ReforestationFragment extends Fragment {
         View.OnClickListener OCLMap = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestMapsActivity);
+                Navigation.findNavController(view).navigate(R.id.DestMap);
             }
         };
         BtnMap.setOnClickListener(OCLMap);
