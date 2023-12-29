@@ -7,10 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -23,10 +21,10 @@ import com.example.madapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link QuizInFragment#newInstance} factory method to
+ * Use the {@link QuizQuestionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuizInFragment extends Fragment {
+public class QuizQuestionFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,7 +54,7 @@ public class QuizInFragment extends Fragment {
     private ScoreViewModel scoreViewModel;
 
 
-    public QuizInFragment() {
+    public QuizQuestionFragment() {
         // Required empty public constructor
     }
 
@@ -66,11 +64,11 @@ public class QuizInFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment QuizInFragment.
+     * @return A new instance of fragment QuizQuestionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static QuizInFragment newInstance(String param1, String param2) {
-        QuizInFragment fragment = new QuizInFragment();
+    public static QuizQuestionFragment newInstance(String param1, String param2) {
+        QuizQuestionFragment fragment = new QuizQuestionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -93,7 +91,7 @@ public class QuizInFragment extends Fragment {
 
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz_in, container, false);
+        return inflater.inflate(R.layout.fragment_quiz_question, container, false);
     }
 
     @Override
@@ -121,12 +119,15 @@ public class QuizInFragment extends Fragment {
         loadNewQuestion();
     }
 
-    public void onClick(View view) {
 
-        option1.setBackgroundColor(Color.BLACK);
-        option2.setBackgroundColor(Color.BLACK);
-        option3.setBackgroundColor(Color.BLACK);
-        option4.setBackgroundColor(Color.BLACK);
+    public void onClick(View view) {
+        int originalColor = Color.rgb(27, 94, 32);
+
+        // reset button background to green
+        option1.setBackgroundColor(originalColor);
+        option2.setBackgroundColor(originalColor);
+        option3.setBackgroundColor(originalColor);
+        option4.setBackgroundColor(originalColor);
 
         Button clickedButton = (Button) view;
         if(clickedButton.getId() == R.id.BtnSubmitAns) {
@@ -161,7 +162,7 @@ public class QuizInFragment extends Fragment {
 
     void finishQuiz() {
         String passStatus = "";
-        if(score > totalQuestion*0.60) {
+        if(score > totalQuestion*0.70) {
             passStatus = "Passed";
         } else {
             passStatus = "Failed";
@@ -190,6 +191,7 @@ public class QuizInFragment extends Fragment {
     void restartQuiz() {
         score = 0;
         currentQuestionIndex = 0;
+        selectedAnswer = "";
         loadNewQuestion();
     }
 

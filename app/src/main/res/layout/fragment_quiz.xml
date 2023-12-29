@@ -9,37 +9,39 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="291dp"
-        android:layout_height="168dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="91dp"
+        android:layout_width="339dp"
+        android:layout_height="213dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/quiz_front"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/BtnStartQuiz"
-        android:layout_width="155dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="320dp"
-        android:backgroundTint="@color/blue_900"
-        android:onClick="sendMessage"
-        android:text="Start Quiz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/BtnScoreQuiz"
-        android:layout_width="143dp"
-        android:layout_height="52dp"
+        android:id="@+id/BtnStartQuiz"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="336dp"
+        android:backgroundTint="@color/blue_900"
+        android:text="Start Quiz"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/BtnRulesQuiz"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
         android:layout_marginTop="35dp"
         android:backgroundTint="@color/blue_900"
-        android:onClick="sendMessage"
-        android:text="Scores"
+        android:text="Rules"
+        android:textSize="18sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BtnStartQuiz" />
 

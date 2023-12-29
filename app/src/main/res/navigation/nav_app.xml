@@ -125,16 +125,16 @@
         tools:layout="@layout/fragment_cf_second_question" />
 
     <fragment
-        android:id="@+id/DestQuizIn"
-        android:name="com.example.madapp.quiz.QuizInFragment"
+        android:id="@+id/DestQuizQuestion"
+        android:name="com.example.madapp.quiz.QuizQuestionFragment"
         android:label="Play Quiz"
-        tools:layout="@layout/fragment_quiz_in"/>
+        tools:layout="@layout/fragment_quiz_question"/>
 
     <fragment
-        android:id="@+id/DestScoreQuiz"
-        android:name="com.example.madapp.quiz.QuizScoreFragment"
-        android:label="Quiz Score"
-        tools:layout="@layout/fragment_quiz_score"/>
+        android:id="@+id/DestRulesQuiz"
+        android:name="com.example.madapp.quiz.QuizRulesFragment"
+        android:label="Quiz Rules"
+        tools:layout="@layout/fragment_quiz_rules"/>
     <fragment
         android:id="@+id/thirdQuestionCalculateCF"
         android:name="com.example.madapp.fragment_thridQuestionCalculateCF"

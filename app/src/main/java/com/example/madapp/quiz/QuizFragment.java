@@ -68,23 +68,24 @@ public class QuizFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Button BtnQuiz1 = view.findViewById(R.id.BtnStartQuiz);
-        View.OnClickListener OCLArticle = new View.OnClickListener() {
+        Button BtnStartQuiz = view.findViewById(R.id.BtnStartQuiz);
+        View.OnClickListener OCLStartQuiz = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestQuizIn);
+                Navigation.findNavController(view).navigate(R.id.DestQuizQuestion);
             }
         };
-        BtnQuiz1.setOnClickListener(OCLArticle);
+        BtnStartQuiz.setOnClickListener(OCLStartQuiz);
 
-        Button BtnQuiz3 = view.findViewById(R.id.BtnScoreQuiz);
-        View.OnClickListener OCLMap = new View.OnClickListener(){
+
+        Button BtnRulesQuiz = view.findViewById(R.id.BtnRulesQuiz);
+        View.OnClickListener OCLRulesQuiz = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestScoreQuiz);
+                Navigation.findNavController(view).navigate(R.id.DestRulesQuiz);
             }
         };
-        BtnQuiz3.setOnClickListener(OCLMap);
+        BtnRulesQuiz.setOnClickListener(OCLRulesQuiz);
 
     }
 }
