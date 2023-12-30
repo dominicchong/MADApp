@@ -145,6 +145,21 @@
         android:name="com.example.madapp.DestCertificate"
         android:label="fragment_dest_certificate"
         tools:layout="@layout/fragment_dest_certificate" />
+    <fragment
+        android:id="@+id/explainTips1Fragment"
+        android:name="com.example.madapp.ExplainTips1Fragment"
+        android:label="Article Tip 1"
+        tools:layout="@layout/fragment_explain_tips1" />
+    <fragment
+        android:id="@+id/explainTips2Fragment"
+        android:name="com.example.madapp.ExplainTips2Fragment"
+        android:label="Article Tip 2"
+        tools:layout="@layout/fragment_explain_tips2" />
+    <fragment
+        android:id="@+id/explainTips3Fragment"
+        android:name="com.example.madapp.ExplainTips3Fragment"
+        android:label="Article Tip 3"
+        tools:layout="@layout/fragment_explain_tips3" />
 
 
 </navigation>

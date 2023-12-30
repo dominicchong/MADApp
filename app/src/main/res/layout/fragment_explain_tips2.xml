@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".ExplainTips2Fragment">
+
+    <ImageView
+        android:id="@+id/IV3R"
+        android:layout_width="454dp"
+        android:layout_height="292dp"
+        android:src="@drawable/img_reduce_reuse_recycle_infographic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVTitleArticle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="The 3 R’s – Reduce, Reuse, and Recycle"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IV3R" />
+
+    <TextView
+        android:id="@+id/TVSummary"
+        android:layout_width="381dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="16dp"
+        android:text="The 3 R’s stand for “Reduce, Reuse, and Recycle”. This Eco Trio are rules that guide us to take care of our planet and use things wisely.. Not only that, by applying 3R's he waste can be reduce and this will help to reduce carbon footprint and combat climate change"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVTitleArticle2" />
+
+    <TextView
+        android:id="@+id/TVSubHeaderLink2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="The link to article is as follows:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/TVSummary"
+        app:layout_constraintTop_toBottomOf="@+id/TVSummary" />
+
+    <TextView
+        android:id="@+id/TVArticle2Link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="https://earthhow.com/reduce-reuse-recycle/"
+        android:textColor="#3366CC"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/TVSubHeaderLink2"
+        app:layout_constraintTop_toBottomOf="@+id/TVSubHeaderLink2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
