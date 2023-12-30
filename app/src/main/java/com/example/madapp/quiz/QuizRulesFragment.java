@@ -28,8 +28,6 @@ public class QuizRulesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ScoreViewModel scoreViewModel;
-
     public QuizRulesFragment() {
         // Required empty public constructor
     }

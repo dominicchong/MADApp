@@ -4,7 +4,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -16,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.madapp.quiz.ScoreViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -28,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
-    private ScoreViewModel scoreViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Bottom Navigation menu
         setupBottomNavMenu(navController);
-
-
-        scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
 
     }
 

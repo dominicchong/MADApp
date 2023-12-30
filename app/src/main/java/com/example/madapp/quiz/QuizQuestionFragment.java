@@ -52,8 +52,6 @@ public class QuizQuestionFragment extends Fragment {
     Button option4;
     Button BtnSubmitAns;
 
-    private ScoreViewModel scoreViewModel;
-
 
     public QuizQuestionFragment() {
         // Required empty public constructor
