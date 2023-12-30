@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.madapp.R;
@@ -121,9 +122,9 @@ public class QuizQuestionFragment extends Fragment {
 
 
     public void onClick(View view) {
-        int originalColor = Color.rgb(27, 94, 32);
+        int originalColor = Color.rgb(106, 27, 154);
 
-        // reset button background to green
+        // reset button background to purple_800
         option1.setBackgroundColor(originalColor);
         option2.setBackgroundColor(originalColor);
         option3.setBackgroundColor(originalColor);
@@ -141,7 +142,9 @@ public class QuizQuestionFragment extends Fragment {
         else {
             // choices button clicked
             selectedAnswer = clickedButton.getText().toString();
-            clickedButton.setBackgroundColor(Color.BLUE);
+
+            // change selected choice to bluish color
+            clickedButton.setBackgroundColor(Color.rgb(64, 102, 224));
         }
     }
 
@@ -161,30 +164,35 @@ public class QuizQuestionFragment extends Fragment {
     }
 
     void finishQuiz() {
+        // Inflate the custom layout
+        View customDialogView = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, null);
+
+        // Find views in the custom layout
+        ImageView CustomIV = customDialogView.findViewById(R.id.CustomIV);
+        TextView customDialogTitle = customDialogView.findViewById(R.id.customDialogTitle);
+        TextView customDialogMessage = customDialogView.findViewById(R.id.customDialogMessage);
+
+
         String passStatus = "";
         if(score > totalQuestion*0.70) {
-            passStatus = "Passed";
+            passStatus = "Congratulations! You Win";
+            CustomIV.setImageResource(R.drawable.trophy);
         } else {
-            passStatus = "Failed";
+            passStatus = "You Lost! Try Again?";
+            CustomIV.setImageResource(R.drawable.game_over);
         }
 
+        // Set custom content
+        customDialogTitle.setText(passStatus);
+        customDialogMessage.setText("Your score is " + score + " out of " + totalQuestion);
+
+        // Create the custom AlertDialog
         new AlertDialog.Builder(getContext())
-                .setTitle(passStatus)
-                .setMessage("Score is " + score + " out of " + totalQuestion)
-                .setPositiveButton("Restart", ((dialogInterface, i) -> restartQuiz()))
+                .setView(customDialogView)
+                .setPositiveButton("Try Again", (dialogInterface, i) -> restartQuiz())
                 .setNegativeButton("Back to Quiz", (dialogInterface, i) -> backToQuiz())
                 .setCancelable(false)
                 .show();
-
-
-        // Obtain the ViewModel from the activity scope
-        scoreViewModel = new ViewModelProvider(requireActivity()).get(ScoreViewModel.class);
-
-        // Assume you have the quiz score available
-        int quizScore = score;
-
-        // Set the quiz score in the ViewModel
-        scoreViewModel.setQuizScore(quizScore);
 
     }
 

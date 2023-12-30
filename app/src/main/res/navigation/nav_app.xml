@@ -71,10 +71,28 @@
         tools:layout="@layout/fragment_article_reforest" />
 
     <fragment
+        android:id="@+id/DestArticleDetails"
+        android:name="com.example.madapp.ArticleDetailsFragment"
+        android:label="Article Details"
+        tools:layout="@layout/fragment_article_details" />
+
+    <fragment
         android:id="@+id/DestQuiz"
         android:name="com.example.madapp.quiz.QuizFragment"
         android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
+
+    <fragment
+        android:id="@+id/DestQuizQuestion"
+        android:name="com.example.madapp.quiz.QuizQuestionFragment"
+        android:label="Play Quiz"
+        tools:layout="@layout/fragment_quiz_question"/>
+
+    <fragment
+        android:id="@+id/DestRulesQuiz"
+        android:name="com.example.madapp.quiz.QuizRulesFragment"
+        android:label="Quiz Rules"
+        tools:layout="@layout/fragment_quiz_rules"/>
 
     <fragment
         android:id="@+id/DestMap"
@@ -124,17 +142,6 @@
         android:label="Track Carbon Footprint"
         tools:layout="@layout/fragment_cf_second_question" />
 
-    <fragment
-        android:id="@+id/DestQuizQuestion"
-        android:name="com.example.madapp.quiz.QuizQuestionFragment"
-        android:label="Play Quiz"
-        tools:layout="@layout/fragment_quiz_question"/>
-
-    <fragment
-        android:id="@+id/DestRulesQuiz"
-        android:name="com.example.madapp.quiz.QuizRulesFragment"
-        android:label="Quiz Rules"
-        tools:layout="@layout/fragment_quiz_rules"/>
     <fragment
         android:id="@+id/thirdQuestionCalculateCF"
         android:name="com.example.madapp.fragment_thridQuestionCalculateCF"
