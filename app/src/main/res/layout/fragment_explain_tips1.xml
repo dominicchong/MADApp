@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".ExplainTips1Fragment">
+
+    <ImageView
+        android:id="@+id/IVPublicTransport"
+        android:layout_width="459dp"
+        android:layout_height="284dp"
+        android:src="@drawable/public_transport"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVTitleArticle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Your guide to climate action: Transport"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IVPublicTransport" />
+
+    <TextView
+        android:id="@+id/TVSummary"
+        android:layout_width="360dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="44dp"
+        android:text="Using public transport can help reduce carbon emission and this will help in combat climate change."
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVTitleArticle1" />
+
+    <TextView
+        android:id="@+id/TVSubHeaderLink1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="The link to article is as follows:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/TVSummary"
+        app:layout_constraintTop_toBottomOf="@+id/TVSummary" />
+
+    <TextView
+        android:id="@+id/TVArticle1Link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="https://www.un.org/en/actnow/transport"
+        android:textColor="#3366CC"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/TVSubHeaderLink1"
+        app:layout_constraintTop_toBottomOf="@+id/TVSubHeaderLink1" />
+</androidx.constraintlayout.widget.ConstraintLayout>
