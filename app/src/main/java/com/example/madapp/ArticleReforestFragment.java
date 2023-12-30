@@ -1,15 +1,23 @@
 package com.example.madapp;
 
+import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +25,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ArticleReforestFragment extends Fragment {
+
+    public static int articlePage = 0;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,9 +86,56 @@ public class ArticleReforestFragment extends Fragment {
         CardView CVArticle4 = view.findViewById(R.id.CVArticle4);
         CardView CVArticle5 = view.findViewById(R.id.CVArticle5);
 
+        CVArticle1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                articlePage = 1;
+                Navigation.findNavController(view).navigate(R.id.DestArticleDetails);
+            }
+        });
 
+        CVArticle2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                articlePage = 2;
+                Navigation.findNavController(view).navigate(R.id.DestArticleDetails);
+            }
+        });
 
+        CVArticle3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                articlePage = 3;
+                Navigation.findNavController(view).navigate(R.id.DestArticleDetails);
+            }
+        });
 
+        CVArticle4.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                articlePage = 4;
+                Navigation.findNavController(view).navigate(R.id.DestArticleDetails);
+            }
+        });
+
+        CVArticle5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                articlePage = 5;
+                Navigation.findNavController(view).navigate(R.id.DestArticleDetails);
+            }
+        });
 
     }
+
+    private void openCustomTabs(String url) {
+        // Create a CustomTabsIntent
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        CustomTabsIntent customTabsIntent = builder.build();
+
+        // Launch the URL using Custom Tabs
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
+    }
+
 }

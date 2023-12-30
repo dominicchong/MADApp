@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    tools:context=".ArticleDetailsFragment">
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="721dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TVArticleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Article Title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="24dp"/>
+
+            <TextView
+                android:id="@+id/TVArticleAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:paddingBottom="24dp"/>
+
+
+            <ImageView
+                android:id="@+id/IVArticleDescImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="24dp"
+                tools:layout_editor_absoluteY="40dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/TVArticleDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                android:lineSpacingExtra="5sp"
+                android:text="Article Description"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/TVMoreInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:text="For more information, visit the website below"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/TVArticleWebLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="48dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:text="@string/link"
+                android:textColor="@color/blue_900"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</androidx.core.widget.NestedScrollView>
