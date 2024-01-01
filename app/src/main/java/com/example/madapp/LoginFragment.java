@@ -2,45 +2,39 @@ package com.example.madapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseAuth firebaseAuth;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment home.
-     */
-    // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance(String param1, String param2) {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
@@ -53,10 +47,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -68,37 +59,63 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        EditText emailEditText = view.findViewById(R.id.LoginEmail);
+        EditText passwordEditText = view.findViewById(R.id.LoginPass);
+
         Button BtnCNA = view.findViewById(R.id.CNABtn);
-        View.OnClickListener CNA = new View.OnClickListener() {
+        BtnCNA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.DestRegister);
             }
-        };
-        BtnCNA.setOnClickListener(CNA);
+        });
 
         Button Btnfgt = view.findViewById(R.id.fgtBtn);
-        View.OnClickListener forgot = new View.OnClickListener() {
+        Btnfgt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.DestForgotPassword);
             }
-        };
-        Btnfgt.setOnClickListener(forgot);
-
+        });
 
         Button BtnLogin = view.findViewById(R.id.BtnLogin);
         BtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the MainActivity from the LoginActivity
-                Intent intent = new Intent(requireActivity(), MainActivity.class);
-                startActivity(intent);
+                // Get user-entered email and password
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
 
-                // Finish the LoginActivity to prevent going back to it from MainActivity
-                requireActivity().finish();
+                // Validate email and password
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(requireContext(), "Email and password cannot be blank", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Authenticate with Firebase
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success
+                                    Log.d("LoginFragment", "signInWithEmail:success");
+                                    Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
+
+                                    // Start the MainActivity
+                                    Intent intent = new Intent(requireActivity(), MainActivity.class);
+                                    startActivity(intent);
+
+                                    // Finish the LoginActivity to prevent going back to it from MainActivity
+                                    requireActivity().finish();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("LoginFragment", "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
         });
-
     }
 }
