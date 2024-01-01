@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/quiz_background_blue"
+    android:padding="16dp"
     tools:context=".quiz.QuizQuestionFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,7 +15,7 @@
         android:id="@+id/TVTotalQuestion"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@color/dark_blue"
         android:gravity="center"
         android:text="Total Question"
@@ -22,7 +23,7 @@
         android:textSize="17sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,27 +31,26 @@
         android:id="@+id/TVQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="Question"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/TVTotalQuestion" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="48dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/TVQuestion">
 
         <Button
             android:id="@+id/option1"
@@ -58,8 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/purple_800"
-            android:textColor="@color/white"
             android:text="Option 1"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="163dp"
             tools:layout_editor_absoluteY="205dp" />
 
@@ -69,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/purple_800"
-            android:textColor="@color/white"
             android:text="Option 2"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="162dp"
             tools:layout_editor_absoluteY="262dp" />
 
@@ -80,8 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/purple_800"
-            android:textColor="@color/white"
             android:text="Option 3"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="160dp"
             tools:layout_editor_absoluteY="350dp" />
 
@@ -91,8 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/purple_800"
-            android:textColor="@color/white"
             android:text="Option 4"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="162dp"
             tools:layout_editor_absoluteY="419dp" />
 
@@ -116,7 +116,7 @@
         android:id="@+id/BtnSubmitAns"
         android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="@color/blue_900"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"

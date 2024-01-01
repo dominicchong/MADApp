@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -29,14 +30,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link QuizQuestionFragment#newInstance} factory method to
+ * Use the {@link QuestionQuizFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuizQuestionFragment extends Fragment {
+public class QuestionQuizFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +52,6 @@ public class QuizQuestionFragment extends Fragment {
     private List<QuestionList> questionList = new ArrayList<>();
     int score = 0;
     int currentQuestionIndex = 0;
-    int maxTotalQuestion = 5;
     String selectedAnswer = "";
     TextView TVTotalQuestion;
     TextView TVQuestion;
@@ -64,7 +63,8 @@ public class QuizQuestionFragment extends Fragment {
     Button BtnSubmitAns;
 
 
-    public QuizQuestionFragment() {
+
+    public QuestionQuizFragment() {
         // Required empty public constructor
     }
 
@@ -74,11 +74,11 @@ public class QuizQuestionFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment QuizQuestionFragment.
+     * @return A new instance of fragment QuestionQuizFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static QuizQuestionFragment newInstance(String param1, String param2) {
-        QuizQuestionFragment fragment = new QuizQuestionFragment();
+    public static QuestionQuizFragment newInstance(String param1, String param2) {
+        QuestionQuizFragment fragment = new QuestionQuizFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -117,7 +117,6 @@ public class QuizQuestionFragment extends Fragment {
         BtnSubmitAns = view.findViewById(R.id.BtnSubmitAns);
         TVQuestionNo = view.findViewById(R.id.TVQuestionNo);
 
-//        startQuiz();
         // get questions from Firebase Data
         DatabaseReference quizDBRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://ecohelper-eea91-default-rtdb.firebaseio.com/quiz");
 
@@ -169,56 +168,6 @@ public class QuizQuestionFragment extends Fragment {
 
     }
 
-    void startQuiz() {
-        // get questions from Firebase Data
-        DatabaseReference quizDBRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://ecohelper-eea91-default-rtdb.firebaseio.com/quiz");
-
-        // show dialog while questions are being fetched
-        Context context;
-        ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading");
-        progressDialog.show();
-
-        quizDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                // get all questions from firebase database of quiz
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    // getting question, option and ans data from firebase database
-                    String getQuestion = dataSnapshot.child("question").getValue(String.class);
-                    String getOption1 = dataSnapshot.child("option1").getValue(String.class);
-                    String getOption2 = dataSnapshot.child("option2").getValue(String.class);
-                    String getOption3 = dataSnapshot.child("option3").getValue(String.class);
-                    String getOption4 = dataSnapshot.child("option4").getValue(String.class);
-                    String getAnswer = dataSnapshot.child("answer").getValue(String.class);
-
-                    // adding data into questionList
-                    QuestionList questionsList = new QuestionList(getQuestion, getOption1, getOption2, getOption3, getOption4, getAnswer);
-                    questionList.add(questionsList);
-
-                }
-
-                // hide dialog
-                progressDialog.hide();
-
-                loadNewQuestion();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        option1.setOnClickListener(this::onClick);
-        option2.setOnClickListener(this::onClick);
-        option3.setOnClickListener(this::onClick);
-        option4.setOnClickListener(this::onClick);
-        BtnSubmitAns.setOnClickListener(this::onClick);
-    }
 
     public void onClick(View view) {
         int originalColor = Color.rgb(106, 27, 154);
@@ -231,19 +180,12 @@ public class QuizQuestionFragment extends Fragment {
 
         Button clickedButton = (Button) view;
         if(clickedButton.getId() == R.id.BtnSubmitAns) {
-
-            // if user does not select an answer, a toast message will appear
-            if(selectedAnswer.equals("")) {
-                Toast.makeText(view.getContext(), "You must select an answer!", Toast.LENGTH_SHORT).show();
+            // Score increases by 1 if selected ans is equal to correct ans
+            if(selectedAnswer.equals(questionList.get(currentQuestionIndex).getAnswer())) {
+                score++;
             }
-            else {
-                // Score increases by 1 if selected ans is equal to correct ans
-                if(selectedAnswer.equals(questionList.get(currentQuestionIndex).getAnswer())) {
-                    score++;
-                }
-                currentQuestionIndex++;
-                loadNewQuestion();
-            }
+            currentQuestionIndex++;
+            loadNewQuestion();
         }
         else {
             // choices button clicked
@@ -268,9 +210,6 @@ public class QuizQuestionFragment extends Fragment {
         option4.setText(questionList.get(currentQuestionIndex).getOption4());
         TVQuestionNo.setText("Question " + (currentQuestionIndex + 1) + " of " + questionList.size());
         TVTotalQuestion.setText("Total Questions: " + questionList.size());
-
-        // reset selected answer to empty value
-        selectedAnswer = "";
 
     }
 
@@ -315,27 +254,7 @@ public class QuizQuestionFragment extends Fragment {
     }
 
     void backToQuiz() {
-        // reset score
-        score = 0;
-        selectedAnswer = "";
-
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.DestQuiz);
-    }
-
-
-    void shuffleQuestion() {
-        Random rand = new Random();
-        List<Integer> randomQuestionOrder = new ArrayList<Integer>();
-        for (int i = 0; i < 5; i++) {
-            while(true) {
-                Integer next = rand.nextInt(maxTotalQuestion) + 1;
-                if (!randomQuestionOrder.contains(next)) {
-                    // Done for this iteration
-                    randomQuestionOrder.add(next);
-                    break;
-                }
-            }
-        }
     }
 }

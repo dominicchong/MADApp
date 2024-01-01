@@ -9,11 +9,11 @@ public class QuestionAnswer {
 
     public static String choices[][] = {
             {"Deforestation", "Forest", "Reforestation", "Planting"},
-            {"Throwing rubbish on the road", "Building a house", "Partying", "Scatter seed on empty field"}
+            {"Throwing rubbish on the road", "Building a house", "Partying", "Scatter seed on fertile field"}
     };
 
     public static String correctAnswers[] = {
-            "Reforestation",
-            "Scatter seed on empty field"
+            choices[0][2],
+            choices[1][3]
     };
 }
