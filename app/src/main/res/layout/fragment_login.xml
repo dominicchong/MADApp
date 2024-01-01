@@ -7,7 +7,7 @@
     tools:context=".LoginFragment">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/dots1"
         android:layout_width="191dp"
         android:layout_height="19dp"
         android:layout_marginStart="9dp"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/LoginEmail"
         android:layout_width="246dp"
         android:layout_height="49dp"
         android:layout_marginStart="82dp"
@@ -81,7 +81,7 @@
     <Button
         android:id="@+id/fgtBtn"
         android:layout_width="154dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="148dp"
@@ -108,10 +108,10 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginPass" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/LoginPass"
         android:layout_width="245dp"
         android:layout_height="49dp"
         android:layout_marginStart="82dp"
@@ -123,10 +123,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginEmail" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/dots2"
         android:layout_width="191dp"
         android:layout_height="19dp"
         android:layout_marginEnd="8dp"
