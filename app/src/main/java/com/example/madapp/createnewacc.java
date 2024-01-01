@@ -78,6 +78,7 @@ public class createnewacc extends Fragment {
                             userRef.child("email").setValue(email);
                             userRef.child("username").setValue(username);
                             userRef.child("phoneNumber").setValue(phoneNumber);
+                            userRef.child("password").setValue(password);
                             // Add more user details as needed
                         }
 
