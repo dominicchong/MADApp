@@ -106,9 +106,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         //Prepare the place category list
         String[] placeCategory = {
-                "Kuala Lumpur", "APE Volunteer Site 5", "Urban Reforestation @ Sg Putat",
+                "Taman Tugu", "APE Volunteer Site 5", "Urban Reforestation @ Sg Putat",
                 "Kinabatangan Wildlife Sanctuary", "Bukit Piton Wildlife Safari", "Tabin Wildlife Reserve",
-                "Lok Kawi Wildlife Park"};
+                "Lok Kawi Wildlife Park", "Bangsar Nursery FTS"};
         SPCategory.setAdapter(new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_dropdown_item, placeCategory));
 
@@ -119,25 +119,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
-    // Method to add location LatLng to locationList
-    public void addLocationPosition() {
-        LatLng KL = new LatLng(3.1597182895318707, 101.70883414154353);
-        LatLng APEVolunteerSite5 = new LatLng(5.55, 118.31);
-        LatLng UrbanReforestationSgPutat = new LatLng(2.256187755440792, 102.27169677901126);
-        LatLng KinabatanganWildlifeSanctuary = new LatLng(5.615706881211299, 118.358824454556);
-        LatLng BukitPitonWildlifeSafari = new LatLng(5.024940906606486, 118.34722354122756);
-        LatLng TabinWildlifeReserve = new LatLng(5.231477679367326, 118.72625183634673);
-        LatLng LokKawiWildlifePark = new LatLng(5.860375044713165, 116.07159309341546);
-
-        locationList.add(KL);
-        locationList.add(APEVolunteerSite5);
-        locationList.add(UrbanReforestationSgPutat);
-        locationList.add(KinabatanganWildlifeSanctuary);
-        locationList.add(BukitPitonWildlifeSafari);
-        locationList.add(TabinWildlifeReserve);
-        locationList.add(LokKawiWildlifePark);
-    }
 
     private Marker setMarker(LatLng location, String title, String snippet){
         // Only clear markers when map has markers and when addAllMarkers method are not called
@@ -154,26 +135,26 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return locate;
     }
 
-    public void addAllMarkers() {
-        isMethodAddAllMarkersCalled = true;     // Change boolean to true so that all markers remain and not cleared
 
-        Marker marker1 = setMarker(locationList.get(0), "Malaysia", "Kuala Lumpur");
-        Marker marker2 = setMarker(locationList.get(1), "APE Volunteer Site 5", "Kinabatangan, Sabah");
-        Marker marker3 = setMarker(locationList.get(2), "Urban Reforestation @ Sg Putat", "Ayer Keroh, Melaka");
-        Marker marker4 = setMarker(locationList.get(3), "Kinabatangan Wildlife Sanctuary", "Kinabatangan, Sabah");
-        Marker marker5 = setMarker(locationList.get(4), "Bukit Piton Wildlife Safari", "Lahad Datu, Sabah");
-        Marker marker6 = setMarker(locationList.get(5), "Tabin Wildlife Reserve", "Lahad Datu, Sabah");
-        Marker marker7 = setMarker(locationList.get(6), "Lok Kawi Wildlife Park", "Kota Kinabalu, Sabah");
+    // Method to add location LatLng to locationList
+    public void addLocationPosition() {
+        LatLng TamanTugu = new LatLng(3.151521173038412, 101.68460338586648);
+        LatLng APEVolunteerSite5 = new LatLng(5.55, 118.31);
+        LatLng UrbanReforestationSgPutat = new LatLng(2.256187755440792, 102.27169677901126);
+        LatLng KinabatanganWildlifeSanctuary = new LatLng(5.615706881211299, 118.358824454556);
+        LatLng BukitPitonWildlifeSafari = new LatLng(5.024940906606486, 118.34722354122756);
+        LatLng TabinWildlifeReserve = new LatLng(5.231477679367326, 118.72625183634673);
+        LatLng LokKawiWildlifePark = new LatLng(5.860375044713165, 116.07159309341546);
+        LatLng BangsarNurseryFTS = new LatLng(3.1376047342213536, 101.67665166136555);
 
-        reforestationMarkersList.add(marker1);
-        reforestationMarkersList.add(marker2);
-        reforestationMarkersList.add(marker3);
-        reforestationMarkersList.add(marker4);
-        reforestationMarkersList.add(marker5);
-        reforestationMarkersList.add(marker6);
-        reforestationMarkersList.add(marker7);
-
-        isMethodAddAllMarkersCalled = false;    // Change boolean back to false before exiting method
+        locationList.add(TamanTugu);
+        locationList.add(APEVolunteerSite5);
+        locationList.add(UrbanReforestationSgPutat);
+        locationList.add(KinabatanganWildlifeSanctuary);
+        locationList.add(BukitPitonWildlifeSafari);
+        locationList.add(TabinWildlifeReserve);
+        locationList.add(LokKawiWildlifePark);
+        locationList.add(BangsarNurseryFTS);
     }
 
 
@@ -185,7 +166,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         switch (selectedItem) {
             case 0: // Kuala Lumpur
-                marker = setMarker(locationList.get(0), "Malaysia", "Kuala Lumpur");
+                marker = setMarker(locationList.get(0), "Taman Tugu", "Kuala Lumpur");
                 return locationList.get(0);
             case 1: // APE Malaysia Volunteer Site
                 marker = setMarker(locationList.get(1), "APE Volunteer Site 5", "Kinabatangan, Sabah");
@@ -205,10 +186,36 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             case 6:
                 marker = setMarker(locationList.get(6), "Lok Kawi Wildlife Park", "Kota Kinabalu, Sabah");
                 return locationList.get(6);
+            case 7:
+                marker = setMarker(locationList.get(7), "Bangsar Nursery FTS", "Bangsar, Kuala Lumpur");;
 
             default:
                 return null;
         }
+    }
+
+    public void addAllMarkers() {
+        isMethodAddAllMarkersCalled = true;     // Change boolean to true so that all markers remain and not cleared
+
+        Marker marker1 = setMarker(locationList.get(0), "Taman Tugu", "Kuala Lumpur");
+        Marker marker2 = setMarker(locationList.get(1), "APE Volunteer Site 5", "Kinabatangan, Sabah");
+        Marker marker3 = setMarker(locationList.get(2), "Urban Reforestation @ Sg Putat", "Ayer Keroh, Melaka");
+        Marker marker4 = setMarker(locationList.get(3), "Kinabatangan Wildlife Sanctuary", "Kinabatangan, Sabah");
+        Marker marker5 = setMarker(locationList.get(4), "Bukit Piton Wildlife Safari", "Lahad Datu, Sabah");
+        Marker marker6 = setMarker(locationList.get(5), "Tabin Wildlife Reserve", "Lahad Datu, Sabah");
+        Marker marker7 = setMarker(locationList.get(6), "Lok Kawi Wildlife Park", "Kota Kinabalu, Sabah");
+        Marker marker8 = setMarker(locationList.get(7), "Bangsar Nursery FTS", "Bangsar, Kuala Lumpur");
+
+        reforestationMarkersList.add(marker1);
+        reforestationMarkersList.add(marker2);
+        reforestationMarkersList.add(marker3);
+        reforestationMarkersList.add(marker4);
+        reforestationMarkersList.add(marker5);
+        reforestationMarkersList.add(marker6);
+        reforestationMarkersList.add(marker7);
+        reforestationMarkersList.add(marker8);
+
+        isMethodAddAllMarkersCalled = false;    // Change boolean back to false before exiting method
     }
 
 
@@ -217,7 +224,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
         addLocationPosition();
 
-        // Setting basic features of Google Map
 //        mMap.getUiSettings().setZoomControlsEnabled(true);      // show zoom in and out button at bottom right corner
 
 
