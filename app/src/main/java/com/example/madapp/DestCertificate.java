@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DestCertificate#newInstance} factory method to
@@ -31,6 +36,8 @@ public class DestCertificate extends Fragment {
     private String mParam2;
 
     CFViewModel viewModel;
+
+    private FirebaseAuth firebaseAuth;
 
     public DestCertificate() {
         // Required empty public constructor
@@ -62,6 +69,7 @@ public class DestCertificate extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         viewModel = new ViewModelProvider(requireActivity()).get(CFViewModel.class);
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -75,5 +83,15 @@ public class DestCertificate extends Fragment {
         TextView TVName = view.findViewById(R.id.TVName);
         Double total = viewModel.getTotal();
         TVName.setText(Double.toString(total));
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        // You can now store additional user information in the Firebase Realtime Database
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+            userRef.child("total").setValue(Double.toString(total));
+            // Add more user details as needed
+        }
     }
 }
