@@ -97,7 +97,7 @@
     <fragment
         android:id="@+id/DestMap"
         android:name="com.example.madapp.MapsFragment"
-        android:label="Google Maps Location"
+        android:label="Reforestation Location"
         tools:layout="@layout/fragment_maps" />
 
 

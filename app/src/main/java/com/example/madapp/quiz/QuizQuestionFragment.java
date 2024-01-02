@@ -8,11 +8,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madapp.MainActivity;
 import com.example.madapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -50,10 +54,12 @@ public class QuizQuestionFragment extends Fragment {
 
     // Question variables
     private List<QuestionList> questionList = new ArrayList<>();
+    List<QuestionList> randomQuestionList;
     int score = 0;
     int currentQuestionIndex = 0;
     int maxTotalQuestion = 5;
     String selectedAnswer = "";
+    ImageView IVBackToQuiz;
     TextView TVTotalQuestion;
     TextView TVQuestion;
     TextView TVQuestionNo;
@@ -116,8 +122,22 @@ public class QuizQuestionFragment extends Fragment {
         option4 = view.findViewById(R.id.option4);
         BtnSubmitAns = view.findViewById(R.id.BtnSubmitAns);
         TVQuestionNo = view.findViewById(R.id.TVQuestionNo);
+        IVBackToQuiz = view.findViewById(R.id.IVBackToQuiz);
 
-//        startQuiz();
+        IVBackToQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Confirmation")
+                        .setMessage("Are you sure you want to go back to quiz?")
+                        .setPositiveButton("Yes", (dialogInterface, i) -> backToQuiz())
+                        .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
+                        .setCancelable(false)
+                        .show();
+            }
+        });
+
+
         // get questions from Firebase Data
         DatabaseReference quizDBRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://ecohelper-eea91-default-rtdb.firebaseio.com/quiz");
 
@@ -128,14 +148,15 @@ public class QuizQuestionFragment extends Fragment {
         progressDialog.setMessage("Loading");
         progressDialog.show();
 
+
         quizDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<QuestionList> questionList = new ArrayList<>();
 
-                // get all questions from firebase database of quiz
+                // Get all questions from the Firebase database of the quiz
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    // getting question, option and ans data from firebase database
+                    // Getting question, options, and answer data from Firebase database
                     String getQuestion = dataSnapshot.child("question").getValue(String.class);
                     String getOption1 = dataSnapshot.child("option1").getValue(String.class);
                     String getOption2 = dataSnapshot.child("option2").getValue(String.class);
@@ -143,13 +164,15 @@ public class QuizQuestionFragment extends Fragment {
                     String getOption4 = dataSnapshot.child("option4").getValue(String.class);
                     String getAnswer = dataSnapshot.child("answer").getValue(String.class);
 
-                    // adding data into questionList
-                    QuestionList questionsList = new QuestionList(getQuestion, getOption1, getOption2, getOption3, getOption4, getAnswer);
-                    questionList.add(questionsList);
-
+                    // Adding data into questionList
+                    QuestionList question = new QuestionList(getQuestion, getOption1, getOption2, getOption3, getOption4, getAnswer);
+                    questionList.add(question);
                 }
 
-                // hide dialog
+                // Shuffle order of questions so that each time user play, question will not always be the same
+                shuffleQuestion(questionList);
+
+                // Hide the progress dialog
                 progressDialog.hide();
 
                 loadNewQuestion();
@@ -167,57 +190,6 @@ public class QuizQuestionFragment extends Fragment {
         option4.setOnClickListener(this::onClick);
         BtnSubmitAns.setOnClickListener(this::onClick);
 
-    }
-
-    void startQuiz() {
-        // get questions from Firebase Data
-        DatabaseReference quizDBRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://ecohelper-eea91-default-rtdb.firebaseio.com/quiz");
-
-        // show dialog while questions are being fetched
-        Context context;
-        ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading");
-        progressDialog.show();
-
-        quizDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                // get all questions from firebase database of quiz
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    // getting question, option and ans data from firebase database
-                    String getQuestion = dataSnapshot.child("question").getValue(String.class);
-                    String getOption1 = dataSnapshot.child("option1").getValue(String.class);
-                    String getOption2 = dataSnapshot.child("option2").getValue(String.class);
-                    String getOption3 = dataSnapshot.child("option3").getValue(String.class);
-                    String getOption4 = dataSnapshot.child("option4").getValue(String.class);
-                    String getAnswer = dataSnapshot.child("answer").getValue(String.class);
-
-                    // adding data into questionList
-                    QuestionList questionsList = new QuestionList(getQuestion, getOption1, getOption2, getOption3, getOption4, getAnswer);
-                    questionList.add(questionsList);
-
-                }
-
-                // hide dialog
-                progressDialog.hide();
-
-                loadNewQuestion();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        option1.setOnClickListener(this::onClick);
-        option2.setOnClickListener(this::onClick);
-        option3.setOnClickListener(this::onClick);
-        option4.setOnClickListener(this::onClick);
-        BtnSubmitAns.setOnClickListener(this::onClick);
     }
 
     public void onClick(View view) {
@@ -238,7 +210,7 @@ public class QuizQuestionFragment extends Fragment {
             }
             else {
                 // Score increases by 1 if selected ans is equal to correct ans
-                if(selectedAnswer.equals(questionList.get(currentQuestionIndex).getAnswer())) {
+                if(selectedAnswer.equals(randomQuestionList.get(currentQuestionIndex).getAnswer())) {
                     score++;
                 }
                 currentQuestionIndex++;
@@ -255,19 +227,19 @@ public class QuizQuestionFragment extends Fragment {
     }
 
     void loadNewQuestion() {
-        if(currentQuestionIndex == questionList.size()) {
+        if(currentQuestionIndex == randomQuestionList.size()) {
             finishQuiz();
             return;
         }
 
-        // set current question to TextView along with options from questionList ArrayList
-        TVQuestion.setText(questionList.get(currentQuestionIndex).getQuestion());
-        option1.setText(questionList.get(currentQuestionIndex).getOption1());
-        option2.setText(questionList.get(currentQuestionIndex).getOption2());
-        option3.setText(questionList.get(currentQuestionIndex).getOption3());
-        option4.setText(questionList.get(currentQuestionIndex).getOption4());
-        TVQuestionNo.setText("Question " + (currentQuestionIndex + 1) + " of " + questionList.size());
-        TVTotalQuestion.setText("Total Questions: " + questionList.size());
+        // set current question to TextView along with options
+        TVQuestion.setText(randomQuestionList.get(currentQuestionIndex).getQuestion());
+        option1.setText(randomQuestionList.get(currentQuestionIndex).getOption1());
+        option2.setText(randomQuestionList.get(currentQuestionIndex).getOption2());
+        option3.setText(randomQuestionList.get(currentQuestionIndex).getOption3());
+        option4.setText(randomQuestionList.get(currentQuestionIndex).getOption4());
+        TVQuestionNo.setText("Question " + (currentQuestionIndex + 1) + " of " + randomQuestionList.size());
+        TVTotalQuestion.setText("Total Questions: " + randomQuestionList.size());
 
         // reset selected answer to empty value
         selectedAnswer = "";
@@ -285,7 +257,7 @@ public class QuizQuestionFragment extends Fragment {
 
 
         String passStatus = "";
-        if(score > questionList.size()*0.70) {
+        if(score > randomQuestionList.size()*0.70) {
             passStatus = "Congratulations! You Win";
             CustomIV.setImageResource(R.drawable.trophy);
         } else {
@@ -295,12 +267,12 @@ public class QuizQuestionFragment extends Fragment {
 
         // Set custom content
         customDialogTitle.setText(passStatus);
-        customDialogMessage.setText("Your score is " + score + " out of " + questionList.size());
+        customDialogMessage.setText("Your score is " + score + " out of " + randomQuestionList.size());
 
         // Create the custom AlertDialog
         new AlertDialog.Builder(getContext())
                 .setView(customDialogView)
-                .setPositiveButton("Try Again", (dialogInterface, i) -> restartQuiz())
+                .setPositiveButton("Play Again", (dialogInterface, i) -> restartQuiz())
                 .setNegativeButton("Back to Quiz", (dialogInterface, i) -> backToQuiz())
                 .setCancelable(false)
                 .show();
@@ -311,31 +283,37 @@ public class QuizQuestionFragment extends Fragment {
         score = 0;
         currentQuestionIndex = 0;
         selectedAnswer = "";
-        loadNewQuestion();
+
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.DestQuizQuestion);
     }
 
     void backToQuiz() {
         // reset score
         score = 0;
+        currentQuestionIndex = 0;
         selectedAnswer = "";
 
+        // Navigate back to the quiz page
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.DestQuiz);
+
+        // Hide the back button in the DestQuiz toolbar
+        MainActivity activity = (MainActivity) requireActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
     }
 
+    void shuffleQuestion(List<QuestionList> questionList) {
+        // Shuffle the questionList to randomize the order
+        Collections.shuffle(questionList);
 
-    void shuffleQuestion() {
-        Random rand = new Random();
-        List<Integer> randomQuestionOrder = new ArrayList<Integer>();
-        for (int i = 0; i < 5; i++) {
-            while(true) {
-                Integer next = rand.nextInt(maxTotalQuestion) + 1;
-                if (!randomQuestionOrder.contains(next)) {
-                    // Done for this iteration
-                    randomQuestionOrder.add(next);
-                    break;
-                }
-            }
-        }
+        // Get the maximum number of questions to display
+        int maxQuestions = Math.min(5, questionList.size());
+
+        // Get the sublist of questions with the maximum number
+        randomQuestionList = questionList.subList(0, maxQuestions);
     }
 }

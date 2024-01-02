@@ -10,8 +10,8 @@
     <ImageView
         android:id="@+id/imageView12"
         android:layout_width="339dp"
-        android:layout_height="213dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="177dp"
+        android:layout_marginTop="65dp"
         android:src="@drawable/quiz_front"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,12 +22,12 @@
         android:id="@+id/BtnStartQuiz"
         android:layout_width="170dp"
         android:layout_height="65dp"
-        android:layout_marginTop="336dp"
+        android:layout_marginTop="310dp"
         android:backgroundTint="@color/blue_900"
         android:text="Start Quiz"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,15 +35,28 @@
         android:id="@+id/BtnRulesQuiz"
         android:layout_width="170dp"
         android:layout_height="65dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/blue_900"
         android:text="Rules"
-        android:textSize="18sp"
         android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BtnStartQuiz" />
+
+    <Button
+        android:id="@+id/BtnBackToReforestation"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/blue_900"
+        android:text="Back to Reforestation"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnRulesQuiz" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
