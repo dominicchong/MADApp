@@ -187,7 +187,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 marker = setMarker(locationList.get(6), "Lok Kawi Wildlife Park", "Kota Kinabalu, Sabah");
                 return locationList.get(6);
             case 7:
-                marker = setMarker(locationList.get(7), "Bangsar Nursery FTS", "Bangsar, Kuala Lumpur");;
+                marker = setMarker(locationList.get(7), "Bangsar Nursery FTS", "Bangsar, Kuala Lumpur");
+                return locationList.get(7);
 
             default:
                 return null;
