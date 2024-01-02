@@ -257,7 +257,7 @@ public class QuizQuestionFragment extends Fragment {
 
 
         String passStatus = "";
-        if(score > randomQuestionList.size()*0.70) {
+        if(score >= randomQuestionList.size()*0.80) {
             passStatus = "Congratulations! You Win";
             CustomIV.setImageResource(R.drawable.trophy);
         } else {
