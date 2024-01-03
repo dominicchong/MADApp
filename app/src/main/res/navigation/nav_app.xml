@@ -150,7 +150,7 @@
     <fragment
         android:id="@+id/DestCertificate"
         android:name="com.example.madapp.DestCertificate"
-        android:label="fragment_dest_certificate"
+        android:label="Download Certificate"
         tools:layout="@layout/fragment_dest_certificate" />
     <fragment
         android:id="@+id/explainTips1Fragment"

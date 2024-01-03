@@ -1,17 +1,27 @@
 package com.example.madapp;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +40,8 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
     private String mParam2;
 
     CFViewModel viewModel;
+
+    private FirebaseAuth firebaseAuth;
 
     public fragment_thridQuestionCalculateCF() {
         // Required empty public constructor
@@ -61,6 +73,7 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         viewModel = new ViewModelProvider(requireActivity()).get(CFViewModel.class);
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -89,9 +102,75 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
             public void onClick(View v) {
                 Double AnsQ3 = Double.parseDouble(ETAnsQ3.getText().toString());
                 viewModel.setAnsQ3(AnsQ3);
-                Navigation.findNavController(view).navigate(R.id.DestCertificate);
+
+                completeCalculation();
             }
         };
         BtnCompleteCF.setOnClickListener(OCLCompleteCF);
+
+
+    }
+
+    private void completeCalculation() {
+        Double total_CF = viewModel.getTotal();
+        // Inflate the custom layout
+        View customDialogView = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, null);
+
+        // Find views in the custom layout
+        ImageView CustomIV = customDialogView.findViewById(R.id.CustomIV);
+        TextView customDialogTitle = customDialogView.findViewById(R.id.customDialogTitle);
+        TextView customDialogMessage = customDialogView.findViewById(R.id.customDialogMessage);
+
+
+        String avgLevel = "";
+        if(total_CF >= 4) {
+            avgLevel = "Your carbon footprint level is above the average level";
+            CustomIV.setImageResource(R.drawable.try_hard_to_reduce_cf);
+            new AlertDialog.Builder(getContext())
+                    .setView(customDialogView)
+                    .setPositiveButton("See result", (dialogInterface, i) -> resultCF())
+                    .setNegativeButton("Back to Home Carbon Footprint", (dialogInterface, i) -> backToCFHome())
+                    .setCancelable(false)
+                    .show();
+        } else {
+            avgLevel = "Congrats! Your carbon footprint level is lower than average level and you earn a certificate";
+            CustomIV.setImageResource(R.drawable.congrate_gain_cert);
+            new AlertDialog.Builder(getContext())
+                    .setView(customDialogView)
+                    .setPositiveButton("Download certificate", (dialogInterface, i) -> downloadCertificate())
+                    .setNeutralButton("Result", (dialogInterface, i) -> resultCF())
+                    .setNegativeButton("Back to Home Carbon Footprint", (dialogInterface, i) -> backToCFHome())
+                    .setCancelable(false)
+                    .show();
+        }
+
+        // Set custom content
+        customDialogTitle.setText(avgLevel);
+        customDialogMessage.setText("Your carbon footprint is " + total_CF);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        // You can now store additional user information in the Firebase Realtime Database
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+            userRef.child("total cf").setValue(total_CF);
+        }
+
+    }
+
+    private void resultCF() {
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.DestTipsReduceCF);
+    }
+
+    private void downloadCertificate() {
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.DestCertificate);
+    }
+
+    private void backToCFHome() {
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.DestCarbonFootprint);
     }
 }
