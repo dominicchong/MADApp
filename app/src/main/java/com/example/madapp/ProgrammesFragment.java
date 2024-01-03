@@ -1,12 +1,14 @@
 package com.example.madapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +16,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProgrammesFragment extends Fragment {
+
+    private ConstraintLayout lowerPart;
+    // Find reference to the LinearLayout
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +63,28 @@ public class ProgrammesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_programmes, container, false);
+        View view = inflater.inflate(R.layout.fragment_programmes, container, false);
+
+        // Find references to the upper and lower parts
+
+        lowerPart = view.findViewById(R.id.lowerpart);
+
+        // Find reference to the LinearLayout
+        LinearLayout programme1Layout = view.findViewById(R.id.programme1);
+
+        // Set onClickListener for the programme1 LinearLayout
+        programme1Layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Navigate to another page (replace with your navigation logic)
+                // For example, you can use Intent to start a new Activity
+                Intent intent = new Intent(getActivity(), programme1.class);
+                startActivity(intent);
+            }
+        });
+
+
+        return view;
     }
+
 }

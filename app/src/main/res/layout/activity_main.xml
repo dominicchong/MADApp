@@ -18,7 +18,7 @@
             android:id="@+id/TBMainAct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorSecondary"
+            android:background="@color/teal_200"
             android:minHeight="?attr/actionBarSize"
             app:title="Reforestation" />
 
