@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,9 +89,15 @@ public class fragment_secondQuestionCalculateCF extends Fragment {
         View.OnClickListener OCLNextQuestion2 = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double AnsQ2 = Double.parseDouble(ETAnsQ2.getText().toString());
-                viewModel.setAnsQ2(AnsQ2);
-                Navigation.findNavController(view).navigate(R.id.thirdQuestionCalculateCF);
+                String AnsQ2Text = ETAnsQ2.getText().toString().trim();
+                if(AnsQ2Text.isEmpty()){
+                    Toast.makeText(requireContext(), "Please enter a value", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Double AnsQ2 = Double.parseDouble(ETAnsQ2.getText().toString());
+                    viewModel.setAnsQ2(AnsQ2);
+                    Navigation.findNavController(view).navigate(R.id.thirdQuestionCalculateCF);
+                }
             }
         };
         BtnNextQuestionQ2.setOnClickListener(OCLNextQuestion2);
