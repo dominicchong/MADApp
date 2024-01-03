@@ -1,6 +1,9 @@
 package com.example.madapp;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -32,6 +35,9 @@ public class ProfileFragment extends Fragment {
     DatabaseReference userRef; // Reference to the database
     TextView usernameTV, birthDateTV, phoneNumberTV, emailTV;
     ImageView profileView;
+    private int pageVisited = 0;
+    private static final String PREFS_NAME = "MyPrefs";
+    private static final String PAGE_VISITED_KEY = "page_visited";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,20 @@ public class ProfileFragment extends Fragment {
             return;
         }
 
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int pageVisited = sharedPreferences.getInt(PAGE_VISITED_KEY, 0);
+
+        Context context = getContext();
+        ProgressDialog progressDialog = new ProgressDialog(context);
+
+        // Inside the click event or method where the profile page is clicked
+        if (pageVisited == 0) {
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Loading");
+            progressDialog.show();
+            pageVisited++;
+            sharedPreferences.edit().putInt(PAGE_VISITED_KEY, pageVisited).apply();
+        }
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -103,6 +123,8 @@ public class ProfileFragment extends Fragment {
                                 .load(Uri.parse(profilePicUri))
                                 .into(profileView);
                     }
+
+                    progressDialog.dismiss();
 
                 } else {
                     // Data does not exist

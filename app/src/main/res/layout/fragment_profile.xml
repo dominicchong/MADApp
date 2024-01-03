@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@color/white">
+    android:background="@color/blue_100">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:id="@+id/profileView"
                 android:layout_width="136dp"
                 android:layout_height="136dp"
-                android:layout_marginTop="96dp"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/profileicon"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="2dp"
@@ -69,7 +69,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/user"
-                        app:tint="@color/teal_200"/>
+                        app:tint="@color/teal_700"/>
 
 
                     <TextView
@@ -107,7 +107,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/birthday"
-                        app:tint = "@color/teal_200"/>
+                        app:tint = "@color/teal_700"/>
 
 
                     <TextView
@@ -145,7 +145,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/phone"
-                        app:tint= "@color/teal_200"/>
+                        app:tint= "@color/teal_700"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -182,7 +182,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/email"
-                        app:tint= "@color/teal_200"/>
+                        app:tint= "@color/teal_700"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="48dp"
-                android:background="@color/white"
+                android:background="@color/blue_100"
                 android:contentDescription="Edit Profile icon"
                 android:scaleType="fitCenter"
                 android:src="@drawable/edit_profile"
@@ -224,7 +224,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.285"
-                app:tint="@color/teal_200" />
+                app:tint="@color/teal_700" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
