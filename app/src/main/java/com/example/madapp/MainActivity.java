@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         // Set of destination IDs which do not show the Up button and bottom navigation bar
         Set<Integer> destinationsWithoutUpAndBottomNav = new HashSet<>(Arrays.asList(
                 R.id.DestQuizQuestion
-
         ));
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build(); //Appbar configuration will help to define which destination should have an Up button (back arrow) in app bar
@@ -69,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         /// Add a destination changed listener to hide the Up button and show/hide bottom navigation bar dynamically
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destinationsWithoutUpAndBottomNav.contains(destination.getId())) {
+                getSupportActionBar().hide();
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false); // Hide Up button
                 hideBottomNavigationView(); // Hide bottom navigation bar
             } else {
+                getSupportActionBar().show();
                 showBottomNavigationView(); // Show bottom navigation bar
             }
         });

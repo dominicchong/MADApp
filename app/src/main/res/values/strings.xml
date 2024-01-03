@@ -7,4 +7,5 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="google_maps_key">AIzaSyBEm_j_bcGVYTQ_xda6cqpWNmjXxDq3KT0</string>
     <string name="link">Link</string>
+    <string name="info_details">Mobile Application Development\nApp Name: EcoHelper\n\nSDG 13: Climate Action\nProject Name: Carbon Offsetting And Reforestation Programme</string>
 </resources>
