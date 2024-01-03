@@ -108,6 +108,7 @@ public class LoginFragment extends Fragment {
 
                                     // Finish the LoginActivity to prevent going back to it from MainActivity
                                     requireActivity().finish();
+
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("LoginFragment", "signInWithEmail:failure", task.getException());

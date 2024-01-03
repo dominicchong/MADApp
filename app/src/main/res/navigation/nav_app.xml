@@ -8,7 +8,7 @@
 <!--    News and Programmes module-->
     <fragment
         android:id="@+id/DestHome"
-        android:name="com.example.madapp.fragment_home"
+        android:name="com.example.madapp.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/DestOrganizations"
-        android:name="com.example.madapp.OrganizationsFragment"
+        android:name="com.example.madapp.OrganizationFragment"
         android:label="Organizations"
         tools:layout="@layout/fragment_organizations" />
     <fragment
