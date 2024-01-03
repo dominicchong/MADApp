@@ -1,61 +1,62 @@
 package com.example.madapp;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.ByteArrayOutputStream;
+
 public class EditProfileFragment extends Fragment {
+    EditText usernameEditText, birthDateEditText, phoneNumberEditText, emailEditText;
+    ImageButton editButton;
+    ImageView profileView;
+    ActivityResultLauncher<Intent> resultLauncher;
+    ActivityResultLauncher<Intent> cameraLauncher;
+    Uri selectedImageUri;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userID;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public EditProfileFragment() {
-        // Required empty public constructor
+    {
+        assert user != null;
+        userID = user.getUid();
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditProfileFragment newInstance(String param1, String param2) {
-        EditProfileFragment fragment = new EditProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,14 +67,200 @@ public class EditProfileFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
-        View.OnClickListener OCLUpdateProfile = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestProfile);
-            }
-        };
-        BtnUpdateProfile.setOnClickListener(OCLUpdateProfile);
 
+        // Retrieve references to EditText fields
+        usernameEditText = view.findViewById(R.id.usernameTV);
+        birthDateEditText = view.findViewById(R.id.birthDateTV);
+        phoneNumberEditText = view.findViewById(R.id.phoneNumberTV);
+        emailEditText = view.findViewById(R.id.emailTV);
+        profileView = view.findViewById(R.id.profileView);
+        editButton = view.findViewById(R.id.editButton);
+
+        retrieveUserData();
+
+        // Register result launcher for picking images
+        registerImagePickerResult();
+
+        // Set click listener for editButton
+        editButton.setOnClickListener(v -> showImageSourceOptions());
+
+        Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
+        BtnUpdateProfile.setOnClickListener(v -> updateProfile(view));
+
+//        Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
+//        View.OnClickListener OCLUpdateProfile = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.DestProfile);
+//            }
+//        };
+//        BtnUpdateProfile.setOnClickListener(OCLUpdateProfile);
+
+    }
+
+    private void retrieveUserData() {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Retrieve data from the dataSnapshot
+                    String username = dataSnapshot.child("username").getValue(String.class);
+                    String birthDate = dataSnapshot.child("birthDate").getValue(String.class);
+                    String phoneNumber = dataSnapshot.child("phoneNumber").getValue(String.class);
+                    String email = dataSnapshot.child("email").getValue(String.class);
+                    String profilePicUri = dataSnapshot.child("profilePic").getValue(String.class);
+
+                    // Set hints in EditText fields
+                    usernameEditText.setHint(username);
+                    emailEditText.setHint(email);
+                    phoneNumberEditText.setHint(phoneNumber);
+                    birthDateEditText.setHint(birthDate);
+                    // Load and display the profile image using Glide
+//                    if (profilePicUri != null && !profilePicUri.isEmpty()) {
+//                        Glide.with(requireContext())
+//                                .load(Uri.parse(profilePicUri))
+//                                .into(profileView);
+//                    }
+                }
+                Toast.makeText(requireContext(), "Information Obtain Success.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the failure to retrieve data
+                Toast.makeText(requireContext(), "Information Obtain failed. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updateProfile(View view) {
+        // Get updated information from EditText
+        String newUsername = usernameEditText.getText().toString().trim();
+        String newEmail = emailEditText.getText().toString().trim();
+        String newPhoneNumber = phoneNumberEditText.getText().toString().trim();
+        String newBirthDate = birthDateEditText.getText().toString().trim();
+//        Integer newPhoneNumber = Integer.parseInt(phoneNumberEditText.getText().toString().trim());
+//        Integer newBirthDate = Integer.parseInt(birthDateEditText.getText().toString().trim());
+
+        // Check which fields are modified
+        boolean isUsernameModified = !newUsername.isEmpty();
+        boolean isEmailModified = !newEmail.isEmpty();
+        boolean isPhoneNumberModified = !newPhoneNumber.isEmpty();
+        boolean isBirthDateModified = !newBirthDate.isEmpty();
+        boolean isImageModified = selectedImageUri != null;
+
+        // Update Realtime Database based on modified fields
+        if (isUsernameModified) {
+            userRef.child("username").setValue(newUsername);
+        }
+        if (isEmailModified) {
+            userRef.child("email").setValue(newEmail);
+        }
+        if (isPhoneNumberModified) {
+            userRef.child("phoneNumber").setValue(newPhoneNumber);
+        }
+        if (isBirthDateModified) {
+            userRef.child("birthDate").setValue(newBirthDate);
+        }
+        // Update profilePic field with the image URI if it's modified
+        if (isImageModified ) {
+            String imageUriString = selectedImageUri.toString();
+            Log.d("UpdateProfile", "Updating profilePic with: " + imageUriString);
+            userRef.child("profilePic").setValue(imageUriString);
+        } else {
+            Toast.makeText(requireContext(), "ImageURI not inserted to the database", Toast.LENGTH_SHORT).show();
+        }
+
+
+        Toast.makeText(requireContext(), "Update completed successfully", Toast.LENGTH_SHORT).show();
+        Navigation.findNavController(view).navigate(R.id.DestProfile);
+    }
+
+    private void showImageSourceOptions() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Choose Image Source");
+        String[] options = {"Pick from Gallery", "Take Photo"};
+        builder.setItems(options, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    pickImage();
+                    break;
+                case 1:
+                    takePhoto();
+                    break;
+            }
+        });
+        builder.show();
+    }
+
+
+    private void pickImage(){
+        Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
+        resultLauncher.launch(intent);
+    }
+
+    private void takePhoto() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraLauncher.launch(cameraIntent);
+    }
+
+    private void registerImagePickerResult() {
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    try {
+                        Uri imageUri = result.getData().getData();
+                        profileView.setImageURI(imageUri);
+                        selectedImageUri = imageUri;
+                    } catch (Exception e) {
+                        Toast.makeText(requireContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        cameraLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    try {
+                        Bitmap photo = (Bitmap) result.getData().getExtras().get("data");
+                        // Convert Bitmap to Uri
+                        Uri imageUri = getImageUri(requireContext(), photo);
+
+                        // Set the Uri to selectedImageUri
+                        selectedImageUri = imageUri;
+                        profileView.setImageBitmap(photo);
+
+                        // Save the image to a file if needed
+                        // saveImageToFile(photo);
+                    } catch (Exception e) {
+                        Toast.makeText(requireContext(), "Error taking photo", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    // Function to convert Bitmap to Uri
+    private Uri getImageUri(Context context, Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, null, null);
+        return Uri.parse(path);
+    }
+
+    private void registerResult(){
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        try {
+                            Uri imageUri = result.getData().getData();
+                            profileView.setImageURI(imageUri);
+                        }catch (Exception e){
+                            Toast.makeText(requireContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
     }
 }

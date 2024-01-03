@@ -1,11 +1,20 @@
 package com.example.madapp;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,51 +25,32 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FeedbackFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 public class FeedbackFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FeedbackFragment() {
-        // Required empty public constructor
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userID;
+    {
+        assert user != null;
+        userID = user.getUid();
     }
+    DatabaseReference feedbackRef = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FeedbackFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FeedbackFragment newInstance(String param1, String param2) {
-        FeedbackFragment fragment = new FeedbackFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    ActivityResultLauncher<Intent> resultLauncher;
+    ActivityResultLauncher<Intent> cameraLauncher;
+    Uri selectedImageUri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -76,19 +66,7 @@ public class FeedbackFragment extends Fragment {
         TextView TVRating = view.findViewById(R.id.TVRating);
         EditText ETFeedback = view.findViewById(R.id.ETFeedback);    // needed if you want to collect the feedback later
         Button BtnSubmitFeedback = view.findViewById(R.id.BtnSubmitFeedback);
-
-        View.OnClickListener OCLSubmitFeedback = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = "Thank you for your feedback! ";
-                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-
-                // Clear the rating and text input after click submit button
-                RateBarFeedback.setRating(0);
-                ETFeedback.setText("");
-            }
-        };
-        BtnSubmitFeedback.setOnClickListener(OCLSubmitFeedback);
+        ImageButton imageButton = view.findViewById(R.id.imageButton);
 
         // The rating bar OnRatingBarChangeListener to change the rating whenever it is used by user
         RateBarFeedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -98,5 +76,154 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
+        registerImagePickerResult();
+
+        // Set click listener for imageButton
+        imageButton.setOnClickListener(v -> showImageSourceOptions());
+
+        View.OnClickListener OCLSubmitFeedback = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the rating and feedback text
+                float rating = RateBarFeedback.getRating();
+                String feedbackText = ETFeedback.getText().toString();
+                // Convert the selected image to a Bitmap
+                Bitmap imageBitmap = getBitmapFromUri(selectedImageUri);
+
+
+                // Create a feedback object or map with the rating and feedback
+                Map<String, Object> feedbackMap = new HashMap<>();
+                feedbackMap.put("rating", rating);
+                feedbackMap.put("feedback", feedbackText);
+
+                // Convert Bitmap to Uri and add to feedbackMap
+                Uri imageUri = getImageUri(requireContext(), imageBitmap);
+                feedbackMap.put("imageUri", imageUri.toString());
+
+                // Add the feedback to Realtime Database
+                feedbackRef.push().setValue(feedbackMap)
+                        .addOnSuccessListener(aVoid -> {
+                            // Handle successful feedback submission
+                            String message = "Thank you for your feedback!";
+                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                            // Clear the rating and text input after click submit button
+                            RateBarFeedback.setRating(0);
+                            ETFeedback.setText("");
+                        })
+                        .addOnFailureListener(e -> {
+                            // Handle failed feedback submission
+                            Toast.makeText(getContext(), "Feedback submission failed. Please try again.", Toast.LENGTH_SHORT).show();
+                        });
+            }
+//            @Override
+//            public void onClick(View v) {
+//                String message = "Thank you for your feedback! ";
+//                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+//
+//                // Clear the rating and text input after click submit button
+//                RateBarFeedback.setRating(0);
+//                ETFeedback.setText("");
+//            }
+        };
+        BtnSubmitFeedback.setOnClickListener(OCLSubmitFeedback);
+
+    }
+
+    private void showImageSourceOptions() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Choose Image Source");
+        String[] options = {"Pick from Gallery", "Take Photo"};
+        builder.setItems(options, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    pickImage();
+                    break;
+                case 1:
+                    takePhoto();
+                    break;
+            }
+        });
+        builder.show();
+    }
+
+    private void pickImage(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        try {
+            resultLauncher.launch(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(requireContext(), "Error picking image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void takePhoto() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraLauncher.launch(cameraIntent);
+    }
+
+    private void registerImagePickerResult() {
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    try {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null && data.getData() != null) {
+                                Uri imageUri = data.getData();
+                                selectedImageUri = imageUri;
+                                // You can set the image to an ImageView or do other operations
+                                // For example: imageView.setImageURI(imageUri);
+                                Toast.makeText(requireContext(), "Image selected successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(requireContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(requireContext(), "Image selection canceled", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(requireContext(), "Error picking image", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        cameraLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    try {
+                        Bitmap photo = (Bitmap) result.getData().getExtras().get("data");
+                        // Convert Bitmap to Uri
+                        Uri imageUri = getImageUri(requireContext(), photo);
+
+                        // Set the Uri to selectedImageUri
+                        selectedImageUri = imageUri;
+
+                        // Save the image to a file if needed
+                        // saveImageToFile(photo);
+                        Toast.makeText(requireContext(), "Photo taken successfully", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(requireContext(), "Error taking photo", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    // Function to convert Bitmap to Uri
+    private Uri getImageUri(Context context, Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, null, null);
+        return Uri.parse(path);
+    }
+
+    // Function to get Bitmap from Uri
+    private Bitmap getBitmapFromUri(Uri uri) {
+        try {
+            return MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), uri);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
