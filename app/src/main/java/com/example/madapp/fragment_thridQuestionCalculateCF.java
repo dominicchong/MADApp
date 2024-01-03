@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,10 +101,16 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
         View.OnClickListener OCLCompleteCF = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Double AnsQ3 = Double.parseDouble(ETAnsQ3.getText().toString());
-                viewModel.setAnsQ3(AnsQ3);
+                String AnsQ3Text = ETAnsQ3.getText().toString().trim();
+                if(AnsQ3Text.isEmpty()){
+                    Toast.makeText(requireContext(), "Please enter a value", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Double AnsQ3 = Double.parseDouble(ETAnsQ3.getText().toString());
+                    viewModel.setAnsQ3(AnsQ3);
 
-                completeCalculation();
+                    completeCalculation();
+                }
             }
         };
         BtnCompleteCF.setOnClickListener(OCLCompleteCF);
