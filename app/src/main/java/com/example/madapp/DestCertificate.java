@@ -1,9 +1,18 @@
 package com.example.madapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -13,7 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,6 +120,89 @@ public class DestCertificate extends Fragment {
 
                 }
             });
+        }
+        Button BtnDownload = view.findViewById(R.id.BtnDownload);
+        BtnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadCertificate(view);
+            }
+        });
+    }
+    private void downloadCertificate(View view) {
+        // Get the ImageView and TextView from the fragment's view
+        ImageView imageView = view.findViewById(R.id.imageView);
+        TextView nameText = view.findViewById(R.id.TVName);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        // You can now store additional user information in the Firebase Realtime Database
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String username = String.valueOf(snapshot.child("username").getValue());
+                    nameText.setText(username);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        nameText.setTextColor(Color.BLACK);
+
+        // Create a Bitmap from the ImageView
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
+
+        // Create a mutable copy of the Bitmap
+        Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+        // Create a Canvas to draw on the mutable Bitmap
+        Canvas canvas = new Canvas(bitmap);
+
+        // Set the background color of the canvas to ensure transparency
+        canvas.drawColor(Color.BLACK);
+
+        // Draw the image from the ImageView
+        canvas.drawBitmap(originalBitmap, 0, 0, null);
+
+        // Calculate the position to center the text in the middle of the canvas
+        float textX = (canvas.getWidth() - nameText.getWidth()) / 2f;
+        float textY = (canvas.getHeight() + nameText.getHeight()) / 2f + 150;
+
+        // Draw the text from the TextView onto the Bitmap at the calculated position
+        canvas.drawText(nameText.getText().toString(), textX, textY, nameText.getPaint());
+
+        // Use getExternalFilesDir for Android 10 and above
+        File certificateFile;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            certificateFile = new File(requireContext().getExternalFilesDir(null), "certificate.png");
+        } else {
+            certificateFile = new File(requireContext().getExternalFilesDir(null), "certificate.png");
+        }
+
+        // Perform the download
+        // For simplicity, we'll use a basic example with File I/O
+        try {
+            // Write the image to the file
+            FileOutputStream fos = new FileOutputStream(certificateFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+
+            // Display the correct path to the user
+            String certificatePath = certificateFile.getAbsolutePath();
+            Toast.makeText(requireContext(), "Image downloaded successfully. Path: " + certificatePath, Toast.LENGTH_SHORT).show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(requireContext(), "Failed to download image.", Toast.LENGTH_SHORT).show();
         }
     }
 }
