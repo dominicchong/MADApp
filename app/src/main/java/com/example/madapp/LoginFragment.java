@@ -1,5 +1,6 @@
 package com.example.madapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -110,13 +113,25 @@ public class LoginFragment extends Fragment {
                                     requireActivity().finish();
 
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w("LoginFragment", "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    if (isNetworkAvailable()) {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("LoginFragment", "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Display a message to the user indicating no internet connection
+                                        Toast.makeText(getContext(), "No internet connection available", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         });
             }
         });
+    }
+
+    // check if network is available
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) requireContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

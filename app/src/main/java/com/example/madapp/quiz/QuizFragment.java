@@ -1,20 +1,31 @@
 package com.example.madapp.quiz;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.madapp.MainActivity;
 import com.example.madapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,11 +82,20 @@ public class QuizFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         Button BtnStartQuiz = view.findViewById(R.id.BtnStartQuiz);
         View.OnClickListener OCLStartQuiz = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestQuizQuestion);
+                // check if there is internet connection before navigating to quiz questions
+                if (isNetworkAvailable()) {
+                    Navigation.findNavController(view).navigate(R.id.DestQuizQuestion);
+
+                } else {
+                    // Display a message to the user indicating no internet connection
+                    Toast.makeText(getContext(), "No internet connection available", Toast.LENGTH_SHORT).show();
+                }
+
             }
         };
         BtnStartQuiz.setOnClickListener(OCLStartQuiz);
@@ -100,7 +120,12 @@ public class QuizFragment extends Fragment {
         };
         BtnBackToReforestation.setOnClickListener(OCLBackToReforestation);
 
+    }
 
-
+    // check if network is available
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) requireContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

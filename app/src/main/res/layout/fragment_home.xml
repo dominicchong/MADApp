@@ -102,7 +102,7 @@
                         android:layout_width="88dp"
                         android:layout_height="49dp"
                         android:layout_margin="10dp"
-                        android:contentDescription="TODO"
+                        android:contentDescription="News"
                         app:srcCompat="@drawable/video_call" />
 
                     <TextView
@@ -128,7 +128,7 @@
                         android:layout_width="85dp"
                         android:layout_height="50dp"
                         android:layout_margin="10dp"
-                        android:contentDescription="TODO"
+                        android:contentDescription="Programmes"
                         app:srcCompat="@drawable/video_call" />
 
                     <TextView
@@ -154,7 +154,7 @@
                         android:layout_width="84dp"
                         android:layout_height="50dp"
                         android:layout_margin="10dp"
-                        android:contentDescription="TODO"
+                        android:contentDescription="Organizations"
                         app:srcCompat="@drawable/video_call" />
 
                     <TextView

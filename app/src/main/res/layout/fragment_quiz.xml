@@ -49,12 +49,13 @@
         android:id="@+id/BtnBackToReforestation"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:layout_marginStart="97dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/blue_900"
         android:text="Back to Reforestation"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BtnRulesQuiz" />
 
