@@ -66,6 +66,16 @@ public class ProfileFragment extends Fragment {
         };
         BtnEditProfile.setOnClickListener(OCLEditProfile);
 
+        ImageView IVEnhancedSurvey = view.findViewById(R.id.IVEnhancedSurvey);
+        View.OnClickListener OCLEnhancedSurvey = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestProfileEnhancedSurvey);
+            }
+        };
+        IVEnhancedSurvey.setOnClickListener(OCLEnhancedSurvey);
+
+
         profileView = view.findViewById(R.id.profileView);
         usernameTV = view.findViewById(R.id.usernameTV);
         birthDateTV = view.findViewById(R.id.birthDateTV);
@@ -81,20 +91,6 @@ public class ProfileFragment extends Fragment {
             return;
         }
 
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        int pageVisited = sharedPreferences.getInt(PAGE_VISITED_KEY, 0);
-
-        Context context = getContext();
-        ProgressDialog progressDialog = new ProgressDialog(context);
-
-        // Inside the click event or method where the profile page is clicked
-        if (pageVisited == 0) {
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("Loading");
-            progressDialog.show();
-            pageVisited++;
-            sharedPreferences.edit().putInt(PAGE_VISITED_KEY, pageVisited).apply();
-        }
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -123,8 +119,6 @@ public class ProfileFragment extends Fragment {
                                 .load(Uri.parse(profilePicUri))
                                 .into(profileView);
                     }
-
-                    progressDialog.dismiss();
 
                 } else {
                     // Data does not exist

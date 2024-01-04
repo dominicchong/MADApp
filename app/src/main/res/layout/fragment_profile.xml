@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@color/blue_100">
+    android:background="@color/azureish_white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,15 +42,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/white_background"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:background="@drawable/white_background"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileView">
@@ -58,152 +58,144 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/user"
-                        app:tint="@color/teal_700"/>
+                        app:tint="@color/teal_700" />
 
 
                     <TextView
+                        android:id="@+id/usernameTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/usernameTV"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:textAlignment="viewStart"
                         android:paddingStart="30dp"
-                        android:paddingEnd="30dp"
                         android:paddingTop="5dp"
-                        />
+                        android:paddingEnd="30dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_margin= "10dp"
-                    android:alpha = "0.5"
-                    android:background="@color/teal_200"/>
+                    android:layout_margin="10dp"
+                    android:alpha="0.5"
+                    android:background="@color/teal_200" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/birthday"
-                        app:tint = "@color/teal_700"/>
+                        app:tint="@color/teal_700" />
 
 
                     <TextView
+                        android:id="@+id/birthDateTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/birthDateTV"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:textAlignment="viewStart"
                         android:paddingStart="30dp"
-                        android:paddingEnd="30dp"
                         android:paddingTop="5dp"
-                        />
+                        android:paddingEnd="30dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_margin= "10dp"
-                    android:alpha = "0.5"
-                    android:background="@color/teal_200"/>
+                    android:layout_margin="10dp"
+                    android:alpha="0.5"
+                    android:background="@color/teal_200" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/phone"
-                        app:tint= "@color/teal_700"/>
+                        app:tint="@color/teal_700" />
 
                     <TextView
+                        android:id="@+id/phoneNumberTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/phoneNumberTV"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:textAlignment="viewStart"
                         android:paddingStart="30dp"
-                        android:paddingEnd="30dp"
                         android:paddingTop="5dp"
-                        />
+                        android:paddingEnd="30dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_margin= "10dp"
-                    android:alpha = "0.5"
-                    android:background="@color/teal_200"/>
+                    android:layout_margin="10dp"
+                    android:alpha="0.5"
+                    android:background="@color/teal_200" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/email"
-                        app:tint= "@color/teal_700"/>
+                        app:tint="@color/teal_700" />
 
                     <TextView
+                        android:id="@+id/emailTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/emailTV"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:textAlignment="viewStart"
                         android:paddingStart="30dp"
-                        android:paddingEnd="30dp"
                         android:paddingTop="5dp"
-                        />
+                        android:paddingEnd="30dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_margin= "10dp"
-                    android:alpha = "0.5"
-                    android:background="@color/teal_200"/>
+                    android:layout_margin="10dp"
+                    android:alpha="0.5"
+                    android:background="@color/teal_200" />
 
 
             </LinearLayout>
@@ -211,10 +203,10 @@
 
             <ImageButton
                 android:id="@+id/BtnEditProfile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="48dp"
-                android:background="@color/blue_100"
+                android:background="@color/azureish_white"
                 android:contentDescription="Edit Profile icon"
                 android:scaleType="fitCenter"
                 android:src="@drawable/edit_profile"
@@ -224,6 +216,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.285"
+                app:tint="@color/teal_700" />
+
+            <ImageView
+                android:id="@+id/IVEnhancedSurvey"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/ic_baseline_survey_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/BtnEditProfile"
                 app:tint="@color/teal_700" />
 
 

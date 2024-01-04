@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@color/blue_100">
+    android:background="@color/azureish_white">
 
     <ScrollView
         android:layout_width="match_parent"
