@@ -119,7 +119,7 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
     }
 
     private void completeCalculation() {
-        Double total_CF = viewModel.getTotal();
+        String total_CF = viewModel.getTotal();
         // Inflate the custom layout
         View customDialogView = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, null);
 
@@ -130,13 +130,12 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
 
 
         String avgLevel = "";
-        if(total_CF >= 4) {
+        if(Double.parseDouble(total_CF) >= 4) {
             avgLevel = "Your carbon footprint level is above the average level";
             CustomIV.setImageResource(R.drawable.try_hard_to_reduce_cf);
             new AlertDialog.Builder(getContext())
                     .setView(customDialogView)
-                    .setPositiveButton("See result", (dialogInterface, i) -> resultCF())
-                    .setNegativeButton("Back to Home Carbon Footprint", (dialogInterface, i) -> backToCFHome())
+                    .setPositiveButton("Back to Home Carbon Footprint", (dialogInterface, i) -> backToCFHome())
                     .setCancelable(false)
                     .show();
         } else {
@@ -145,7 +144,6 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
             new AlertDialog.Builder(getContext())
                     .setView(customDialogView)
                     .setPositiveButton("Download certificate", (dialogInterface, i) -> downloadCertificate())
-                    .setNeutralButton("Result", (dialogInterface, i) -> resultCF())
                     .setNegativeButton("Back to Home Carbon Footprint", (dialogInterface, i) -> backToCFHome())
                     .setCancelable(false)
                     .show();
