@@ -108,7 +108,7 @@ public class EditProfileFragment extends Fragment {
                     String birthDate = dataSnapshot.child("birthDate").getValue(String.class);
                     String phoneNumber = dataSnapshot.child("phoneNumber").getValue(String.class);
                     String email = dataSnapshot.child("email").getValue(String.class);
-                    String profilePicUri = dataSnapshot.child("profilePic").getValue(String.class);
+//                    String profilePicUri = dataSnapshot.child("profilePic").getValue(String.class);
 
                     // Set hints in EditText fields
                     usernameEditText.setHint(username);

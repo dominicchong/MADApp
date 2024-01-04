@@ -25,6 +25,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -47,6 +48,8 @@ public class FeedbackFragment extends Fragment {
     ActivityResultLauncher<Intent> resultLauncher;
     ActivityResultLauncher<Intent> cameraLauncher;
     Uri selectedImageUri;
+
+    ImageButton imageButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,8 +90,6 @@ public class FeedbackFragment extends Fragment {
                 // Get the rating and feedback text
                 float rating = RateBarFeedback.getRating();
                 String feedbackText = ETFeedback.getText().toString();
-                // Convert the selected image to a Bitmap
-                Bitmap imageBitmap = getBitmapFromUri(selectedImageUri);
 
 
                 // Create a feedback object or map with the rating and feedback
@@ -97,24 +98,33 @@ public class FeedbackFragment extends Fragment {
                 feedbackMap.put("feedback", feedbackText);
 
                 // Convert Bitmap to Uri and add to feedbackMap
-                Uri imageUri = getImageUri(requireContext(), imageBitmap);
-                feedbackMap.put("imageUri", imageUri.toString());
+                if (selectedImageUri != null) {
+                    // Convert the selected image to a Bitmap
+                    Bitmap imageBitmap = getBitmapFromUri(selectedImageUri);
+                    Uri imageUri = getImageUri(requireContext(), imageBitmap);
+                    feedbackMap.put("imageUri", imageUri.toString());
+                }
+                if(rating==0 && feedbackText.isEmpty()){
+                    Toast.makeText(getContext(), "Can't Submit as it is empty", Toast.LENGTH_SHORT).show();
+                }else {
 
-                // Add the feedback to Realtime Database
-                feedbackRef.push().setValue(feedbackMap)
-                        .addOnSuccessListener(aVoid -> {
-                            // Handle successful feedback submission
-                            String message = "Thank you for your feedback!";
-                            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                    // Add the feedback to Realtime Database
+                    feedbackRef.push().setValue(feedbackMap)
+                            .addOnSuccessListener(aVoid -> {
+                                // Handle successful feedback submission
+                                String message = "Thank you for your feedback!";
+                                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
 
-                            // Clear the rating and text input after click submit button
-                            RateBarFeedback.setRating(0);
-                            ETFeedback.setText("");
-                        })
-                        .addOnFailureListener(e -> {
-                            // Handle failed feedback submission
-                            Toast.makeText(getContext(), "Feedback submission failed. Please try again.", Toast.LENGTH_SHORT).show();
-                        });
+                                // Clear the rating and text input after click submit button
+                                RateBarFeedback.setRating(0);
+                                ETFeedback.setText("");
+                                Navigation.findNavController(view).navigate(R.id.DestHome);
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle failed feedback submission
+                                Toast.makeText(getContext(), "Feedback submission failed. Please try again.", Toast.LENGTH_SHORT).show();
+                            });
+                }
             }
 //            @Override
 //            public void onClick(View v) {
@@ -211,6 +221,10 @@ public class FeedbackFragment extends Fragment {
 
     // Function to convert Bitmap to Uri
     private Uri getImageUri(Context context, Bitmap bitmap) {
+        if (bitmap == null) {
+            // Handle the case where the Bitmap is null
+            return null;
+        }
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, null, null);

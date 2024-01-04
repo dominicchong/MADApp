@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Set of destination IDs which do not show the Up button and bottom navigation bar
         Set<Integer> destinationsWithoutUpAndBottomNav = new HashSet<>(Arrays.asList(
-                R.id.DestQuizQuestion
+                R.id.DestQuizQuestion,
+                R.id.DestProfileEnhancedSurveyQuestion
         ));
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build(); //Appbar configuration will help to define which destination should have an Up button (back arrow) in app bar
