@@ -1,6 +1,5 @@
 package com.example.madapp;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -86,7 +85,7 @@ public class OrganizationFragment extends Fragment {
             public void onClick(View view) {
                 // Handle click for organizationImageButton1
                 // Example: Open a website associated with the first organization
-                openWebsiteForOrganization("https://www.gec.org.my/");
+                openCustomTabs("https://www.gec.org.my/");
             }
         });
 
@@ -97,51 +96,51 @@ public class OrganizationFragment extends Fragment {
             public void onClick(View view) {
                 // Handle click for organizationImageButton2
                 // Example: Open a website associated with the first organization
-                openWebsiteForOrganization("http://ecoknights.org.my/");
+                openCustomTabs("http://ecoknights.org.my/");
             }
         });
 
         // Initialize ImageButton3 and set onClickListener
-        organizationImageButton3 = view.findViewById(R.id.organizationButton1);
+        organizationImageButton3 = view.findViewById(R.id.organizationButton3);
         organizationImageButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton3
                 // Example: Open a website associated with the first organization
-                openWebsiteForOrganization("https://www.umlawsociety.com/ecolawgy");
+                openCustomTabs("https://www.umlawsociety.com/ecolawgy");
             }
         });
 
         // Initialize ImageButton4 and set onClickListener
-        organizationImageButton4 = view.findViewById(R.id.organizationButton1);
+        organizationImageButton4 = view.findViewById(R.id.organizationButton4);
         organizationImageButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton4
                 // Example: Open a website associated with the first organization
-                openWebsiteForOrganization("https://www.greenpeace.org/");
+                openCustomTabs("https://www.greenpeace.org/");
             }
         });
 
         // Initialize ImageButton5 and set onClickListener
-        organizationImageButton5 = view.findViewById(R.id.organizationButton1);
+        organizationImageButton5 = view.findViewById(R.id.organizationButton5);
         organizationImageButton5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton5
                 // Example: Open a website associated with the first organization
-                openWebsiteForOrganization("http://www.mns.my/");
+                openCustomTabs("http://www.mns.my/");
             }
         });
 
         // Initialize ImageButton6 and set onClickListener
-        organizationImageButton6 = view.findViewById(R.id.organizationButton1);
+        organizationImageButton6 = view.findViewById(R.id.organizationButton6);
         organizationImageButton6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton6
                 // Example: Open a website associated with the first organization
-                openWebsiteForOrganization("http://www.trees.org.my/");
+                openCustomTabs("http://www.trees.org.my/");
             }
         });
 
@@ -149,7 +148,7 @@ public class OrganizationFragment extends Fragment {
         haveMoreOrganization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGoogleOrganizationsList("https://www.ensearch.org/global-gateway/environmental-ngos-in-malaysia/");
+                openCustomTabs("https://www.ensearch.org/global-gateway/environmental-ngos-in-malaysia/");
             }
         });
 
@@ -157,34 +156,14 @@ public class OrganizationFragment extends Fragment {
         return view;
     }
 
-    private void openWebsiteForOrganization(String url) {
-        // Create an Intent to open a web browser
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        // Check if there is an app to handle the Intent
-        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
-            // Start the activity if there is an app to handle the Intent
-            startActivity(intent);
-        } else {
-            // Handle the case where there is no app to handle the Intent
-            // You can show a message or use a WebView to display the website within your app
-            Toast.makeText(requireContext(), "No app to handle this action", Toast.LENGTH_SHORT).show();
-        }
+    private void openCustomTabs(String url) {
+        // Create a CustomTabsIntent
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        CustomTabsIntent customTabsIntent = builder.build();
+
+        // Launch the URL using Custom Tabs
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
     }
 
-    public void openGoogleOrganizationsList(String url) {
-
-        // Create an Intent to open a web browser
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        // Check if there is an app to handle the Intent
-        if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
-            // Start the activity if there is an app to handle the Intent
-            startActivity(intent);
-        } else {
-            // Handle the case where there is no app to handle the Intent
-            // You can show a message or use a WebView to display the website within your app
-            Toast.makeText(requireContext(), "No app to handle this action", Toast.LENGTH_SHORT).show();
-        }
-    }
 }
+

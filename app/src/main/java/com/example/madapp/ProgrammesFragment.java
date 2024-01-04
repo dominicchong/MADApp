@@ -1,14 +1,13 @@
 package com.example.madapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,8 +16,7 @@ import androidx.fragment.app.Fragment;
  */
 public class ProgrammesFragment extends Fragment {
 
-    private ConstraintLayout lowerPart;
-    // Find reference to the LinearLayout
+    public static int ProgrammesPage = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,26 +63,52 @@ public class ProgrammesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_programmes, container, false);
 
-        // Find references to the upper and lower parts
+        CardView CVProgramme1 = view.findViewById(R.id.CVProgramme1);
+        CardView CVProgramme2 = view.findViewById(R.id.CVProgramme2);
+        CardView CVProgramme3 = view.findViewById(R.id.CVProgramme3);
+        CardView CVProgramme4 = view.findViewById(R.id.CVProgramme4);
+        CardView CVProgramme5 = view.findViewById(R.id.CVProgramme5);
 
-        lowerPart = view.findViewById(R.id.lowerpart);
-
-        // Find reference to the LinearLayout
-        LinearLayout programme1Layout = view.findViewById(R.id.programme1);
-
-        // Set onClickListener for the programme1 LinearLayout
-        programme1Layout.setOnClickListener(new View.OnClickListener() {
+        CVProgramme1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Navigate to another page (replace with your navigation logic)
-                // For example, you can use Intent to start a new Activity
-                Intent intent = new Intent(getActivity(), programme1.class);
-                startActivity(intent);
+                ProgrammesPage = 1;
+                Navigation.findNavController(view).navigate(R.id.DestProgrammesDetails);
             }
         });
 
+        CVProgramme2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProgrammesPage = 2;
+                Navigation.findNavController(view).navigate(R.id.DestProgrammesDetails);
+            }
+        });
+
+        CVProgramme3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProgrammesPage = 3;
+                Navigation.findNavController(view).navigate(R.id.DestProgrammesDetails);
+            }
+        });
+
+        CVProgramme4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProgrammesPage = 4;
+                Navigation.findNavController(view).navigate(R.id.DestProgrammesDetails);
+            }
+        });
+
+        CVProgramme5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProgrammesPage = 5;
+                Navigation.findNavController(view).navigate(R.id.DestProgrammesDetails);
+            }
+        });
 
         return view;
     }
-
 }

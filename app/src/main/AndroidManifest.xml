@@ -12,10 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADApp"
         tools:targetApi="31">
-        <activity
-            android:name=".programme1"
-            android:exported="true">
-        </activity>
 
 
         <!--
