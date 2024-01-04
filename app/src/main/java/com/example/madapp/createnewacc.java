@@ -2,12 +2,14 @@ package com.example.madapp;
 
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -39,6 +41,16 @@ public class createnewacc extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        Button BtnBTL = view.findViewById(R.id.BtnBTL);
+        View.OnClickListener OCLBTL = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestLogin);
+            }
+        };
+        BtnBTL.setOnClickListener(OCLBTL);
+
         // Log statement to check if onViewCreated is called
         Log.d("SignUpFragment", "onViewCreated");
 
@@ -62,7 +74,21 @@ public class createnewacc extends Fragment {
         String username = usernameEditText.getText().toString();
         String phoneNumber = phoneNumberEditText.getText().toString();
 
-        // Validate email, password, username, and phone number if needed
+        // Validate email, password, username, and phone number according to format
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(username) || TextUtils.isEmpty(phoneNumber)) {
+            Toast.makeText(requireContext(), "Text field cannot be blank", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            Toast.makeText(requireContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (password.length() < 6) {
+            Toast.makeText(requireContext(), "Password must be 6 characters or longer", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Sign up with Firebase
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -93,4 +119,12 @@ public class createnewacc extends Fragment {
                     }
                 });
     }
+
+
+    // Function to validate email address using regex
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(emailRegex);
+    }
+
 }

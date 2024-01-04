@@ -6,120 +6,134 @@
     android:layout_height="match_parent"
     tools:context=".createnewacc">
 
+    <TextView
+        android:id="@+id/ecohelpertext"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:background="@color/very_light_blue"
+        android:fontFamily="@font/judsonitalic"
+        android:gravity="bottom"
+        android:paddingBottom="20dp"
+        android:text="EcoHelper"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textDirection="inherit"
+        android:textIsSelectable="false"
+        android:textSize="44sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="117dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ecohelper_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/Username"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textColor="#00BCD4"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/Emailadd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createnewacctext" />
 
     <EditText
         android:id="@+id/Emailadd"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Email Address"
         android:inputType="text"
         android:minHeight="48dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/Phonenum"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Username" />
 
     <EditText
         android:id="@+id/Phonenum"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Phone number"
         android:inputType="text"
         android:minHeight="48dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/Password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Emailadd" />
 
     <EditText
         android:id="@+id/Password"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/SignupBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Phonenum" />
 
     <Button
         android:id="@+id/SignupBtn"
-        android:layout_width="139dp"
-        android:layout_height="48dp"
+        android:layout_width="135dp"
+        android:layout_height="57dp"
         android:layout_marginStart="136dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="136dp"
-        android:layout_marginBottom="82dp"
         android:background="#03A9F4"
         android:text="Sign Up"
         android:textColor="#5E35B1"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Password" />
 
     <TextView
         android:id="@+id/createnewacctext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="36dp"
         android:text="Create New Account"
         android:textAllCaps="true"
         android:textColor="#3F51B5"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/Username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Ecohelpertext" />
+        app:layout_constraintTop_toBottomOf="@+id/ecohelpertext" />
 
-    <TextView
-        android:id="@+id/Ecohelpertext"
-        android:layout_width="411dp"
-        android:layout_height="147dp"
-        android:background="#03A9F4"
-        android:fontFamily="@font/judsonitalic"
-        android:gravity="center"
-        android:text="EcoHelper"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#5E35B1"
-        android:textDirection="inherit"
-        android:textIsSelectable="false"
-        android:textSize="48sp"
+    <Button
+        android:id="@+id/BtnBTL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="138dp"
+        android:background="#F9F9F9"
+        android:text="Back to Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/SignupBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
