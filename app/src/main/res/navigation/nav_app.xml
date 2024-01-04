@@ -171,6 +171,11 @@
         android:name="com.example.madapp.ExplainTips3Fragment"
         android:label="Article Tip 3"
         tools:layout="@layout/fragment_explain_tips3" />
+    <fragment
+        android:id="@+id/DestProfileEnhancedSurveyQuestion"
+        android:name="com.example.madapp.ProfileEnhancedSurveyQuestionFragment"
+        android:label="Profile Enhanced Survey"
+        tools:layout="@layout/fragment_profile_enhanced_survey_question" />
 
 
 </navigation>

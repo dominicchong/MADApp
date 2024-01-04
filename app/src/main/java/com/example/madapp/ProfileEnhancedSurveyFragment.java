@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+
+import com.example.madapp.quiz.QuizFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +40,11 @@ public class ProfileEnhancedSurveyFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileEnchanceSurveyFragment.
+     * @return A new instance of fragment DestQuiz.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileEnhancedSurveyFragment newInstance(String param1, String param2) {
-        ProfileEnhancedSurveyFragment fragment = new ProfileEnhancedSurveyFragment();
+    public static ProfileEnhancedSurveyQuestionFragment newInstance(String param1, String param2) {
+        ProfileEnhancedSurveyQuestionFragment fragment = new ProfileEnhancedSurveyQuestionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,14 +69,25 @@ public class ProfileEnhancedSurveyFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Button BtnSubmitEnhancedSurvey = view.findViewById(R.id.BtnSubmitEnhancedSurvey);
-        View.OnClickListener OCLSubmitEnhancedSurvey = new View.OnClickListener() {
+        Button BtnStartQuiz = view.findViewById(R.id.BtnStartQuiz);
+        View.OnClickListener OCLStartQuiz = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.DestProfile);
+                Navigation.findNavController(view).navigate(R.id.DestProfileEnhancedSurveyQuestion);
             }
         };
-        BtnSubmitEnhancedSurvey.setOnClickListener(OCLSubmitEnhancedSurvey);
+        BtnStartQuiz.setOnClickListener(OCLStartQuiz);
+
+//        ImageButton BtnBackToReforestation = view.findViewById(R.id.BtnBackToReforestation);
+//        View.OnClickListener OCLBackToReforestation = new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(view).navigate(R.id.DestHome);
+//            }
+//        };
+//        BtnBackToReforestation.setOnClickListener(OCLBackToReforestation);
+
+
 
     }
 }

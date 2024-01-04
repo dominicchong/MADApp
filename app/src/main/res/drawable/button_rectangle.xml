@@ -1,0 +1,10 @@
+<!-- res/drawable/button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" /> <!-- Button background color -->
+    <corners android:radius="8dp" /> <!-- Adjust the radius for rounded corners -->
+    <padding
+        android:left="16dp"
+        android:top="16dp"
+        android:right="16dp"
+        android:bottom="16dp" /> <!-- Adjust padding for each side -->
+</shape>
