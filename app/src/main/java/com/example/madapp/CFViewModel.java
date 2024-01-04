@@ -32,7 +32,7 @@ public class CFViewModel extends ViewModel {
         this.AnsQ3 = AnsQ3;
     }
 
-    public Double getTotal() {
+    public String getTotal() {
         double total = 0.0;
 
         if (AnsQ1 != null) {
@@ -47,6 +47,6 @@ public class CFViewModel extends ViewModel {
             total += (AnsQ3*11.38)/1000;
         }
 
-        return total;
+        return String.format("%.2f", total);
     }
 }
