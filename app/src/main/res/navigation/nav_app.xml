@@ -32,7 +32,11 @@
         android:name="com.example.madapp.NewsFragment"
         android:label="News"
         tools:layout="@layout/fragment_news"/>
-
+    <fragment
+        android:id="@+id/DestProgrammesDetails"
+        android:name="com.example.madapp.ProgrammesDetails"
+        android:label="Programmes Details"
+        tools:layout="@layout/fragment_programmes_details" />
 
     <!--Carbon Footprint module-->
     <fragment
