@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madapp.models.Article;
-import com.example.madapp.models.response.ArticleResponse;
 import com.example.madapp.models.request.TopHeadlinesRequest;
-
+import com.example.madapp.models.response.ArticleResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +84,7 @@ public class NewsFragment extends Fragment {
     }
 
     private void getNews() {
-        NewsApiClient newsApiClient = new NewsApiClient("854a1c31a3194f5aa1b97dadc709e693");
+        NewsApiClient newsApiClient = new NewsApiClient("10774329cdmsh26219e20677757ap199f7djsn97fa2cd569dc");
         newsApiClient.getTopHeadlines(
                 new TopHeadlinesRequest.Builder()
                         .q("bitcoin")
@@ -117,4 +117,5 @@ public class NewsFragment extends Fragment {
                 }
         );
     }
-}
+
+        }
