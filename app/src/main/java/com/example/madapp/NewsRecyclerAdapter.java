@@ -43,12 +43,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
                 .placeholder(R.drawable.no_image_icon)
                 .into(holder.imageView);
 
-//        holder.itemView.setOnClickListener(v->{
-//            Intent intent = new Intent(v.getContext(), NewsFullActivity.class);
-//            intent.putExtra("url",article.getUrl());
-//            v.getContext().startActivity(intent);
-//        });
-
         holder.itemView.setOnClickListener(v->{
             FragmentNewsDetails fragmentNewsDetails = new FragmentNewsDetails();
 
