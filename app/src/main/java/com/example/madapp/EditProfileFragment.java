@@ -61,6 +61,7 @@ public class EditProfileFragment extends Fragment {
         userID = user.getUid();
     }
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
+    DatabaseReference usersRef1 = FirebaseDatabase.getInstance().getReference().child("users");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,30 @@ public class EditProfileFragment extends Fragment {
         editButton.setOnClickListener(v -> showImageSourceOptions());
 
         Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
-        BtnUpdateProfile.setOnClickListener(v -> updateProfile(view));
+        BtnUpdateProfile.setOnClickListener(v -> {
+//            String newUsername = usernameEditText.getText().toString().trim();
+//            String newEmail = emailEditText.getText().toString().trim();
+//            String newPhoneNumber = phoneNumberEditText.getText().toString().trim();
+//
+//            // Check for duplicate user
+//            checkForDuplicateUser(newUsername);
+//            checkForDuplicateEmail(newEmail);
+//            checkForDuplicatePhoneNumber(newPhoneNumber);
+            updateProfile(view);
+
+//            if (!isDuplicateUsername && !isDuplicateEmail && !isDuplicatePhoneNumber) {
+//                updateProfile(requireView());
+//            }
+//            else {
+//                // Show a message that duplicates are found
+//                Toast.makeText(requireContext(), "Duplicates found. Update aborted.", Toast.LENGTH_SHORT).show();
+//            }
+
+            // Add other logic here if needed
+            // For example, update the profile if there are no duplicates
+            // updateProfile(view);
+        });
+//        BtnUpdateProfile.setOnClickListener(v -> updateProfile(view));
 
 //        Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
 //        View.OnClickListener OCLUpdateProfile = new View.OnClickListener() {
@@ -141,6 +165,19 @@ public class EditProfileFragment extends Fragment {
         });
     }
 
+    // This method is an example of where you might perform the query
+    private void checkForDuplicateUser(String userInput) {
+
+    }
+
+    private void checkForDuplicateEmail(String newEmail) {
+
+    }
+
+    private void checkForDuplicatePhoneNumber(String newPhoneNumber) {
+
+    }
+
     private void updateProfile(View view) {
         // Get updated information from EditText
         String newUsername = usernameEditText.getText().toString().trim();
@@ -159,13 +196,66 @@ public class EditProfileFragment extends Fragment {
 
         // Update Realtime Database based on modified fields
         if (isUsernameModified) {
-            userRef.child("username").setValue(newUsername);
+            usersRef1.orderByChild("username").equalTo(newUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Duplicates found, display a toast
+                        Toast.makeText(requireContext(), "Duplicate username found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Username is not updated", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        userRef.child("username").setValue(newUsername);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle the error
+                }
+            });
         }
-        if (isEmailModified) {
-            userRef.child("email").setValue(newEmail);
+        if (isEmailModified ) {
+            usersRef1.orderByChild("email").equalTo(newEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Duplicate email found, display a toast
+                        Toast.makeText(requireContext(), "Duplicate email found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Email is not updated", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+
+                        userRef.child("email").setValue(newEmail);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle the error
+                }
+            });
         }
         if (isPhoneNumberModified) {
-            userRef.child("phoneNumber").setValue(newPhoneNumber);
+            usersRef1.orderByChild("phoneNumber").equalTo(newPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // Duplicate phone number found, display a toast
+                        Toast.makeText(requireContext(), "Duplicate phone number found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Phone Number is not updated", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+
+                        userRef.child("phoneNumber").setValue(newPhoneNumber);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle the error
+                }
+            });
         }
         if (isBirthDateModified) {
             userRef.child("birthDate").setValue(newBirthDate);
@@ -175,13 +265,15 @@ public class EditProfileFragment extends Fragment {
             String imageUriString = selectedImageUri.toString();
             Log.d("UpdateProfile", "Updating profilePic with: " + imageUriString);
             userRef.child("profilePic").setValue(imageUriString);
-        } else {
-            Toast.makeText(requireContext(), "ImageURI not inserted to the database", Toast.LENGTH_SHORT).show();
         }
+//        else {
+//            Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show();
+//        }
 
-
-        Toast.makeText(requireContext(), "Update completed successfully", Toast.LENGTH_SHORT).show();
-        Navigation.findNavController(view).navigate(R.id.DestProfile);
+//        if(!isDuplicateUsername && !isDuplicateEmail && !isDuplicatePhoneNumber){
+//            Toast.makeText(requireContext(), "Update completed successfully", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(view).navigate(R.id.DestProfile);
+//        }
     }
 
     private void showImageSourceOptions() {
