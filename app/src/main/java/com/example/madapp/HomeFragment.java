@@ -1,23 +1,22 @@
 package com.example.madapp;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,6 +86,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         TextView usernameText = view.findViewById(R.id.textView5);
+        CircleImageView circleImageView = view.findViewById(R.id.imageView7);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -97,7 +99,17 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String username = String.valueOf(snapshot.child("username").getValue());
+                    String profilePicUri = snapshot.child("profilePic").getValue(String.class);
                     usernameText.setText(username);
+                    // Load and display the profile image using Glide
+                    if (profilePicUri != null && !profilePicUri.isEmpty() && isAdded()) {
+                        Glide.with(requireContext())
+                                .load(Uri.parse(profilePicUri))
+                                .into(circleImageView);
+                    } else {
+                        // If there's no profile picture, you might want to set a default image here
+                        circleImageView.setImageResource(R.drawable.profile);
+                    }
                 }
 
                 @Override
@@ -105,7 +117,8 @@ public class HomeFragment extends Fragment {
 
                 }
             });
-        }
+            }
+
 
         // Find button IDs
         ImageButton newsButton = view.findViewById(R.id.news);
@@ -149,6 +162,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
     private void showLogoutConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Confirm Logout");

@@ -10,7 +10,7 @@ public class APIClient {
     private static Retrofit getRetrofit(){
         if(mRetrofit == null){
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl("https://newsapi.org/")
+                    .baseUrl("https://climate-change-live-api5.p.rapidapi.com/news/Guardian/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
