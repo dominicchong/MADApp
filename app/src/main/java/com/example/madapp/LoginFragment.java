@@ -3,6 +3,7 @@ package com.example.madapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -64,6 +66,18 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         EditText emailEditText = view.findViewById(R.id.LoginEmail);
         EditText passwordEditText = view.findViewById(R.id.LoginPass);
+
+        ToggleButton toggleButton = view.findViewById(R.id.toggleButton);
+
+        toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // If the toggle button is checked, show the password
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            } else {
+                // If the toggle button is not checked, hide the password
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+        });
 
         Button BtnCNA = view.findViewById(R.id.CNABtn);
         BtnCNA.setOnClickListener(new View.OnClickListener() {
