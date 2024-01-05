@@ -1,5 +1,7 @@
 package com.example.madapp;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.madapp.models.Article;
+import com.kwabenaberko.newsapilib.models.Article;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -37,6 +42,23 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
                 .error(R.drawable.no_image_icon)
                 .placeholder(R.drawable.no_image_icon)
                 .into(holder.imageView);
+
+//        holder.itemView.setOnClickListener(v->{
+//            Intent intent = new Intent(v.getContext(), NewsFullActivity.class);
+//            intent.putExtra("url",article.getUrl());
+//            v.getContext().startActivity(intent);
+//        });
+
+        holder.itemView.setOnClickListener(v->{
+            FragmentNewsDetails fragmentNewsDetails = new FragmentNewsDetails();
+
+            // Pass the URL as a bundle argument to the fragment
+            Bundle bundle = new Bundle();
+            bundle.putString("url", article.getUrl());
+            fragmentNewsDetails.setArguments(bundle);
+
+            Navigation.findNavController(v).navigate(R.id.DestNewsDetails, bundle);
+        });
     }
 
     void updateData(List<Article> data){
@@ -46,7 +68,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     }
     @Override
     public int getItemCount() {
-        return 0;
+        return articleList.size();
     }
 
     class NewsViewHolder extends RecyclerView.ViewHolder{
