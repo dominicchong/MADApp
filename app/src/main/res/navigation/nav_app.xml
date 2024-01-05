@@ -176,6 +176,11 @@
         android:name="com.example.madapp.ProfileEnhancedSurveyQuestionFragment"
         android:label="Profile Enhanced Survey"
         tools:layout="@layout/fragment_profile_enhanced_survey_question" />
+    <fragment
+        android:id="@+id/DestNewsDetails"
+        android:name="com.example.madapp.FragmentNewsDetails"
+        android:label="News Details"
+        tools:layout="@layout/fragment_news_details" />
 
 
 </navigation>
