@@ -38,6 +38,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+
 public class EditProfileFragment extends Fragment {
     EditText usernameEditText, birthDateEditText, phoneNumberEditText, emailEditText;
     ImageButton editButton;
@@ -47,6 +53,8 @@ public class EditProfileFragment extends Fragment {
     Uri selectedImageUri;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userID;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+
 
     {
         assert user != null;
@@ -186,13 +194,41 @@ public class EditProfileFragment extends Fragment {
                     pickImage();
                     break;
                 case 1:
-                    takePhoto();
+                    if (checkCameraPermission()) {
+                        takePhoto();
+                    } else {
+                        requestCameraPermission();
+                    }
                     break;
             }
         });
         builder.show();
     }
 
+    private boolean checkCameraPermission() {
+        return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(
+                requireActivity(),
+                new String[]{Manifest.permission.CAMERA},
+                CAMERA_PERMISSION_REQUEST_CODE
+        );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                takePhoto();
+            } else {
+                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private void pickImage(){
         Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);

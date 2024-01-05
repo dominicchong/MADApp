@@ -28,32 +28,36 @@
             <!--                app:layout_constraintStart_toStartOf="parent"-->
             <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileView"
                 android:layout_width="136dp"
                 android:layout_height="136dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="4dp"
                 android:src="@drawable/profileicon"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="@id/ProfileEnhancedTV"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.455" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="52dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/white_background"
                 android:orientation="vertical"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profileView">
+                app:layout_constraintTop_toBottomOf="@id/scoreProgressBar">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -200,22 +204,19 @@
 
             </LinearLayout>
 
-
             <ImageButton
                 android:id="@+id/BtnEditProfile"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="40dp"
                 android:background="@color/azureish_white"
                 android:contentDescription="Edit Profile icon"
                 android:scaleType="fitCenter"
                 android:src="@drawable/edit_profile"
-                app:layout_constraintBottom_toTopOf="@+id/profileView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.935"
+                app:layout_constraintHorizontal_bias="0.906"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.285"
                 app:tint="@color/teal_700" />
 
             <ImageView
@@ -223,10 +224,58 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/ic_baseline_survey_24"
+                app:layout_constraintEnd_toStartOf="@+id/BtnEditProfile"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/BtnEditProfile"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/teal_700" />
+
+            <ProgressBar
+                android:id="@+id/scoreProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="286dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="396dp"
+                android:max="8"
+                android:progress="0"
+                android:progressDrawable="@drawable/custom_progress_drawable"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.256"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ProfileEnhancedTV"
+                app:layout_constraintVertical_bias="0.343" />
+
+            <TextView
+                android:id="@+id/ProfileEnhancedTV"
+                android:layout_width="326dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="256dp"
+                android:text="Environmental Awareness"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.376"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/enhancedSurveyPercentage"
+                android:layout_width="39dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="52dp"
+                android:text="TextView"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/scoreProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/profileView"
+                app:layout_constraintVertical_bias="0.428" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
