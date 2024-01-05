@@ -164,11 +164,6 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
 
     }
 
-    private void resultCF() {
-        NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.DestTipsReduceCF);
-    }
-
     private void downloadCertificate() {
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.DestCertificate);
