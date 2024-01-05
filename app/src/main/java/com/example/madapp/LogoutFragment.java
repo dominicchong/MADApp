@@ -14,12 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LogoutFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class LogoutFragment extends Fragment{
+public class LogoutFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,7 +60,8 @@ public class LogoutFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_logout, container, false);
+        View view = inflater.inflate(R.layout.fragment_logout, container, false);
+
         // Hide the toolbar
         if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -78,15 +74,14 @@ public class LogoutFragment extends Fragment{
                 bottomNavigationView.setVisibility(View.GONE);
             }
         }
-        return view;
 
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-        Button BtnReturnToLogin = view.findViewById(R.id.BtnReturnToLogin);
-        BtnReturnToLogin.setOnClickListener(new View.OnClickListener() {
+        Button btnReturnToLogin = view.findViewById(R.id.BtnReturnToLogin);
+        btnReturnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the LoginActivity from the MainActivity
@@ -98,5 +93,13 @@ public class LogoutFragment extends Fragment{
             }
         });
 
+        Button btnBackToHomePage = view.findViewById(R.id.BtnBthp);
+        btnBackToHomePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to the HomeFragment
+                Navigation.findNavController(view).navigate(R.id.DestHome);
+            }
+        });
     }
 }
