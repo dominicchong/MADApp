@@ -10,13 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.madapp.models.Article;
-import com.example.madapp.models.request.TopHeadlinesRequest;
-import com.example.madapp.models.response.ArticleResponse;
+import com.kwabenaberko.newsapilib.NewsApiClient;
+import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
+import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
+import com.kwabenaberko.newsapilib.models.Article;
+
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +29,7 @@ public class NewsFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Article> articleList = new ArrayList<>();
     private NewsRecyclerAdapter adapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,29 +86,19 @@ public class NewsFragment extends Fragment {
     }
 
     private void getNews() {
-        NewsApiClient newsApiClient = new NewsApiClient("10774329cdmsh26219e20677757ap199f7djsn97fa2cd569dc");
+        NewsApiClient newsApiClient = new NewsApiClient("abae49a7790f4cce977f8f52569af0ba");
         newsApiClient.getTopHeadlines(
                 new TopHeadlinesRequest.Builder()
-                        .q("bitcoin")
                         .language("en")
                         .build(),
                 new NewsApiClient.ArticlesResponseCallback() {
                     @Override
                     public void onSuccess(ArticleResponse response) {
-                        requireActivity().runOnUiThread(() -> {
-                            // Log the raw response for debugging purposes
-                            Log.d("API Response", response.toString());
+                        requireActivity().runOnUiThread(()->{
+                            articleList = response.getArticles();
+                            adapter.updateData(articleList);
+                            adapter.notifyDataSetChanged();
 
-                            // Check if the response contains articles
-                            if (response.getArticles() != null && !response.getArticles().isEmpty()) {
-                                // The response contains articles
-                                articleList = response.getArticles();
-                                adapter.updateData(articleList);
-                                adapter.notifyDataSetChanged();
-                            } else {
-                                // The response is empty or does not contain articles
-                                Log.e("API Response", "Empty or null article list");
-                            }
                         });
                     }
 
@@ -117,5 +109,4 @@ public class NewsFragment extends Fragment {
                 }
         );
     }
-
-        }
+}
