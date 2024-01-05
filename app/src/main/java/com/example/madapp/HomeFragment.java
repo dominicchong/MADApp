@@ -78,6 +78,9 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         firebaseAuth = FirebaseAuth.getInstance();
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.lowerpart, new NewsFragment())
+                .commit();
     }
 
     @Override
