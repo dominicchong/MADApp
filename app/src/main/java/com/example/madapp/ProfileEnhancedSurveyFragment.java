@@ -78,14 +78,14 @@ public class ProfileEnhancedSurveyFragment extends Fragment {
         };
         BtnStartQuiz.setOnClickListener(OCLStartQuiz);
 
-//        ImageButton BtnBackToReforestation = view.findViewById(R.id.BtnBackToReforestation);
-//        View.OnClickListener OCLBackToReforestation = new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Navigation.findNavController(view).navigate(R.id.DestHome);
-//            }
-//        };
-//        BtnBackToReforestation.setOnClickListener(OCLBackToReforestation);
+        Button BtnBackToProfilePage = view.findViewById(R.id.btnBackProfile);
+        View.OnClickListener OCLBackToProfile = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.DestProfile);
+            }
+        };
+        BtnBackToProfilePage.setOnClickListener(OCLBackToProfile);
 
 
 

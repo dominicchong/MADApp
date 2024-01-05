@@ -21,14 +21,30 @@
         android:id="@+id/BtnStartQuiz"
         android:layout_width="170dp"
         android:layout_height="65dp"
-        android:layout_marginTop="452dp"
         android:backgroundTint="@color/blue_900"
         android:text="Start Survey"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+    <Button
+        android:id="@+id/btnBackProfile"
+        android:layout_width="216dp"
+        android:layout_height="62dp"
+        android:backgroundTint="@color/blue_900"
+        android:text="Back to Profile PAGE"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnStartQuiz"
+        app:layout_constraintVertical_bias="0.258" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

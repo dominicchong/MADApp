@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -21,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +40,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.Manifest;
+
 public class FeedbackFragment extends Fragment {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -48,8 +55,9 @@ public class FeedbackFragment extends Fragment {
     ActivityResultLauncher<Intent> resultLauncher;
     ActivityResultLauncher<Intent> cameraLauncher;
     Uri selectedImageUri;
+    ImageView imageView;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
 
-    ImageButton imageButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,7 @@ public class FeedbackFragment extends Fragment {
         EditText ETFeedback = view.findViewById(R.id.ETFeedback);    // needed if you want to collect the feedback later
         Button BtnSubmitFeedback = view.findViewById(R.id.BtnSubmitFeedback);
         ImageButton imageButton = view.findViewById(R.id.imageButton);
+        imageView = view.findViewById(R.id.imageView);
 
         // The rating bar OnRatingBarChangeListener to change the rating whenever it is used by user
         RateBarFeedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -104,7 +113,7 @@ public class FeedbackFragment extends Fragment {
                     Uri imageUri = getImageUri(requireContext(), imageBitmap);
                     feedbackMap.put("imageUri", imageUri.toString());
                 }
-                if(rating==0 && feedbackText.isEmpty()){
+                if(rating==0 && feedbackText.isEmpty() && selectedImageUri != null){
                     Toast.makeText(getContext(), "Can't Submit as it is empty", Toast.LENGTH_SHORT).show();
                 }else {
 
@@ -168,8 +177,39 @@ public class FeedbackFragment extends Fragment {
     }
 
     private void takePhoto() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraLauncher.launch(cameraIntent);
+        if (checkCameraPermission()) {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraLauncher.launch(cameraIntent);
+        } else {
+            requestCameraPermission();
+        }
+    }
+
+    private boolean checkCameraPermission() {
+        return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(
+                requireActivity(),
+                new String[]{Manifest.permission.CAMERA},
+                CAMERA_PERMISSION_REQUEST_CODE
+        );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, launch the camera
+                takePhoto();
+            } else {
+                // Permission denied, show a message or take appropriate action
+                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void registerImagePickerResult() {
@@ -181,6 +221,7 @@ public class FeedbackFragment extends Fragment {
                             Intent data = result.getData();
                             if (data != null && data.getData() != null) {
                                 Uri imageUri = data.getData();
+                                imageView.setImageURI(imageUri);
                                 selectedImageUri = imageUri;
                                 // You can set the image to an ImageView or do other operations
                                 // For example: imageView.setImageURI(imageUri);
@@ -208,6 +249,8 @@ public class FeedbackFragment extends Fragment {
 
                         // Set the Uri to selectedImageUri
                         selectedImageUri = imageUri;
+
+                        imageView.setImageBitmap(photo);
 
                         // Save the image to a file if needed
                         // saveImageToFile(photo);

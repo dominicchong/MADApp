@@ -1,19 +1,26 @@
 package com.example.madapp;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +39,8 @@ public class ProfileFragment extends Fragment {
     private int pageVisited = 0;
     private static final String PREFS_NAME = "MyPrefs";
     private static final String PAGE_VISITED_KEY = "page_visited";
+    ProgressBar scoreProgressBar;
+    TextView enhancedSurveyPercentage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,8 @@ public class ProfileFragment extends Fragment {
         birthDateTV = view.findViewById(R.id.birthDateTV);
         phoneNumberTV = view.findViewById(R.id.phoneNumberTV);
         emailTV = view.findViewById(R.id.emailTV);
+        scoreProgressBar = view.findViewById(R.id.scoreProgressBar);
+        enhancedSurveyPercentage = view.findViewById(R.id.enhancedSurveyPercentage);
 
         loadDataFromFirebase();
     }
@@ -100,12 +111,14 @@ public class ProfileFragment extends Fragment {
                     String phoneNumber = dataSnapshot.child("phoneNumber").getValue(String.class);
                     String email = dataSnapshot.child("email").getValue(String.class);
                     String profilePicUri = dataSnapshot.child("profilePic").getValue(String.class);
+                    Integer userScore = dataSnapshot.child("score").getValue(Integer.class);
 
                     // Update UI elements with the retrieved data
                     usernameTV.setText(username);
                     birthDateTV.setText(birthDate);
                     phoneNumberTV.setText(phoneNumber);
                     emailTV.setText(email);
+                    updateProgressBar(userScore);
 
                     // Load and display the profile image using Glide
                     if (profilePicUri != null && !profilePicUri.isEmpty() && isAdded()) {
@@ -132,5 +145,15 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void updateProgressBar(Integer userScore) {
+        // Set the progress bar's value to the user's score, or 0 if the score is null
+        scoreProgressBar.setProgress(userScore != null ? userScore : 0);
 
-        }
+        // Calculate the percentage of correct answers among 8 questions
+        int totalQuestions = 8;
+        int percentage = (int) Math.round((userScore != null ? (double) userScore : 0) / totalQuestions * 100);
+
+        // Set the percentage in the enhancedSurveyPercentage TextView
+        enhancedSurveyPercentage.setText(percentage + "%");
+    }
+}
