@@ -96,7 +96,7 @@ public class OrganizationFragment extends Fragment {
             public void onClick(View view) {
                 // Handle click for organizationImageButton2
                 // Example: Open a website associated with the first organization
-                openCustomTabs("http://ecoknights.org.my/");
+                openCustomTabs("https://www.hati.my/ecoknights/");
             }
         });
 
@@ -140,7 +140,7 @@ public class OrganizationFragment extends Fragment {
             public void onClick(View view) {
                 // Handle click for organizationImageButton6
                 // Example: Open a website associated with the first organization
-                openCustomTabs("http://www.trees.org.my/");
+                openCustomTabs("https://www.hati.my/treat-every-environment-special-sdn-bhd-trees/");
             }
         });
 
