@@ -128,7 +128,7 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
                 new AlertDialog.Builder(getContext())
                         .setTitle("Confirmation")
                         .setMessage("Are you sure you want to go back to profile enhanced survey?")
-                        .setPositiveButton("Yes", (dialogInterface, i) -> backToQuiz())
+                        .setPositiveButton("Yes", (dialogInterface, i) -> backToProfileEnhancedSurvey())
                         .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
                         .setCancelable(false)
                         .show();
@@ -191,9 +191,9 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
     }
 
     public void onClick(View view) {
-        int originalColor = Color.rgb(25, 118, 210);
+        int originalColor = Color.rgb(0, 137, 123);
 
-        // reset button background to purple_800
+        // reset button background to teal_700
         option1.setBackgroundColor(originalColor);
         option2.setBackgroundColor(originalColor);
         option3.setBackgroundColor(originalColor);
@@ -219,8 +219,8 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
             // choices button clicked
             selectedAnswer = clickedButton.getText().toString();
 
-            // change selected choice to bluish color
-            clickedButton.setBackgroundColor(Color.rgb(13, 71, 161));
+            // change selected choice to purplish color
+            clickedButton.setBackgroundColor(Color.rgb(20, 117, 252));
         }
     }
 
@@ -266,7 +266,7 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
         TextView customDialogMessage = customDialogView.findViewById(R.id.customDialogMessage);
 
 
-        String passStatus = "Congratulations! Survey Done";
+        String passStatus = "Survey Done!";
 
         // Set custom content
         customDialogTitle.setText(passStatus);
@@ -286,33 +286,23 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
         // Create the custom AlertDialog
         new AlertDialog.Builder(getContext())
                 .setView(customDialogView)
-                .setPositiveButton("Play Again", (dialogInterface, i) -> restartQuiz())
-                .setNegativeButton("Back to Survey Page", (dialogInterface, i) -> backToQuiz())
+                .setPositiveButton("Back to Survey Page", (dialogInterface, i) -> backToProfileEnhancedSurvey())
                 .setCancelable(false)
                 .show();
 
     }
 
-    void restartQuiz() {
-        score = 0;
-        currentQuestionIndex = 0;
-        selectedAnswer = "";
-
-        NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.DestProfileEnhancedSurveyQuestion);
-    }
-
-    void backToQuiz() {
+    void backToProfileEnhancedSurvey() {
         // reset score
         score = 0;
         currentQuestionIndex = 0;
         selectedAnswer = "";
 
-        // Navigate back to the quiz page
+        // Navigate back to the profile enhanced survey page
         NavController navController = NavHostFragment.findNavController(this);
         navController.navigate(R.id.DestProfileEnhancedSurvey);
 
-        // Hide the back button in the DestQuiz toolbar
+        // Hide the back button in the toolbar
         MainActivity activity = (MainActivity) requireActivity();
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {

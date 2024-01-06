@@ -2,6 +2,7 @@ package com.example.madapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -28,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +57,8 @@ public class EditProfileFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userID;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+    String profilePicUri;
+    boolean isImageRemoved = false;
 
 
     {
@@ -140,7 +145,7 @@ public class EditProfileFragment extends Fragment {
                     String birthDate = dataSnapshot.child("birthDate").getValue(String.class);
                     String phoneNumber = dataSnapshot.child("phoneNumber").getValue(String.class);
                     String email = dataSnapshot.child("email").getValue(String.class);
-//                    String profilePicUri = dataSnapshot.child("profilePic").getValue(String.class);
+                    profilePicUri = dataSnapshot.child("profilePic").getValue(String.class);
 
                     // Set hints in EditText fields
                     usernameEditText.setHint(username);
@@ -148,19 +153,19 @@ public class EditProfileFragment extends Fragment {
                     phoneNumberEditText.setHint(phoneNumber);
                     birthDateEditText.setHint(birthDate);
                     // Load and display the profile image using Glide
-//                    if (profilePicUri != null && !profilePicUri.isEmpty()) {
-//                        Glide.with(requireContext())
-//                                .load(Uri.parse(profilePicUri))
-//                                .into(profileView);
-//                    }
+                    if (profilePicUri != null && !profilePicUri.isEmpty()) {
+                        Glide.with(requireContext())
+                                .load(Uri.parse(profilePicUri))
+                                .into(profileView);
+                    }
                 }
-                Toast.makeText(requireContext(), "Information Obtain Success.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Successfully obtained information", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle the failure to retrieve data
-                Toast.makeText(requireContext(), "Information Obtain failed. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Failed to obtain information. Please try again.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -260,26 +265,38 @@ public class EditProfileFragment extends Fragment {
         if (isBirthDateModified) {
             userRef.child("birthDate").setValue(newBirthDate);
         }
+
         // Update profilePic field with the image URI if it's modified
-        if (isImageModified ) {
-            String imageUriString = selectedImageUri.toString();
-            Log.d("UpdateProfile", "Updating profilePic with: " + imageUriString);
-            userRef.child("profilePic").setValue(imageUriString);
+        if (isImageModified) {
+            if (selectedImageUri != null) {
+                String imageUriString = selectedImageUri.toString();
+                Log.d("UpdateProfile", "Updating profilePic with: " + imageUriString);
+                userRef.child("profilePic").setValue(imageUriString);
+            }
         }
+        else {
+            if(isImageRemoved) {
+                // If the photo is removed, update profilePic to an empty string or null
+                userRef.child("profilePic").setValue(null); // or userRef.child("profilePic").removeValue();
+                isImageRemoved = false;
+            }
+        }
+
 //        else {
 //            Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show();
 //        }
 
 //        if(!isDuplicateUsername && !isDuplicateEmail && !isDuplicatePhoneNumber){
 //            Toast.makeText(requireContext(), "Update completed successfully", Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(view).navigate(R.id.DestProfile);
 //        }
+
+        Navigation.findNavController(view).navigate(R.id.DestProfile);
     }
 
     private void showImageSourceOptions() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Choose Image Source");
-        String[] options = {"Pick from Gallery", "Take Photo"};
+        String[] options = {"Pick from Gallery", "Take Photo", "Remove Photo"};
         builder.setItems(options, (dialog, which) -> {
             switch (which) {
                 case 0:
@@ -291,6 +308,8 @@ public class EditProfileFragment extends Fragment {
                     } else {
                         requestCameraPermission();
                     }
+                case 2:
+                    removePhoto();
                     break;
             }
         });
@@ -391,4 +410,52 @@ public class EditProfileFragment extends Fragment {
                 }
         );
     }
+
+    // remove photo of user
+    private void removePhoto() {
+        // Check if there is a selected image
+        if (profilePicUri != null) {
+            // Create a confirmation dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("Confirmation");
+            builder.setMessage("Are you sure you want to remove your photo?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Remove the image from the ImageView
+                    profileView.setImageDrawable(null);
+
+                    // Remove the image from the Firebase Realtime Database
+                    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
+                    databaseRef.child("profileImage").removeValue()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(requireContext(), "Photo removed successfully", Toast.LENGTH_SHORT).show();
+
+                                    // Set the default image in the ImageView
+                                    profileView.setImageResource(R.drawable.default_profile_img);
+
+                                    // Reset the selectedImageUri variable
+                                    selectedImageUri = null;
+
+                                    isImageRemoved = true;
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(requireContext(), "Failed to remove photo", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            });
+            builder.setNegativeButton("No", null);
+            builder.show();
+        } else {
+            Toast.makeText(requireContext(), "There is no photo to remove", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

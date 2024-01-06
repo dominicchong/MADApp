@@ -37,8 +37,6 @@ public class ProfileFragment extends Fragment {
     TextView usernameTV, birthDateTV, phoneNumberTV, emailTV;
     ImageView profileView;
     private int pageVisited = 0;
-    private static final String PREFS_NAME = "MyPrefs";
-    private static final String PAGE_VISITED_KEY = "page_visited";
     ProgressBar scoreProgressBar;
     TextView enhancedSurveyPercentage;
 
@@ -125,6 +123,10 @@ public class ProfileFragment extends Fragment {
                         Glide.with(requireContext())
                                 .load(Uri.parse(profilePicUri))
                                 .into(profileView);
+                    }
+                    else {
+                        // If the profilePic is null or empty, set a default image
+                        profileView.setImageResource(R.drawable.default_profile_img);
                     }
 
                 } else {
