@@ -151,7 +151,7 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
 
         // Set custom content
         customDialogTitle.setText(avgLevel);
-        customDialogMessage.setText("Your carbon footprint is " + total_CF);
+        customDialogMessage.setText("Your carbon footprint is " + total_CF+" tons");
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
