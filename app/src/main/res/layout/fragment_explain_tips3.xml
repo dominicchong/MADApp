@@ -35,7 +35,7 @@
         android:layout_width="360dp"
         android:layout_height="43dp"
         android:layout_marginTop="36dp"
-        android:text="Consuming local products can contribute to reducing carbon footprints and combating climate change"
+        android:text="Consuming local products can reduce carbon footprint and combat climate change."
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
@@ -54,9 +54,9 @@
 
     <TextView
         android:id="@+id/TVArticle3Link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="392dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
         android:text="https://www.themomentum.com/articles/how-eating-local-foods-can-reduce-your-carbon-footprint"
         android:textColor="#3366CC"
         android:textSize="16sp"

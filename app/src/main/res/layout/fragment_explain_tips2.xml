@@ -36,10 +36,10 @@
         android:layout_width="381dp"
         android:layout_height="121dp"
         android:layout_marginTop="16dp"
-        android:text="The 3 R’s stand for “Reduce, Reuse, and Recycle”. This Eco Trio are rules that guide us to take care of our planet and use things wisely.. Not only that, by applying 3R's he waste can be reduce and this will help to reduce carbon footprint and combat climate change"
+        android:text="The 3 R’s stand for “Reduce, Reuse, and Recycle”. This Eco Trio are rules that guide us to take care of our planet and use things wisely. Not only that, by applying 3R's he waste can be reduce and this will help to reduce carbon footprint and combat climate change."
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVTitleArticle2" />
 
@@ -57,7 +57,7 @@
         android:id="@+id/TVArticle2Link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:text="https://earthhow.com/reduce-reuse-recycle/"
         android:textColor="#3366CC"
         android:textSize="16sp"

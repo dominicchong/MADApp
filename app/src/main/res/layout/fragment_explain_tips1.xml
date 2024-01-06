@@ -57,7 +57,7 @@
         android:id="@+id/TVArticle1Link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:text="https://www.un.org/en/actnow/transport"
         android:textColor="#3366CC"
         android:textSize="16sp"

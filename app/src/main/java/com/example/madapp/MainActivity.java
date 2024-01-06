@@ -68,7 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 getSupportActionBar().hide();
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 hideBottomNavigationView();
-            } else {
+            }
+            else if(destination.getId() == R.id.DestCertificate) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            }
+            else{
                 getSupportActionBar().show();
                 showBottomNavigationView();
             }
