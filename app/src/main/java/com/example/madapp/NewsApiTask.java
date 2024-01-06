@@ -6,12 +6,8 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,7 +16,7 @@ import java.util.List;
 
 public class NewsApiTask extends AsyncTask<Void, Void, String> {
 
-    private static final String API_URL = "https://climate-news-feed.p.rapidapi.com/page/1?limit=10";
+    private static final String API_URL = "https://climate-news-feed.p.rapidapi.com/page/1?limit=15";
     private static final String API_KEY = "10774329cdmsh26219e20677757ap199f7djsn97fa2cd569dc";
 
     private NewsRecyclerAdapter newsAdapter;
@@ -93,6 +89,7 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
                 String title = articleObject.getString("title");
                 String url = articleObject.getString("url");
                 String source = articleObject.getString("source");
+                String thumbnail = articleObject.getString("thumbnail");
 
                 // Fetch the HTML content of the article
                 //String htmlContent = fetchHtmlContent(url);
@@ -100,7 +97,7 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
                 // Extract the image URL from the HTML content using JSoup
                 //String imageUrl = extractImageUrl(htmlContent);
 
-                Article newsArticle = new Article(title, url, source); //imageUrl);
+                Article newsArticle = new Article(title, url, source,thumbnail); //imageUrl);
                 parsedData.add(newsArticle);
             }
         } catch (JSONException e) {
@@ -110,10 +107,10 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
         return parsedData;
     }
     // Fetch HTML content of the article in the background
-    private String fetchHtmlContent(String articleUrl) {
+    /*private String fetchHtmlContent(String articleUrl) {
         try {
             return Jsoup.connect(articleUrl).get().html();
-        } catch (IOException e) {
+       } catch (IOException e) {
             Log.e("NewsApiTask", "Error fetching HTML content", e);
             return null;
         }
@@ -131,4 +128,6 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
 
         return null; // No image found in the HTML content
     }
+
+     */
 }
