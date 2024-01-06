@@ -1,19 +1,23 @@
 package com.example.madapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -44,73 +48,91 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.NHFMain);
         NavController navController = host.getNavController();
 
-        // Set of destination IDs which do not show the Up button and bottom navigation bar
         Set<Integer> destinationsWithoutUpAndBottomNav = new HashSet<>(Arrays.asList(
                 R.id.DestQuizQuestion,
                 R.id.DestProfileEnhancedSurveyQuestion
         ));
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build(); //Appbar configuration will help to define which destination should have an Up button (back arrow) in app bar
-//      to automatically handle Up button behavior based on the navigation graph.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
-        //set up action bar to work with NavController, means up button will navigate to appropriate destination define in navigation graph
-        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration); //this: Typically, in an activity, this refers to the current activity context.
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        //setDrawerLayout(drawerLayout): This is configuring the builder to work with a DrawerLayout. It means that if you have a drawer layout in your app, the configured destinations will show the hamburger icon in the Toolbar, indicating that there's a navigation drawer.
         NavigationUI.setupWithNavController(toolbar, navController, new AppBarConfiguration
                 .Builder(R.id.DestHome, R.id.DestCarbonFootprint, R.id.DestReforestation, R.id.DestProfile)
                 .setDrawerLayout(drawerLayout).build());
-        //only write the home and about app so that top level destination will show hamburger icon, and other fragment show up hbutton
 
-
-        // Side Navigation menu
         setupNavMenu(navController);
 
-        /// Add a destination changed listener to hide the Up button and show/hide bottom navigation bar dynamically
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destinationsWithoutUpAndBottomNav.contains(destination.getId())) {
                 getSupportActionBar().hide();
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false); // Hide Up button
-                hideBottomNavigationView(); // Hide bottom navigation bar
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                hideBottomNavigationView();
             } else {
                 getSupportActionBar().show();
-                showBottomNavigationView(); // Show bottom navigation bar
+                showBottomNavigationView();
             }
         });
 
-        // Bottom Navigation menu
         setupBottomNavMenu(navController);
-
     }
 
-    private void setupNavMenu(NavController navController){
+    private void setupNavMenu(NavController navController) {
         NavigationView sideNav = findViewById(R.id.sideNav);
         NavigationUI.setupWithNavController(sideNav, navController);
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_options, menu);
         return true;
     }
 
-
-    // the method below is used to configure the action of the overflow menu which
-    // navigates back to 'home' or 'about app' page
-    public boolean onOptionsItemSelected(MenuItem item){
-        try{
-            Navigation.findNavController(this, R.id.NHFMain).navigate(item.getItemId());
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.NHFMain)).getNavController();
+        if (item.getItemId() == R.id.DestLogout) {
+            showLogoutConfirmationDialog();
             return true;
-        }
-        catch(Exception ex){
+        } else if (item.getItemId() == R.id.DestInfo) {
+            navController.navigate(R.id.DestInfo);
+            return true;
+        } else if (item.getItemId() == R.id.DestFeedback) {
+            navController.navigate(R.id.DestFeedback);
+            return true;
+        } else {
             return super.onOptionsItemSelected(item);
         }
     }
 
-    public boolean onSupportNavigateUp(){
-        return Navigation.findNavController(this, R.id.NHFMain).navigateUp();
+    private void showLogoutConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Logout");
+        builder.setMessage("Are you sure you want to log out?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                performLogout();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    private void setupBottomNavMenu(NavController navController){
+    private void performLogout() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void setupBottomNavMenu(NavController navController) {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_view);
         NavigationUI.setupWithNavController(bottomNav, navController);
     }
