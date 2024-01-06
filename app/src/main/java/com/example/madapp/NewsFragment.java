@@ -1,7 +1,6 @@
 package com.example.madapp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
-import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
-import com.kwabenaberko.newsapilib.models.Article;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +20,12 @@ import java.util.List;
 public class NewsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private List<Article> articleList = new ArrayList<>();
+    //private List<Article> articleList = new ArrayList<>();
     private NewsRecyclerAdapter adapter;
+    // Initialize the adapter and data list
+    private NewsRecyclerAdapter newsAdapter;
+    String apiKey = "10774329cdmsh26219e20677757ap199f7djsn97fa2cd569dc";
+    private List<Article> articleList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,17 +72,19 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         recyclerView = view.findViewById(R.id.news_recycler_view);
         setupRecyclerView();
-        getNews();
+        //getNews();
+        NewsApiTask newsApiTask = new NewsApiTask(newsAdapter, articleList);
+        newsApiTask.execute();
         return view;
     }
 
     private void setupRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new NewsRecyclerAdapter(articleList);
-        recyclerView.setAdapter(adapter);
+        newsAdapter = new NewsRecyclerAdapter(articleList);
+        recyclerView.setAdapter(newsAdapter);
     }
 
-    private void getNews() {
+ /*   private void getNews() {
         NewsApiClient newsApiClient = new NewsApiClient("abae49a7790f4cce977f8f52569af0ba");
         newsApiClient.getTopHeadlines(
                 new TopHeadlinesRequest.Builder()
@@ -108,5 +107,5 @@ public class NewsFragment extends Fragment {
                     }
                 }
         );
-    }
+    */
 }
