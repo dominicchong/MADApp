@@ -62,6 +62,7 @@ public class FragmentNewsDetails extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news_details, container, false);
 
         WebView webView = view.findViewById(R.id.web_view);
+        webView.getSettings().setJavaScriptEnabled(true);
 
         // Retrieve the URL from arguments
         String url = getArguments().getString("url");

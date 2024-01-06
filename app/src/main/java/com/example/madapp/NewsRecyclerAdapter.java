@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         Article article = articleList.get(position);
         holder.titleTextView.setText(article.getTitle());
         holder.sourceTextView.setText(article.getSource());
-        Picasso.get().load(article.getUrlToImage())
+        Picasso.get().load(article.getThumbnail())
                .error(R.drawable.no_image_icon)
                 .placeholder(R.drawable.no_image_icon)
                 .into(holder.imageView);

@@ -3,15 +3,14 @@ package com.example.madapp;
 public class Article {
     private String title;
     private String source;
-    private String urlToImage;
-    private String imageUrl;
+    private String thumbnail;
+
     private String url;
 
-    public Article(String title, String url, String source){//String imageUrl) {
+    public Article(String title, String url, String source, String thumbnail) {
         this.title = title;
         this.source = source;
-        this.urlToImage = urlToImage;
-        this.imageUrl = imageUrl;
+        this.thumbnail = thumbnail;
         this.url = url;
     }
 
@@ -24,15 +23,10 @@ public class Article {
         return source;
     }
 
-    public String getUrlToImage() {
-        return urlToImage;
-    }
+    public String getThumbnail() {return thumbnail;}
 
     public String getUrl() {
         return url;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 }
