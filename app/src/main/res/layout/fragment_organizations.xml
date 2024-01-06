@@ -282,14 +282,15 @@
                     <TextView
                         android:id="@+id/textViewMoreOrganizations"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="140dp"
+                        android:layout_height="23dp"
+                        android:layout_marginStart="130dp"
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="24dp"
+                        android:background="@color/azureish_white"
                         android:clickable="true"
                         android:minHeight="48dp"
                         android:onClick="openGoogleOrganizationsList"
-                        android:text="Want to see more organizations ?"
+                        android:text="Want to know more organizations ?"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
