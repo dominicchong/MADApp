@@ -105,7 +105,7 @@
                         android:layout_height="49dp"
                         android:layout_margin="10dp"
                         android:contentDescription="News"
-                        app:srcCompat="@drawable/video_call" />
+                        app:srcCompat="@drawable/buttonnews" />
 
                     <TextView
                         android:id="@+id/newstitle"
@@ -132,7 +132,7 @@
                         android:layout_height="50dp"
                         android:layout_margin="10dp"
                         android:contentDescription="Programmes"
-                        app:srcCompat="@drawable/video_call" />
+                        app:srcCompat="@drawable/buttonprogrammes" />
 
                     <TextView
                         android:id="@+id/programmetitle"
@@ -159,7 +159,7 @@
                         android:layout_height="50dp"
                         android:layout_margin="10dp"
                         android:contentDescription="Organizations"
-                        app:srcCompat="@drawable/video_call" />
+                        app:srcCompat="@drawable/buttonorganization" />
 
                     <TextView
                         android:id="@+id/organizationtitle"

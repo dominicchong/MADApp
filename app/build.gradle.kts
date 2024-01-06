@@ -66,5 +66,8 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
     implementation ("androidx.annotation:annotation:1.3.0")
+    implementation ("org.apache.httpcomponents:httpclient-android:4.3.5.1")
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("org.jsoup:jsoup:1.14.3")
 
 }
