@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -37,8 +40,11 @@ public class HomeFragment extends Fragment {
     private ConstraintLayout upperPart;
     private ConstraintLayout lowerPart;
     private NavController navController;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    DatabaseReference userRef;
+    TextView usernameText;
+    ImageView circleImageView;
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -81,46 +87,66 @@ public class HomeFragment extends Fragment {
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.lowerpart, new NewsFragment())
                 .commit();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            String userID = user.getUid();
+            userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView usernameText = view.findViewById(R.id.textView5);
-        CircleImageView circleImageView = view.findViewById(R.id.imageView7);
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        // You can now store additional user information in the Firebase Realtime Database
-        if (user != null) {
-            String userId = user.getUid();
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+        usernameText = view.findViewById(R.id.textView5);
+        circleImageView = view.findViewById(R.id.imageView7);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!isAdded()) {
+                    // Fragment is not attached to the activity, exit the method
+                    return;
+                }
+
+                if (snapshot.exists()) {
+                    // Read data from snapshot
                     String username = String.valueOf(snapshot.child("username").getValue());
                     String profilePicUri = snapshot.child("profilePic").getValue(String.class);
                     usernameText.setText(username);
+
                     // Load and display the profile image using Glide
                     if (profilePicUri != null && !profilePicUri.isEmpty() && isAdded()) {
                         Glide.with(requireContext())
                                 .load(Uri.parse(profilePicUri))
                                 .into(circleImageView);
-                    } else {
-                        // If there's no profile picture, you might want to set a default image here
-                        circleImageView.setImageResource(R.drawable.profile);
+                    }
+                    else{
+                        circleImageView.setImageResource(R.drawable.default_profile_img);
+                    }
+
+                } else {
+                    // Data does not exist
+                    if (isAdded()) {
+                        Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         // Find button IDs
@@ -162,33 +188,6 @@ public class HomeFragment extends Fragment {
                         .commit();
             }
         });
-
-        return view;
-    }
-
-    private void showLogoutConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Confirm Logout");
-        builder.setMessage("Are you sure you want to log out?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                logoutUser();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Do nothing, simply close the dialog
-                dialog.dismiss();
-            }
-        });
-        builder.show();
-    }
-    private void logoutUser() {
-
-        Intent intent = new Intent(getActivity(), LoginFragment.class);
-        startActivity(intent);
     }
 }
 

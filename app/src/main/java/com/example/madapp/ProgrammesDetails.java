@@ -260,7 +260,7 @@ public class ProgrammesDetails extends Fragment {
 
             case 5:
                 IVProgrammeImage.setImageResource(R.drawable.programmes5);
-                TVSummary.setText("World Bicycles Day\n" + "3 June  Global event");
+                TVSummary.setText("World Bicycle Day\n" + "3 June  Global event");
                 TVProgrammesDesc.setText("World Bicycle Day draws attention to the benefits of using the bicycle — a simple, affordable, clean and environmentally fit sustainable means of transportation.\n " +
                         "The bicycle contributes to cleaner air and less congestion and makes education, health care and other social services more accessible to the most vulnerable populations.\n" +
                         "A sustainable transport system that promotes economic growth, reduces inequalities while bolstering the fight against climate change is critical to achieving the Sustainable Development Goals.");

@@ -25,7 +25,7 @@
 
                 <GridLayout
                     android:layout_width="353dp"
-                    android:layout_height="715dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:columnCount="1"
                     android:rowCount="5"
@@ -285,6 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="140dp"
                         android:layout_marginTop="30dp"
+                        android:layout_marginBottom="24dp"
                         android:clickable="true"
                         android:minHeight="48dp"
                         android:onClick="openGoogleOrganizationsList"

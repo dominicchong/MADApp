@@ -135,11 +135,9 @@
         android:label="Info App"
         tools:layout="@layout/fragment_info" />
 
-    <fragment
-        android:id="@+id/DestLogout"
-        android:name="com.example.madapp.LogoutFragment"
-        android:label="Logout"
-        tools:layout="@layout/fragment_logout"/>
+<!--    <fragment-->
+<!--        android:id="@+id/DestLogout"-->
+<!--        android:label="Logout" />-->
     <fragment
         android:id="@+id/secondQuestionCalculateCF"
         android:name="com.example.madapp.fragment_secondQuestionCalculateCF"
