@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -87,8 +88,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        Button Btnfgt = view.findViewById(R.id.fgtBtn);
-        Btnfgt.setOnClickListener(new View.OnClickListener() {
+        TextView TVForgotPassword = view.findViewById(R.id.TVForgotPassword);
+        TVForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.DestForgotPassword);
