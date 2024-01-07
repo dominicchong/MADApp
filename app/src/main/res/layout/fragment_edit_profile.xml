@@ -188,7 +188,7 @@
                         android:src="@drawable/email"
                         app:tint="@color/teal_700" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/emailTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
