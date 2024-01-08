@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -48,7 +49,8 @@ import androidx.core.content.ContextCompat;
 
 
 public class EditProfileFragment extends Fragment {
-    EditText usernameEditText, birthDateEditText, phoneNumberEditText, emailEditText;
+    EditText usernameEditText, birthDateEditText, phoneNumberEditText;
+    TextView emailTV;
     ImageButton editButton;
     ImageView profileView;
     ActivityResultLauncher<Intent> resultLauncher;
@@ -86,7 +88,7 @@ public class EditProfileFragment extends Fragment {
         usernameEditText = view.findViewById(R.id.usernameTV);
         birthDateEditText = view.findViewById(R.id.birthDateTV);
         phoneNumberEditText = view.findViewById(R.id.phoneNumberTV);
-        emailEditText = view.findViewById(R.id.emailTV);
+        emailTV = view.findViewById(R.id.emailTV);
         profileView = view.findViewById(R.id.profileView);
         editButton = view.findViewById(R.id.editButton);
 
@@ -149,7 +151,7 @@ public class EditProfileFragment extends Fragment {
 
                     // Set hints in EditText fields
                     usernameEditText.setHint(username);
-                    emailEditText.setHint(email);
+                    emailTV.setText(email);
                     phoneNumberEditText.setHint(phoneNumber);
                     birthDateEditText.setHint(birthDate);
                     // Load and display the profile image using Glide
@@ -186,7 +188,7 @@ public class EditProfileFragment extends Fragment {
     private void updateProfile(View view) {
         // Get updated information from EditText
         String newUsername = usernameEditText.getText().toString().trim();
-        String newEmail = emailEditText.getText().toString().trim();
+//        String newEmail = emailEditText.getText().toString().trim();
         String newPhoneNumber = phoneNumberEditText.getText().toString().trim();
         String newBirthDate = birthDateEditText.getText().toString().trim();
 //        Integer newPhoneNumber = Integer.parseInt(phoneNumberEditText.getText().toString().trim());
@@ -194,7 +196,7 @@ public class EditProfileFragment extends Fragment {
 
         // Check which fields are modified
         boolean isUsernameModified = !newUsername.isEmpty();
-        boolean isEmailModified = !newEmail.isEmpty();
+//        boolean isEmailModified = !newEmail.isEmpty();
         boolean isPhoneNumberModified = !newPhoneNumber.isEmpty();
         boolean isBirthDateModified = !newBirthDate.isEmpty();
         boolean isImageModified = selectedImageUri != null;
@@ -220,27 +222,27 @@ public class EditProfileFragment extends Fragment {
                 }
             });
         }
-        if (isEmailModified ) {
-            usersRef1.orderByChild("email").equalTo(newEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        // Duplicate email found, display a toast
-                        Toast.makeText(requireContext(), "Duplicate email found!", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(requireContext(), "Email is not updated", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-
-                        userRef.child("email").setValue(newEmail);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle the error
-                }
-            });
-        }
+//        if (isEmailModified ) {
+//            usersRef1.orderByChild("email").equalTo(newEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()) {
+//                        // Duplicate email found, display a toast
+//                        Toast.makeText(requireContext(), "Duplicate email found!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(requireContext(), "Email is not updated", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else{
+//
+//                        userRef.child("email").setValue(newEmail);
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    // Handle the error
+//                }
+//            });
+//        }
         if (isPhoneNumberModified) {
             usersRef1.orderByChild("phoneNumber").equalTo(newPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
