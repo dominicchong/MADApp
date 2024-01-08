@@ -82,8 +82,9 @@ public class fragment_firstQuestionCalculateCF extends Fragment {
                 String AnsQ1Text = ETAnsQ1.getText().toString().trim();
                 if(AnsQ1Text.isEmpty()){
                     Toast.makeText(requireContext(), "Please enter a value", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else if (AnsQ1Text.equals("0")) {
+                    Toast.makeText(requireContext(), "Value cant be zero", Toast.LENGTH_SHORT).show();
+                } else{
                     Double AnsQ1 = Double.parseDouble(ETAnsQ1.getText().toString());
                     viewModel.setAnsQ1(AnsQ1);
                     Navigation.findNavController(view).navigate(R.id.secondQuestionCalculateCF);

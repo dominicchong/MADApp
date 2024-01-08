@@ -144,6 +144,16 @@ public class DestCertificate extends Fragment {
             String userId = user.getUid();
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
+            long lastDownloadTimestamp = CertificateManager.getLastDownloadTimestamp(requireContext(), userId);
+            long currentTime = System.currentTimeMillis();
+            long timeLimitation = 20 * 24 * 60 * 60 * 1000; // Set the time limitation to 20 days
+
+            if (currentTime - lastDownloadTimestamp < timeLimitation) {
+                // Display a message indicating the time limitation
+                Toast.makeText(requireContext(), "You can only download the certificate once every 20 days.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -156,6 +166,7 @@ public class DestCertificate extends Fragment {
 
                 }
             });
+            CertificateManager.setLastDownloadTimestamp(requireContext(), userId, System.currentTimeMillis());
         }
 
         nameText.setTextColor(Color.BLACK);
