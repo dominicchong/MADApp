@@ -70,9 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|top|center_vertical"
             android:layout_marginTop="30dp"
-            android:text="What is your electricity usage?"
+            android:text="What is your monthly electricity usage?"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent" />
