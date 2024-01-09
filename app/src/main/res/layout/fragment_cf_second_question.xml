@@ -68,7 +68,7 @@
             android:layout_gravity="top"
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
-            android:text="Distance travel in km"
+            android:text="Distance travel in km per month"
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
