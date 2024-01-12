@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,8 +114,8 @@ public class FeedbackFragment extends Fragment {
                     Uri imageUri = getImageUri(requireContext(), imageBitmap);
                     feedbackMap.put("imageUri", imageUri.toString());
                 }
-                if(rating==0 && feedbackText.isEmpty() && selectedImageUri != null){
-                    Toast.makeText(getContext(), "Can't Submit as it is empty", Toast.LENGTH_SHORT).show();
+                if(rating == 0){
+                    Toast.makeText(getContext(), "Please provide a rating", Toast.LENGTH_SHORT).show();
                 }else {
 
                     // Add the feedback to Realtime Database
@@ -135,15 +136,6 @@ public class FeedbackFragment extends Fragment {
                             });
                 }
             }
-//            @Override
-//            public void onClick(View v) {
-//                String message = "Thank you for your feedback! ";
-//                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-//
-//                // Clear the rating and text input after click submit button
-//                RateBarFeedback.setRating(0);
-//                ETFeedback.setText("");
-//            }
         };
         BtnSubmitFeedback.setOnClickListener(OCLSubmitFeedback);
 
