@@ -84,28 +84,4 @@ public class NewsFragment extends Fragment {
         recyclerView.setAdapter(newsAdapter);
     }
 
- /*   private void getNews() {
-        NewsApiClient newsApiClient = new NewsApiClient("abae49a7790f4cce977f8f52569af0ba");
-        newsApiClient.getTopHeadlines(
-                new TopHeadlinesRequest.Builder()
-                        .language("en")
-                        .build(),
-                new NewsApiClient.ArticlesResponseCallback() {
-                    @Override
-                    public void onSuccess(ArticleResponse response) {
-                        requireActivity().runOnUiThread(()->{
-                            articleList = response.getArticles();
-                            adapter.updateData(articleList);
-                            adapter.notifyDataSetChanged();
-
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        System.out.println(throwable.getMessage());
-                    }
-                }
-        );
-    */
 }

@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".DestCertificate">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <Button
         android:id="@+id/BtnDownload"
         android:layout_width="wrap_content"

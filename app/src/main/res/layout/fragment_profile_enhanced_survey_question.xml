@@ -7,9 +7,6 @@
     android:background="@color/blue_100"
     tools:context=".quiz.QuizQuestionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <TextView
         android:id="@+id/TVQuestion"
         android:layout_width="370dp"

@@ -105,7 +105,7 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
                 if(AnsQ3Text.isEmpty()){
                     Toast.makeText(requireContext(), "Please enter a value", Toast.LENGTH_SHORT).show();
                 }else if (AnsQ3Text.equals("0")) {
-                    Toast.makeText(requireContext(), "Value cant be zero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Value cannot be zero", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Double AnsQ3 = Double.parseDouble(ETAnsQ3.getText().toString());
