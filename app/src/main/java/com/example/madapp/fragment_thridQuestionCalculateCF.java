@@ -130,7 +130,6 @@ public class fragment_thridQuestionCalculateCF extends Fragment {
         TextView customDialogTitle = customDialogView.findViewById(R.id.customDialogTitle);
         TextView customDialogMessage = customDialogView.findViewById(R.id.customDialogMessage);
 
-
         String avgLevel = "";
         if(Double.parseDouble(total_CF) >= 4) {
             avgLevel = "Your carbon footprint level is above the average level";
