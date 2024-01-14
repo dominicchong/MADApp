@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.gms.google-services")
+    id("com.google.firebase.firebase-perf")     // Add the Performance Monitoring Gradle plugin
+    id("com.google.firebase.crashlytics")       // Add the Crashlytics Gradle plugin
 }
 
 android {
@@ -69,5 +71,9 @@ dependencies {
     implementation ("org.apache.httpcomponents:httpclient-android:4.3.5.1")
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("org.jsoup:jsoup:1.14.3")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))     // BoM for Firebase platform
+    implementation("com.google.firebase:firebase-perf")     // Do not need to specify the ver of performance tool
+    implementation("com.google.firebase:firebase-analytics")        // dependency for firebase analytics
+    implementation("com.google.firebase:firebase-crashlytics")      // dependency for crash analytics
 
 }
