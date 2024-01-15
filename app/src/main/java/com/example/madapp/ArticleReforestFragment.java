@@ -111,7 +111,6 @@ public class ArticleReforestFragment extends Fragment {
         });
 
         CVArticle4.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 articlePage = 4;
@@ -128,14 +127,4 @@ public class ArticleReforestFragment extends Fragment {
         });
 
     }
-
-    private void openCustomTabs(String url) {
-        // Create a CustomTabsIntent
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = builder.build();
-
-        // Launch the URL using Custom Tabs
-        customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
-    }
-
 }
