@@ -36,7 +36,6 @@ public class ProfileFragment extends Fragment {
     DatabaseReference userRef; // Reference to the database
     TextView usernameTV, birthDateTV, phoneNumberTV, emailTV;
     ImageView profileView;
-    private int pageVisited = 0;
     ProgressBar scoreProgressBar;
     TextView enhancedSurveyPercentage;
 
@@ -76,7 +75,6 @@ public class ProfileFragment extends Fragment {
         };
         IVEnhancedSurvey.setOnClickListener(OCLEnhancedSurvey);
 
-
         profileView = view.findViewById(R.id.profileView);
         usernameTV = view.findViewById(R.id.usernameTV);
         birthDateTV = view.findViewById(R.id.birthDateTV);
@@ -85,9 +83,11 @@ public class ProfileFragment extends Fragment {
         scoreProgressBar = view.findViewById(R.id.scoreProgressBar);
         enhancedSurveyPercentage = view.findViewById(R.id.enhancedSurveyPercentage);
 
+        //Retrieve data from firebase
         loadDataFromFirebase();
     }
 
+    //Retrieve data from firebase and display
     private void loadDataFromFirebase() {
         if (!isAdded()) {
             // Fragment is not attached to the activity, exit the method
@@ -116,7 +116,7 @@ public class ProfileFragment extends Fragment {
                     birthDateTV.setText(birthDate);
                     phoneNumberTV.setText(phoneNumber);
                     emailTV.setText(email);
-                    updateProgressBar(userScore);
+                    updateEAProgressBar(userScore);
 
                     // Load and display the profile image using Glide
                     if (profilePicUri != null && !profilePicUri.isEmpty() && isAdded()) {
@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void updateProgressBar(Integer userScore) {
+    private void updateEAProgressBar(Integer userScore) {
         // Set the progress bar's value to the user's score, or 0 if the score is null
         scoreProgressBar.setProgress(userScore != null ? userScore : 0);
 
