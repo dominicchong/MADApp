@@ -53,13 +53,11 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
 
 
     // Question variables
-    private List<QuestionList> questionList = new ArrayList<>();
     List<QuestionList> randomQuestionList;
     int score = 0;
     int currentQuestionIndex = 0;
-    int maxTotalQuestion = 8;
     String selectedAnswer = "";
-    ImageView IVBackToQuiz;
+    ImageView IVBackToSurvey;
     TextView TVQuestion;
     TextView TVQuestionNo;
     Button option1;
@@ -113,6 +111,7 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Question variables
         TVQuestion = view.findViewById(R.id.TVQuestion);
         option1 = view.findViewById(R.id.option1);
         option2 = view.findViewById(R.id.option2);
@@ -120,9 +119,9 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
         option4 = view.findViewById(R.id.option4);
         BtnSubmitAns = view.findViewById(R.id.BtnSubmitAns);
         TVQuestionNo = view.findViewById(R.id.TVQuestionNo);
-        IVBackToQuiz = view.findViewById(R.id.IVBackToQuiz);
+        IVBackToSurvey = view.findViewById(R.id.IVBackToSurvey);
 
-        IVBackToQuiz.setOnClickListener(new View.OnClickListener() {
+        IVBackToSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(getContext())
@@ -137,22 +136,21 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
 
 
         // get questions from Firebase Data
-        DatabaseReference quizDBRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://ecohelper-eea91-default-rtdb.firebaseio.com/survey");
+        DatabaseReference surveyDBRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://ecohelper-eea91-default-rtdb.firebaseio.com/survey");
 
         // show dialog while questions are being fetched
-        Context context;
         ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading");
         progressDialog.show();
 
-
-        quizDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Fetch questions from Firebase
+        surveyDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<QuestionList> questionList = new ArrayList<>();
 
-                // Get all questions from the Firebase database of the quiz
+                // Get all questions from the Firebase database of the survey
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     // Getting question, options, and answer data from Firebase database
                     String getQuestion = dataSnapshot.child("question").getValue(String.class);
@@ -167,29 +165,32 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
                     questionList.add(question);
                 }
 
-                // Shuffle order of questions so that each time user play, question will not always be the same
+                // Shuffle order of questions to randomize the order
                 shuffleQuestion(questionList);
 
                 // Hide the progress dialog
                 progressDialog.hide();
 
+                // Load the first question
                 loadNewQuestion();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Display a message to the user about the error
+                Toast.makeText(requireContext(), "Failed to fetch survey questions. Please try again.", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // Set click listeners for buttons
         option1.setOnClickListener(this::onClick);
         option2.setOnClickListener(this::onClick);
         option3.setOnClickListener(this::onClick);
         option4.setOnClickListener(this::onClick);
         BtnSubmitAns.setOnClickListener(this::onClick);
-
     }
 
+    //Handles click events for buttons.
     public void onClick(View view) {
         int originalColor = Color.rgb(0, 137, 123);
 
@@ -226,7 +227,7 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
 
     void loadNewQuestion() {
         if(currentQuestionIndex == randomQuestionList.size()) {
-            finishQuiz();
+            finishSurvey();
             return;
         }
 
@@ -243,7 +244,6 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
 
         // Update the text of the submit button
         updateSubmitButtonText();
-
     }
 
     void updateSubmitButtonText() {
@@ -256,32 +256,26 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
     }
 
 
-    void finishQuiz() {
+    void finishSurvey() {
         // Inflate the custom layout
         View customDialogView = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, null);
 
         // Find views in the custom layout
-        ImageView CustomIV = customDialogView.findViewById(R.id.CustomIV);
         TextView customDialogTitle = customDialogView.findViewById(R.id.customDialogTitle);
         TextView customDialogMessage = customDialogView.findViewById(R.id.customDialogMessage);
-
-
         String passStatus = "Survey Done!";
 
         // Set custom content
         customDialogTitle.setText(passStatus);
         customDialogMessage.setText("Your score is " + score + " out of " + randomQuestionList.size());
-
         // Update the user's score in Firebase
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
-
             // Create a new "score" field and set its value
             userRef.child("score").setValue(score);
         }
-
 
         // Create the custom AlertDialog
         new AlertDialog.Builder(getContext())
@@ -289,7 +283,6 @@ public class ProfileEnhancedSurveyQuestionFragment extends Fragment {
                 .setPositiveButton("Back to Survey Page", (dialogInterface, i) -> backToProfileEnhancedSurvey())
                 .setCancelable(false)
                 .show();
-
     }
 
     void backToProfileEnhancedSurvey() {
