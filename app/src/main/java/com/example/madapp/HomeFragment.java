@@ -1,8 +1,5 @@
 package com.example.madapp;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,8 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
@@ -39,7 +33,6 @@ public class HomeFragment extends Fragment {
 
     private ConstraintLayout upperPart;
     private ConstraintLayout lowerPart;
-    private NavController navController;
     DatabaseReference userRef;
     TextView usernameText;
     ImageView circleImageView;
@@ -106,8 +99,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        usernameText = view.findViewById(R.id.textView5);
-        circleImageView = view.findViewById(R.id.imageView7);
+        usernameText = view.findViewById(R.id.TVUsername);
+        circleImageView = view.findViewById(R.id.CIVUser);
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

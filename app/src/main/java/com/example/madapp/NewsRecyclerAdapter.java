@@ -50,12 +50,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             Navigation.findNavController(v).navigate(R.id.DestNewsDetails, bundle);
         });
     }
-
-    void updateData(List<Article> data){
-        articleList.clear();
-        articleList.addAll(data);
-        notifyDataSetChanged();
-    }
     @Override
     public int getItemCount() {
         return articleList.size();
@@ -67,7 +61,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
         public NewsViewHolder(@NonNull View itemView){
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.organiation_name);
+            titleTextView = itemView.findViewById(R.id.title);
             sourceTextView = itemView.findViewById(R.id.article_source);
             imageView = itemView.findViewById(R.id.article_image_view);
         }

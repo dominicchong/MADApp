@@ -90,8 +90,7 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
                 String url = articleObject.getString("url");
                 String source = articleObject.getString("source");
                 String thumbnail = articleObject.getString("thumbnail");
-
-                Article newsArticle = new Article(title, url, source,thumbnail); //imageUrl;
+                Article newsArticle = new Article(title, url, source,thumbnail);
                 parsedData.add(newsArticle);
             }
         } catch (JSONException e) {
