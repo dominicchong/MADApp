@@ -49,24 +49,33 @@ import androidx.core.content.ContextCompat;
 
 
 public class EditProfileFragment extends Fragment {
+    // UI components
     EditText usernameEditText, birthDateEditText, phoneNumberEditText;
     TextView emailTV;
     ImageButton editButton;
     ImageView profileView;
+
+    // Activity result launchers for image operations
     ActivityResultLauncher<Intent> resultLauncher;
     ActivityResultLauncher<Intent> cameraLauncher;
+
+    // Selected image URI
     Uri selectedImageUri;
+
+    // Firebase user and database references
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userID;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
     String profilePicUri;
     boolean isImageRemoved = false;
 
-
+    // Initialize user ID
     {
         assert user != null;
         userID = user.getUid();
     }
+
+    // Database references
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
     DatabaseReference usersRef1 = FirebaseDatabase.getInstance().getReference().child("users");
 
@@ -83,8 +92,7 @@ public class EditProfileFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-        // Retrieve references to EditText fields
+        // Retrieve references to UI components
         usernameEditText = view.findViewById(R.id.usernameTV);
         birthDateEditText = view.findViewById(R.id.birthDateTV);
         phoneNumberEditText = view.findViewById(R.id.phoneNumberTV);
@@ -92,6 +100,7 @@ public class EditProfileFragment extends Fragment {
         profileView = view.findViewById(R.id.profileView);
         editButton = view.findViewById(R.id.editButton);
 
+        // Retrieve user data from Firebase
         retrieveUserData();
 
         // Register result launcher for picking images
@@ -100,49 +109,20 @@ public class EditProfileFragment extends Fragment {
         // Set click listener for editButton
         editButton.setOnClickListener(v -> showImageSourceOptions());
 
+        // Set click listener for update button
         Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
         BtnUpdateProfile.setOnClickListener(v -> {
-//            String newUsername = usernameEditText.getText().toString().trim();
-//            String newEmail = emailEditText.getText().toString().trim();
-//            String newPhoneNumber = phoneNumberEditText.getText().toString().trim();
-//
-//            // Check for duplicate user
-//            checkForDuplicateUser(newUsername);
-//            checkForDuplicateEmail(newEmail);
-//            checkForDuplicatePhoneNumber(newPhoneNumber);
             updateProfile(view);
-
-//            if (!isDuplicateUsername && !isDuplicateEmail && !isDuplicatePhoneNumber) {
-//                updateProfile(requireView());
-//            }
-//            else {
-//                // Show a message that duplicates are found
-//                Toast.makeText(requireContext(), "Duplicates found. Update aborted.", Toast.LENGTH_SHORT).show();
-//            }
-
-            // Add other logic here if needed
-            // For example, update the profile if there are no duplicates
-            // updateProfile(view);
         });
-//        BtnUpdateProfile.setOnClickListener(v -> updateProfile(view));
-
-//        Button BtnUpdateProfile = view.findViewById(R.id.BtnUpdateProfile);
-//        View.OnClickListener OCLUpdateProfile = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Navigation.findNavController(view).navigate(R.id.DestProfile);
-//            }
-//        };
-//        BtnUpdateProfile.setOnClickListener(OCLUpdateProfile);
-
     }
 
+    // Retrieve user data from Firebase
     private void retrieveUserData() {
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // Retrieve data from the dataSnapshot
+                    // Handle successful data retrieval
                     String username = dataSnapshot.child("username").getValue(String.class);
                     String birthDate = dataSnapshot.child("birthDate").getValue(String.class);
                     String phoneNumber = dataSnapshot.child("phoneNumber").getValue(String.class);
@@ -172,31 +152,15 @@ public class EditProfileFragment extends Fragment {
         });
     }
 
-    // This method is an example of where you might perform the query
-    private void checkForDuplicateUser(String userInput) {
-
-    }
-
-    private void checkForDuplicateEmail(String newEmail) {
-
-    }
-
-    private void checkForDuplicatePhoneNumber(String newPhoneNumber) {
-
-    }
 
     private void updateProfile(View view) {
         // Get updated information from EditText
         String newUsername = usernameEditText.getText().toString().trim();
-//        String newEmail = emailEditText.getText().toString().trim();
         String newPhoneNumber = phoneNumberEditText.getText().toString().trim();
         String newBirthDate = birthDateEditText.getText().toString().trim();
-//        Integer newPhoneNumber = Integer.parseInt(phoneNumberEditText.getText().toString().trim());
-//        Integer newBirthDate = Integer.parseInt(birthDateEditText.getText().toString().trim());
 
         // Check which fields are modified
         boolean isUsernameModified = !newUsername.isEmpty();
-//        boolean isEmailModified = !newEmail.isEmpty();
         boolean isPhoneNumberModified = !newPhoneNumber.isEmpty();
         boolean isBirthDateModified = !newBirthDate.isEmpty();
         boolean isImageModified = selectedImageUri != null;
@@ -219,30 +183,11 @@ public class EditProfileFragment extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Handle the error
+                    Toast.makeText(requireContext(), "Failed to check duplicate username. Please try again.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
-//        if (isEmailModified ) {
-//            usersRef1.orderByChild("email").equalTo(newEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    if (dataSnapshot.exists()) {
-//                        // Duplicate email found, display a toast
-//                        Toast.makeText(requireContext(), "Duplicate email found!", Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(requireContext(), "Email is not updated", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else{
-//
-//                        userRef.child("email").setValue(newEmail);
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                    // Handle the error
-//                }
-//            });
-//        }
+
         if (isPhoneNumberModified) {
             usersRef1.orderByChild("phoneNumber").equalTo(newPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -253,7 +198,6 @@ public class EditProfileFragment extends Fragment {
                         Toast.makeText(requireContext(), "Phone Number is not updated", Toast.LENGTH_SHORT).show();
                     }
                     else{
-
                         userRef.child("phoneNumber").setValue(newPhoneNumber);
                     }
                 }
@@ -261,9 +205,11 @@ public class EditProfileFragment extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Handle the error
+                    Toast.makeText(requireContext(), "Failed to check duplicate phone number. Please try again.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+
         if (isBirthDateModified) {
             userRef.child("birthDate").setValue(newBirthDate);
         }
@@ -274,28 +220,25 @@ public class EditProfileFragment extends Fragment {
                 String imageUriString = selectedImageUri.toString();
                 Log.d("UpdateProfile", "Updating profilePic with: " + imageUriString);
                 userRef.child("profilePic").setValue(imageUriString);
+                Toast.makeText(requireContext(), "Updated image success", Toast.LENGTH_SHORT).show();
             }
         }
         else {
             if(isImageRemoved) {
                 // If the photo is removed, update profilePic to an empty string or null
-                userRef.child("profilePic").setValue(null); // or userRef.child("profilePic").removeValue();
+                userRef.child("profilePic").setValue(null);
+                Toast.makeText(requireContext(), "Removed image success", Toast.LENGTH_SHORT).show();
                 isImageRemoved = false;
             }
         }
 
-//        else {
-//            Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show();
-//        }
-
-//        if(!isDuplicateUsername && !isDuplicateEmail && !isDuplicatePhoneNumber){
-//            Toast.makeText(requireContext(), "Update completed successfully", Toast.LENGTH_SHORT).show();
-//        }
-
+        // Navigate to Profile page when update button is clicked
         Navigation.findNavController(view).navigate(R.id.DestProfile);
     }
 
+    // Display options for choosing image source
     private void showImageSourceOptions() {
+        // AlertDialog to choose image source
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Choose Image Source");
         String[] options = {"Pick from Gallery", "Take Photo", "Remove Photo"};
@@ -318,12 +261,16 @@ public class EditProfileFragment extends Fragment {
         builder.show();
     }
 
+    // Check if camera permission is granted
     private boolean checkCameraPermission() {
+        // Check camera permission
         return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED;
     }
 
+    // Request camera permission
     private void requestCameraPermission() {
+        // Request camera permission
         ActivityCompat.requestPermissions(
                 requireActivity(),
                 new String[]{Manifest.permission.CAMERA},
@@ -331,8 +278,10 @@ public class EditProfileFragment extends Fragment {
         );
     }
 
+    // Handle camera permission request result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // Handle permission request result
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -343,16 +292,21 @@ public class EditProfileFragment extends Fragment {
         }
     }
 
+    // Pick an image from the gallery
     private void pickImage(){
+        // Start image picker activity
         Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
         resultLauncher.launch(intent);
     }
 
+    // Take a photo using the device's camera
     private void takePhoto() {
+        // Start camera activity
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraLauncher.launch(cameraIntent);
     }
 
+    // Register result handlers for image picker and camera
     private void registerImagePickerResult() {
         resultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -433,7 +387,7 @@ public class EditProfileFragment extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(requireContext(), "Photo removed successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(requireContext(), "Photo removed success", Toast.LENGTH_SHORT).show();
 
                                     // Set the default image in the ImageView
                                     profileView.setImageResource(R.drawable.default_profile_img);

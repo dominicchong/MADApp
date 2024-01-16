@@ -94,18 +94,4 @@ public class TipsReduceCFFragment extends Fragment {
             }
         });
     }
-
-//    private void openUrlInBrowser(String url) {
-//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//        startActivity(intent);
-//    }
-
-    private void openCustomTabs(String url) {
-        // Create a CustomTabsIntent
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = builder.build();
-
-        // Launch the URL using Custom Tabs
-        customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
-    }
 }

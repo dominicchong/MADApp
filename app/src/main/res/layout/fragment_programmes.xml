@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,190 +12,189 @@
         tools:layout_editor_absoluteX="-123dp"
         tools:layout_editor_absoluteY="-16dp">
 
+        <GridLayout
+            android:layout_width="353dp"
+            android:layout_height="715dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="16dp"
+            android:columnCount="1"
+            android:rowCount="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-                <GridLayout
-                    android:layout_width="353dp"
-                    android:layout_height="715dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="25dp"
-                    android:columnCount="1"
-                    android:rowCount="5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CVProgramme1"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginBottom="30dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/CVProgramme1"
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:layout_marginBottom="30dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp">
+                <LinearLayout
+                    android:id="@+id/programme1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:id="@+id/programme1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="165dp"
+                        android:layout_height="129dp"
+                        android:paddingRight="20dp"
+                        android:src="@drawable/programme1" />
 
-                            <ImageView
-                                android:id="@+id/imageView1"
-                                android:layout_width="165dp"
-                                android:layout_height="129dp"
-                                android:paddingRight="20dp"
-                                android:src="@drawable/programme1" />
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:text="World Water Week"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/textView1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="World Water Week"
-                                android:layout_marginLeft="30dp"
-                                android:textAlignment="center"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CVProgramme2"
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:layout_marginBottom="30dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/CVProgramme2"
-                        android:layout_width="match_parent"
-                        android:layout_height="111dp"
-                        android:layout_marginBottom="30dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="166dp"
+                        android:layout_height="147dp"
+                        android:paddingRight="20dp"
+                        android:src="@drawable/programme2" />
 
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="166dp"
-                                android:layout_height="147dp"
-                                android:paddingRight="20dp"
-                                android:src="@drawable/programme2" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:text="Plastic Free July"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Plastic Free July"
-                                android:layout_marginLeft="30dp"
-                                android:textAlignment="center"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CVProgramme3"
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                android:layout_marginBottom="30dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/CVProgramme3"
-                        android:layout_width="match_parent"
-                        android:layout_height="106dp"
-                        android:layout_marginBottom="30dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="166dp"
+                        android:layout_height="112dp"
+                        android:paddingRight="20dp"
+                        android:src="@drawable/programme3" />
 
-                            <ImageView
-                                android:id="@+id/imageView3"
-                                android:layout_width="166dp"
-                                android:layout_height="112dp"
-                                android:paddingRight="20dp"
-                                android:src="@drawable/programme3" />
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="Earth Day"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="40dp"
-                                android:text="Earth Day"
-                                android:textAlignment="center"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CVProgramme4"
+                android:layout_width="match_parent"
+                android:layout_height="109dp"
+                android:layout_marginBottom="30dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/CVProgramme4"
-                        android:layout_width="match_parent"
-                        android:layout_height="109dp"
-                        android:layout_marginBottom="30dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="163dp"
+                        android:layout_height="125dp"
+                        android:paddingRight="20dp"
+                        android:src="@drawable/programme4" />
 
-                            <ImageView
-                                android:id="@+id/imageView4"
-                                android:layout_width="163dp"
-                                android:layout_height="125dp"
-                                android:paddingRight="20dp"
-                                android:src="@drawable/programme4" />
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:text="Veganuary 2024"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Veganuary 2024"
-                                android:textAlignment="center"
-                                android:layout_marginLeft="30dp"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CVProgramme5"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:layout_marginBottom="30dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/CVProgramme5"
-                        android:layout_width="match_parent"
-                        android:layout_height="105dp"
-                        android:layout_marginBottom="30dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="165dp"
+                        android:layout_height="140dp"
+                        android:paddingRight="15dp"
+                        android:src="@drawable/programme5" />
 
-                            <ImageView
-                                android:id="@+id/imageView5"
-                                android:layout_width="165dp"
-                                android:layout_height="140dp"
-                                android:paddingRight="15dp"
-                                android:src="@drawable/programme5" />
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="World Bicycle Day"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/textView5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="World Bicycle Day"
-                                android:textAlignment="center"
-                                android:layout_marginLeft="20dp"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                </GridLayout>
+        </GridLayout>
 
     </ScrollView>
 

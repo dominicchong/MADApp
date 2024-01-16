@@ -18,19 +18,6 @@
             android:layout_height="match_parent"
             android:paddingBottom="48dp">
 
-            <!--        <ImageButton-->
-            <!--            android:id="@+id/imageButton3"-->
-            <!--            android:layout_width="25dp"-->
-            <!--            android:layout_height="25dp"-->
-            <!--            android:layout_marginTop="40dp"-->
-            <!--            android:background="#65AEDD"-->
-            <!--            android:scaleType="fitCenter"-->
-            <!--            android:src="@drawable/back_button"-->
-            <!--            app:layout_constraintEnd_toStartOf="@+id/textView"-->
-            <!--            app:layout_constraintHorizontal_bias="0.66"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
             <TextView
                 android:id="@+id/TVRating"
                 android:layout_width="251dp"
@@ -38,7 +25,7 @@
                 android:layout_marginTop="12dp"
                 android:text=""
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.293"
@@ -52,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="How was your experience?"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.278"
@@ -130,12 +117,13 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="308dp"
-                android:layout_height="181dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/image_selected"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 

@@ -1,5 +1,6 @@
 package com.example.madapp.quiz;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +15,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -246,6 +246,7 @@ public class QuizQuestionFragment extends Fragment {
 
     }
 
+    @SuppressLint("SetTextI18n")
     void finishQuiz() {
         // Inflate the custom layout
         View customDialogView = LayoutInflater.from(getContext()).inflate(R.layout.custom_dialog_layout, null);

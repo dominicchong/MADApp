@@ -84,7 +84,6 @@ public class OrganizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton1
-                // Example: Open a website associated with the first organization
                 openCustomTabs("https://www.gec.org.my/");
             }
         });
@@ -95,7 +94,6 @@ public class OrganizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton2
-                // Example: Open a website associated with the first organization
                 openCustomTabs("https://www.hati.my/ecoknights/");
             }
         });
@@ -106,7 +104,6 @@ public class OrganizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton3
-                // Example: Open a website associated with the first organization
                 openCustomTabs("https://www.umlawsociety.com/ecolawgy");
             }
         });
@@ -117,7 +114,6 @@ public class OrganizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton4
-                // Example: Open a website associated with the first organization
                 openCustomTabs("https://www.greenpeace.org/");
             }
         });
@@ -128,7 +124,6 @@ public class OrganizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton5
-                // Example: Open a website associated with the first organization
                 openCustomTabs("http://www.mns.my/");
             }
         });
@@ -139,7 +134,6 @@ public class OrganizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Handle click for organizationImageButton6
-                // Example: Open a website associated with the first organization
                 openCustomTabs("https://www.hati.my/treat-every-environment-special-sdn-bhd-trees/");
             }
         });

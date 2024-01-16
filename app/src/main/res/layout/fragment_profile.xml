@@ -17,19 +17,6 @@
             android:layout_height="wrap_content"
             android:paddingBottom="48dp">
 
-            <!--            <ImageButton-->
-            <!--                android:id="@+id/imageButton5"-->
-            <!--                android:layout_width="25dp"-->
-            <!--                android:layout_height="25dp"-->
-            <!--                android:layout_marginStart="32dp"-->
-            <!--                android:layout_marginTop="40dp"-->
-            <!--                android:background="@color/blue"-->
-            <!--                android:scaleType="fitCenter"-->
-            <!--                android:src="@drawable/menu_icon"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileView"
                 android:layout_width="136dp"
@@ -265,7 +252,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="52dp"
                 android:text=""
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"

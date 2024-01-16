@@ -91,13 +91,7 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
                 String source = articleObject.getString("source");
                 String thumbnail = articleObject.getString("thumbnail");
 
-                // Fetch the HTML content of the article
-                //String htmlContent = fetchHtmlContent(url);
-
-                // Extract the image URL from the HTML content using JSoup
-                //String imageUrl = extractImageUrl(htmlContent);
-
-                Article newsArticle = new Article(title, url, source,thumbnail); //imageUrl);
+                Article newsArticle = new Article(title, url, source,thumbnail); //imageUrl;
                 parsedData.add(newsArticle);
             }
         } catch (JSONException e) {
@@ -106,28 +100,5 @@ public class NewsApiTask extends AsyncTask<Void, Void, String> {
 
         return parsedData;
     }
-    // Fetch HTML content of the article in the background
-    /*private String fetchHtmlContent(String articleUrl) {
-        try {
-            return Jsoup.connect(articleUrl).get().html();
-       } catch (IOException e) {
-            Log.e("NewsApiTask", "Error fetching HTML content", e);
-            return null;
-        }
-    }
 
-    // Extract image URL from HTML content using JSoup
-    private String extractImageUrl(String htmlContent) {
-        Document doc = Jsoup.parse(htmlContent);
-        Elements imgElements = doc.select("img");
-
-        // Assuming the first image tag is the featured image of the article
-        if (!imgElements.isEmpty()) {
-            return imgElements.first().absUrl("src");
-        }
-
-        return null; // No image found in the HTML content
-    }
-
-     */
 }

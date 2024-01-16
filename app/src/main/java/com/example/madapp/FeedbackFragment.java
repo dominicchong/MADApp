@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ import android.Manifest;
 
 public class FeedbackFragment extends Fragment {
 
+    // Firebase user and database references
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userID;
     {
@@ -52,10 +54,13 @@ public class FeedbackFragment extends Fragment {
     }
     DatabaseReference feedbackRef = FirebaseDatabase.getInstance().getReference().child("users").child(userID);
 
+    // Activity result launchers and image URI
     ActivityResultLauncher<Intent> resultLauncher;
     ActivityResultLauncher<Intent> cameraLauncher;
     Uri selectedImageUri;
     ImageView imageView;
+
+    // Camera permission request code
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
 
 
@@ -72,15 +77,15 @@ public class FeedbackFragment extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        // Connect with UI Widget RateBarFeedback, TVRating, ETFeedback, BtnFeedback
+        // Connect with UI widgets
         RatingBar RateBarFeedback = view.findViewById(R.id.RatingBarFeedback);
         TextView TVRating = view.findViewById(R.id.TVRating);
-        EditText ETFeedback = view.findViewById(R.id.ETFeedback);    // needed if you want to collect the feedback later
+        EditText ETFeedback = view.findViewById(R.id.ETFeedback);
         Button BtnSubmitFeedback = view.findViewById(R.id.BtnSubmitFeedback);
         ImageButton imageButton = view.findViewById(R.id.imageButton);
         imageView = view.findViewById(R.id.imageView);
 
-        // The rating bar OnRatingBarChangeListener to change the rating whenever it is used by user
+        // Rating bar listener to update the rating text
         RateBarFeedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -88,11 +93,13 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
+        // Register activity result launchers
         registerImagePickerResult();
 
         // Set click listener for imageButton
         imageButton.setOnClickListener(v -> showImageSourceOptions());
 
+        // Click listener for submit feedback button
         View.OnClickListener OCLSubmitFeedback = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,10 +120,10 @@ public class FeedbackFragment extends Fragment {
                     Uri imageUri = getImageUri(requireContext(), imageBitmap);
                     feedbackMap.put("imageUri", imageUri.toString());
                 }
-                if(rating==0 && feedbackText.isEmpty() && selectedImageUri != null){
-                    Toast.makeText(getContext(), "Can't Submit as it is empty", Toast.LENGTH_SHORT).show();
+                // Validate the rating
+                if(rating == 0){
+                    Toast.makeText(getContext(), "Please provide a rating", Toast.LENGTH_SHORT).show();
                 }else {
-
                     // Add the feedback to Realtime Database
                     feedbackRef.push().setValue(feedbackMap)
                             .addOnSuccessListener(aVoid -> {
@@ -135,20 +142,11 @@ public class FeedbackFragment extends Fragment {
                             });
                 }
             }
-//            @Override
-//            public void onClick(View v) {
-//                String message = "Thank you for your feedback! ";
-//                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-//
-//                // Clear the rating and text input after click submit button
-//                RateBarFeedback.setRating(0);
-//                ETFeedback.setText("");
-//            }
         };
         BtnSubmitFeedback.setOnClickListener(OCLSubmitFeedback);
-
     }
 
+    // Function to display options for selecting image source
     private void showImageSourceOptions() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Choose Image Source");
@@ -166,6 +164,7 @@ public class FeedbackFragment extends Fragment {
         builder.show();
     }
 
+    // Function to launch image picker
     private void pickImage(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         try {
@@ -176,6 +175,7 @@ public class FeedbackFragment extends Fragment {
         }
     }
 
+    // Function to launch camera for taking a photo
     private void takePhoto() {
         if (checkCameraPermission()) {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -185,11 +185,13 @@ public class FeedbackFragment extends Fragment {
         }
     }
 
+    // Function to check camera permission
     private boolean checkCameraPermission() {
         return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED;
     }
 
+    // Function to request camera permission
     private void requestCameraPermission() {
         ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -198,6 +200,7 @@ public class FeedbackFragment extends Fragment {
         );
     }
 
+    // Handle camera permission request result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -212,6 +215,7 @@ public class FeedbackFragment extends Fragment {
         }
     }
 
+    // Register activity result launchers for image picking and camera
     private void registerImagePickerResult() {
         resultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -252,8 +256,6 @@ public class FeedbackFragment extends Fragment {
 
                         imageView.setImageBitmap(photo);
 
-                        // Save the image to a file if needed
-                        // saveImageToFile(photo);
                         Toast.makeText(requireContext(), "Photo taken successfully", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(requireContext(), "Error taking photo", Toast.LENGTH_SHORT).show();

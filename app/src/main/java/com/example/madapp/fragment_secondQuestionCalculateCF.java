@@ -93,7 +93,7 @@ public class fragment_secondQuestionCalculateCF extends Fragment {
                 if(AnsQ2Text.isEmpty()){
                     Toast.makeText(requireContext(), "Please enter a value", Toast.LENGTH_SHORT).show();
                 }else if (AnsQ2Text.equals("0")) {
-                    Toast.makeText(requireContext(), "Value cant be zero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Value cannot be zero", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Double AnsQ2 = Double.parseDouble(ETAnsQ2.getText().toString());

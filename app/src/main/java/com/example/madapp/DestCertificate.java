@@ -154,6 +154,7 @@ public class DestCertificate extends Fragment {
                 return;
             }
 
+            // Retrieve user name from the Firebase Realtime Database
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -166,6 +167,7 @@ public class DestCertificate extends Fragment {
 
                 }
             });
+            // Update the last download timestamp for the user in SharedPreferences
             CertificateManager.setLastDownloadTimestamp(requireContext(), userId, System.currentTimeMillis());
         }
 
@@ -194,16 +196,11 @@ public class DestCertificate extends Fragment {
         // Draw the text from the TextView onto the Bitmap at the calculated position
         canvas.drawText(nameText.getText().toString(), textX, textY, nameText.getPaint());
 
-        // Use getExternalFilesDir for Android 10 and above
-        File certificateFile;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            certificateFile = new File(requireContext().getExternalFilesDir(null), "certificate.png");
-        } else {
-            certificateFile = new File(requireContext().getExternalFilesDir(null), "certificate.png");
-        }
+        // Use getExternalFilesDir to obtain the directory where the app can store private data files
+        File certificateFile = new File(requireContext().getExternalFilesDir(null), "certificate.png");
+
 
         // Perform the download
-        // For simplicity, we'll use a basic example with File I/O
         try {
             // Write the image to the file
             FileOutputStream fos = new FileOutputStream(certificateFile);
