@@ -20,15 +20,10 @@ import java.util.List;
 public class NewsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    //private List<Article> articleList = new ArrayList<>();
-    private NewsRecyclerAdapter adapter;
-    // Initialize the adapter and data list
     private NewsRecyclerAdapter newsAdapter;
-    String apiKey = "10774329cdmsh26219e20677757ap199f7djsn97fa2cd569dc";
     private List<Article> articleList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -83,5 +78,4 @@ public class NewsFragment extends Fragment {
         newsAdapter = new NewsRecyclerAdapter(articleList);
         recyclerView.setAdapter(newsAdapter);
     }
-
 }
