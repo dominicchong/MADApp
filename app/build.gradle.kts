@@ -36,7 +36,7 @@ android {
     }
 }
 
-// dependencies foe Maps API
+// dependencies for Maps API
 buildscript {
     dependencies {
         classpath ("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
@@ -75,5 +75,4 @@ dependencies {
     implementation("com.google.firebase:firebase-perf")     // Do not need to specify the ver of performance tool
     implementation("com.google.firebase:firebase-analytics")        // dependency for firebase analytics
     implementation("com.google.firebase:firebase-crashlytics")      // dependency for crash analytics
-
 }

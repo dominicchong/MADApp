@@ -226,6 +226,7 @@ public class QuizQuestionFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     void loadNewQuestion() {
         if(currentQuestionIndex == randomQuestionList.size()) {
             finishQuiz();
